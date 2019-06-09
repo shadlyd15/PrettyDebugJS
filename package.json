@@ -1,0 +1,19 @@
+{
+  "name": "prettydebugjs",
+  "version": "1.0.0",
+  "description": "A Minimal Debug Library For JavaScript",
+  "main": "PrettyDebugJS.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shadlyd15/PrettyDebugJS.git"
+  },
+  "author": "Shadly Salahuddin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shadlyd15/PrettyDebugJS/issues"
+  },
+  "homepage": "https://github.com/shadlyd15/PrettyDebugJS#readme"
+}
