@@ -10,53 +10,10 @@ const colorCodes = {
     COLOR_RESET     :	'\x1B[00m'
 };
 
-let timeOptions = {  
+const timeOptions = {  
     year: "numeric", month: "short",  
-    day: "numeric", hour: "2-digit", minute: "2-digit"  
+    day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"  
 };  
-
-const debug = {
-	info: function info(message) {
-		const callerInfo = getFileName(info.caller.name);
-		console.log(
-			colorCodes.COLOR_YELLOW	+
-			' [' +
-			new Date().toLocaleTimeString("en-us", timeOptions) + 
-			' ] ' +
-			colorCodes.COLOR_GREEN	+
-			'[ INFO ] : ' +
-			// new Date().toLocaleTimeString("en-us", timeOptions) + 
-			// ' | ' +
-			callerInfo.filename +
-			':' +
-			callerInfo.line +
-			' > ' +
-			info.caller.name +
-			'() :: ' +
-			message +
-			colorCodes.COLOR_RESET
-		);
-	},
-
-	error: function error(message) {
-		const callerInfo = getFileName(error.caller.name);
-		console.log(
-			colorCodes.COLOR_RED	+
-			' ' +
-			'[ ERROR ] \t : ' +
-			new Date().toLocaleTimeString("en-us", timeOptions) + 
-			' | ' +
-			callerInfo.filename +
-			':' +
-			callerInfo.line +
-			' > ' +
-			error.caller.name +
-			'() :: ' +
-			message +
-			colorCodes.COLOR_RESET
-		);
-	},
-};
 
 function getFileName(caller) {
   	const STACK_FUNC_NAME = new RegExp(/at\s+((\S+)\s)?\((\S+):(\d+):(\d+)\)/);
@@ -77,35 +34,52 @@ function getFileName(caller) {
 			};
 		}
 	}
-
 	return null;
 }
 
-
-function iWantToLog() {
-	debug.info('Testing My Information ');
-	debug.error('This is an error message');
+function printDebugMessage(color, fileInfo, functionName, tag, message){
+	console.log(
+		color +
+		' [' +
+		tag +
+		'] \t' +
+		colorCodes.COLOR_YELLOW	+
+		' [' +
+		new Date().toLocaleTimeString("en-us", timeOptions) +
+		'] ' +
+		colorCodes.COLOR_CYAN +
+		'[' +
+		fileInfo.filename +
+		':' +
+		fileInfo.line +
+		'] ' +
+		colorCodes.COLOR_MAGENTA +
+		'[' +
+		functionName +
+		']' +
+		colorCodes.COLOR_YELLOW +
+		' \t:: ' +
+		color +
+		message +
+		colorCodes.COLOR_RESET
+	);
 }
 
-iWantToLog();
+module.exports = {
+	info: function info(message) {
+		const callerInfo = getFileName(info.caller.name);
+		printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
+	},
 
-// console.log(process.env.COLORTERM)
+	error: function error(message) {
+		const callerInfo = getFileName(error.caller.name);
+		printDebugMessage(colorCodes.COLOR_RED, callerInfo, error.caller.name, 'ERROR', message);
+	},
+};
 
-		// console.log(
-		// 	colorCodes.COLOR_RED + 
-		// 	' ' +
-		// 	'[ ERROR ] \t : ' +
-		// 	colorCodes.COLOR_YELLOW + 
-		// 	new Date().toLocaleTimeString(timeOptions) +
-		// 	' : ' +
-		// 	colorCodes.COLOR_RESET + 
-		// 	callerInfo.filename +
-		// 	':' +
-		// 	callerInfo.line +
-		// 	':' +
-		// 	callerInfo.column +
-		// 	' ' +
-		// 	error.caller.name +
-		// 	'() ' +
-		// 	message
-		// );
+// function TestFunction() {
+// 	debug.info('Testing My Information ');
+// 	debug.error('This is an error message');
+// }
+
+// TestFunction();	
