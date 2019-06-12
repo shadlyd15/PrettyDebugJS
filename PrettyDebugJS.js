@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 const colorCodes = {
     COLOR_BLACK     :	'\x1B[30m',
@@ -11,10 +12,22 @@ const colorCodes = {
     COLOR_RESET     :	'\x1B[00m'
 };
 
+const color = {
+	info 		: colorCodes.COLOR_GREEN,
+	error 		: colorCodes.COLOR_RED,
+	time 		: colorCodes.COLOR_YELLOW,
+	location 	: colorCodes.COLOR_CYAN,
+	reset 		: colorCodes.COLOR_RESET
+};
+
 const timeOptions = {  
-    year: "numeric", month: "short",  
-    day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
-};  
+    year: "numeric", month: "short", day: "numeric", 
+    hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
+};
+
+function paintText(text, paintColor, reset = true){
+	return paintColor + text + (reset?color.reset:'');
+}
 
 function printDebugMessage(color, fileInfo, functionName, tag, message){
 	if(!functionName) functionName = 'Anonymous';
@@ -35,10 +48,6 @@ function printDebugMessage(color, fileInfo, functionName, tag, message){
 		' [' +
 		tag +
 		']' +
-		// colorCodes.COLOR_WHITE +
-		// '[' +
-		// functionName +
-		// ']' +
 		colorCodes.COLOR_YELLOW +
 		'\t:\t' +
 		color +
@@ -47,21 +56,15 @@ function printDebugMessage(color, fileInfo, functionName, tag, message){
 	);
 }
 
-
 const fileInfo = {
-	_getErrorObject : function _getErrorObject(){
-	    try { throw Error('') } catch(err) { return err; }
-	},
-
 	currentLocation: function currentLocation(){
-		var err = this._getErrorObject();
-
+		var err = new Error();
 		const regexFile = /\((.*)\)$/;
-		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/)[4]);
+		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
 		const fileName = matchFile[1].replace(/^.*[\\\/]/, '');
 
-		const matchFunc = err.stack.toString().split(/\r\n|\n/)[5];
-		const functionName = matchFunc.replace(/(?=\()(.*)(?<=\))/, '');
+		const matchFunc = err.stack.toString().split(/\r\n|\n/, 5)[4];
+		const functionName = matchFunc.replace(/at |(?=\()(.*)(?<=\))/g, '');
 		
 		return {
 			functionName : functionName,
@@ -70,30 +73,64 @@ const fileInfo = {
 	}
 }
 
+let debugStream = process.stdout;
 module.exports = {
-	info: function info(message) {
-        // console.log(colorCodes.COLOR_GREEN + 'File Name : ' + _getCallerFile() + colorCodes.COLOR_RESET);
 
-        const currentLocationInfo = fileInfo.currentLocation();
-		
+	serStream: function serStream (stream){
+		debugStream = stream | process.stdout;
+	},
+
+	info: function info(message) {
+		if(process.env.DEBUG != 1) return;
+		const currentLocationInfo = fileInfo.currentLocation();
+		debugStream.write(paintText(currentLocationInfo.functionName, color.info) + '(' + currentLocationInfo.fileName + ')');
+		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
+	},
+
+	error: function error(message) {	
+		if(process.env.DEBUG != 1) return;
+		const currentLocationInfo = fileInfo.currentLocation();
 		console.log(currentLocationInfo.functionName + '(' + currentLocationInfo.fileName + ')');
 		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
 	},
 
-	error: function error(message) {
-		// console.log(colorCodes.COLOR_RED + 'File Name : ' + _getCallerFile() + colorCodes.COLOR_RESET);
+	nodeMemoryUsage : function nodeMemoryUsage() {
+		if(process.env.DEBUG != 1) return;
+		const used = process.memoryUsage();
+		console.log(used);
+		const infos = [];
+		for (let key in used) {
+		  infos.push(`${key} : ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+		}
+		console.log(infos);
+	},
 
-		// var err = getErrorObject();
+	sysMemoryUsage : function sysMemoryUsage() {
+		if(process.env.DEBUG != 1) return;
+		var info = {};
+	    var data = fs.readFileSync('/proc/meminfo').toString();
+	    data.split(/\n/g).forEach(function(line){
+	        line = line.split(':');
+	        if (line.length < 2) {
+	            return;
+	        }
+	        info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
+	    });
+	    console.log('MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
+			    	'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
+			    	'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
+			    	'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB '  );
+	},
 
-		// const regex = /\((.*):(\d+):(\d+)\)$/
-		// const match = regex.exec(err.stack.split("\n")[3]);
-		// console.log(match[1] + ' ' + match[2] + ' ' + match[3] + ' ');
-
-		// console.log('caller_line : ' + err.stack.toString().split(/\r\n|\n/)[4]);   
-		// console.log('Stack Trace : ' + err.stack.toString().split(/\r\n|\n/)[3]); 
-		// console.log();
-        
-		// printDebugMessage(colorCodes.COLOR_RED, callerInfo, error.caller.name, 'ERROR', message);
+	scheduleHealthCheck : function scheduleHealthCheck(inputFunc, timeInMinutes){
+		setTimeout(function(){
+			if(global.gc){
+				global.gc();
+			}
+			if(inputFunc){
+				inputFunc();
+				scheduleHealthCheck(inputFunc, timeInMinutes);
+			}
+		}, timeInMinutes * 60 * 1000);
 	}
 };
-
