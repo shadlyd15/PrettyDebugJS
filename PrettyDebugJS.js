@@ -1,3 +1,4 @@
+
 const colorCodes = {
     COLOR_BLACK     :	'\x1B[30m',
     COLOR_RED       :	'\x1B[31m',
@@ -12,74 +13,87 @@ const colorCodes = {
 
 const timeOptions = {  
     year: "numeric", month: "short",  
-    day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"  
+    day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
 };  
 
-function getFileName(caller) {
-  	const STACK_FUNC_NAME = new RegExp(/at\s+((\S+)\s)?\((\S+):(\d+):(\d+)\)/);
-	let err = new Error();
-	if(typeof Error.captureStackTrace === 'function'){
-		Error.captureStackTrace(err);
-	}
-
-	let callerInfo = null;
-	let stacks = err.stack.split('\n').slice(1);
-	for (let i = 0; i < stacks.length; i++) {
-		callerInfo = STACK_FUNC_NAME.exec(stacks[i]);
-		if (callerInfo[2] === caller) {
-			return {
-				filename: callerInfo[3].replace(/^.*[\\\/]/, '') || null,
-				line: callerInfo[4] || null,
-				column: callerInfo[5] || null,
-			};
-		}
-	}
-	return null;
-}
-
 function printDebugMessage(color, fileInfo, functionName, tag, message){
+	if(!functionName) functionName = 'Anonymous';
 	console.log(
-		color +
-		' [' +
-		tag +
-		'] \t' +
 		colorCodes.COLOR_YELLOW	+
 		' [' +
 		new Date().toLocaleTimeString("en-us", timeOptions) +
-		'] ' +
+		'] ' +		
 		colorCodes.COLOR_CYAN +
 		'[' +
+		functionName +
+		' ' +
 		fileInfo.filename +
 		':' +
 		fileInfo.line +
 		'] ' +
-		colorCodes.COLOR_MAGENTA +
-		'[' +
-		functionName +
+		color +
+		' [' +
+		tag +
 		']' +
+		// colorCodes.COLOR_WHITE +
+		// '[' +
+		// functionName +
+		// ']' +
 		colorCodes.COLOR_YELLOW +
-		' \t:: ' +
+		'\t:\t' +
 		color +
 		message +
 		colorCodes.COLOR_RESET
 	);
 }
 
+
+const fileInfo = {
+	_getErrorObject : function _getErrorObject(){
+	    try { throw Error('') } catch(err) { return err; }
+	},
+
+	currentLocation: function currentLocation(){
+		var err = this._getErrorObject();
+
+		const regexFile = /\((.*)\)$/;
+		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/)[4]);
+		const fileName = matchFile[1].replace(/^.*[\\\/]/, '');
+
+		const matchFunc = err.stack.toString().split(/\r\n|\n/)[5];
+		const functionName = matchFunc.replace(/(?=\()(.*)(?<=\))/, '');
+		
+		return {
+			functionName : functionName,
+			fileName : fileName
+		}
+	}
+}
+
 module.exports = {
 	info: function info(message) {
-		const callerInfo = getFileName(info.caller.name);
-		printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
+        // console.log(colorCodes.COLOR_GREEN + 'File Name : ' + _getCallerFile() + colorCodes.COLOR_RESET);
+
+        const currentLocationInfo = fileInfo.currentLocation();
+		
+		console.log(currentLocationInfo.functionName + '(' + currentLocationInfo.fileName + ')');
+		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
 	},
 
 	error: function error(message) {
-		const callerInfo = getFileName(error.caller.name);
-		printDebugMessage(colorCodes.COLOR_RED, callerInfo, error.caller.name, 'ERROR', message);
-	},
+		// console.log(colorCodes.COLOR_RED + 'File Name : ' + _getCallerFile() + colorCodes.COLOR_RESET);
+
+		// var err = getErrorObject();
+
+		// const regex = /\((.*):(\d+):(\d+)\)$/
+		// const match = regex.exec(err.stack.split("\n")[3]);
+		// console.log(match[1] + ' ' + match[2] + ' ' + match[3] + ' ');
+
+		// console.log('caller_line : ' + err.stack.toString().split(/\r\n|\n/)[4]);   
+		// console.log('Stack Trace : ' + err.stack.toString().split(/\r\n|\n/)[3]); 
+		// console.log();
+        
+		// printDebugMessage(colorCodes.COLOR_RED, callerInfo, error.caller.name, 'ERROR', message);
+	}
 };
 
-// function TestFunction() {
-// 	debug.info('Testing My Information ');
-// 	debug.error('This is an error message');
-// }
-
-// TestFunction();	
