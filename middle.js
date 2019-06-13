@@ -9,7 +9,7 @@ module.exports.loga = function(iteration, max){
 		// if(getRandomInt(max)){
 			debug.info("This is test no : " + i + " Rand Value : " + Math.random());
 		// } else{
-			debug.error("This is test no : " + i + " Rand Value : " + Math.random());
+			// debug.error("This is test no : " + i + " Rand Value : " + Math.random());
 		// }
 	}
 };

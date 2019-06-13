@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs	=	require('fs');
+const util	=	require('util');
 
 const colorCodes = {
     COLOR_BLACK     :	'\x1B[30m',
@@ -20,7 +21,7 @@ const color = {
 	reset 		: colorCodes.COLOR_RESET
 };
 
-const timeOptions = {  
+const timeOptions = {
     year: "numeric", month: "short", day: "numeric", 
     hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
 };
@@ -73,36 +74,48 @@ const fileInfo = {
 	}
 }
 
-let debugStream = process.stdout;
 module.exports = {
+	debugStream : [],
 
-	serStream: function serStream (stream){
-		debugStream = stream | process.stdout;
+	setStream: function setStream (stream = process.stdout){
+		this.debugStream.push(stream);
+	},
+
+	print: function print(){
+	  debugStream.write(util.format.apply(this, arguments) + '\n');
+	},
+
+	printToAllStreams : function printAllStreams(){
+		let context = this;
+		let args = arguments;
+		this.debugStream.forEach(function(stream){
+			stream.write(util.format.apply(context, args) + '\n');
+		});
 	},
 
 	info: function info(message) {
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
-		debugStream.write(paintText(currentLocationInfo.functionName, color.info) + '(' + currentLocationInfo.fileName + ')');
+		this.printToAllStreams(paintText(currentLocationInfo.functionName, color.info) + '(' + currentLocationInfo.fileName + ')');
 		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
 	},
 
 	error: function error(message) {	
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
-		console.log(currentLocationInfo.functionName + '(' + currentLocationInfo.fileName + ')');
+		this.printToAllStreams(currentLocationInfo.functionName + '(' + currentLocationInfo.fileName + ')');
 		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
 	},
 
 	nodeMemoryUsage : function nodeMemoryUsage() {
 		if(process.env.DEBUG != 1) return;
 		const used = process.memoryUsage();
-		console.log(used);
+		this.printToAllStreams(used);
 		const infos = [];
 		for (let key in used) {
 		  infos.push(`${key} : ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
 		}
-		console.log(infos);
+		this.printToAllStreams(infos);
 	},
 
 	sysMemoryUsage : function sysMemoryUsage() {
@@ -116,10 +129,10 @@ module.exports = {
 	        }
 	        info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
 	    });
-	    console.log('MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
-			    	'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
-			    	'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
-			    	'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB '  );
+	    this.printToAllStreams(	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
+							   	'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
+							   	'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
+							   	'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB '  );
 	},
 
 	scheduleHealthCheck : function scheduleHealthCheck(inputFunc, timeInMinutes){
