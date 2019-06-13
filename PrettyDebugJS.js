@@ -64,7 +64,7 @@ const fileInfo = {
 		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
 		const fileName = matchFile[1].replace(/^.*[\\\/]/, '');
 
-		const matchFunc = err.stack.toString().split(/\r\n|\n/, 5)[4];
+		const matchFunc = err.stack.toString().split(/\r\n|\n/, 4)[3];
 		const functionName = matchFunc.replace(/at |(?=\()(.*)(?<=\))/g, '');
 		
 		return {
@@ -78,7 +78,9 @@ module.exports = {
 	debugStream : [],
 
 	attachStream: function attachStream(stream = process.stdout){
-		this.debugStream.push(stream);
+		if(stream){
+			this.debugStream.push(stream);
+		}
 	},
 
 	detachStream: function detachStream(stream){
@@ -96,8 +98,9 @@ module.exports = {
 		let context = this;
 		let args = arguments;
 		this.debugStream.forEach(function(stream){
-			// if(stream != )
-			stream.write(util.format.apply(context, args) + '\n');
+			if(stream){
+				stream.write(util.format.apply(context, args) + '\n');
+			}
 		});
 	},
 
