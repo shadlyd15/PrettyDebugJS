@@ -77,8 +77,15 @@ const fileInfo = {
 module.exports = {
 	debugStream : [],
 
-	setStream: function setStream (stream = process.stdout){
+	attachStream: function attachStream(stream = process.stdout){
 		this.debugStream.push(stream);
+	},
+
+	detachStream: function detachStream(stream){
+		let filteredStream = this.debugStream.filter(function(value){
+		    return ( value != stream );
+		});
+		this.debugStream = filteredStream;
 	},
 
 	print: function print(){
@@ -89,6 +96,7 @@ module.exports = {
 		let context = this;
 		let args = arguments;
 		this.debugStream.forEach(function(stream){
+			// if(stream != )
 			stream.write(util.format.apply(context, args) + '\n');
 		});
 	},

@@ -4,7 +4,7 @@ console.time('someFunction');
 const debug = require('./PrettyDebugJS.js');
 const mid = require('./middle.js');
 
-debug.setStream(process.stdout);
+debug.attachStream(process.stdout);
 
 function test(){
 	mid.loga(10, 10);
@@ -21,9 +21,11 @@ var HOST = '0.0.0.0';
 var PORT = 6969;
 
 net.createServer(function(sock) {
-	// We have a connection - a socket object is assigned to the connection automatically
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	});
 	console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);  
 	// sock.write('Hello');
-	debug.setStream(sock);
+	debug.attachStream(sock);
 
 }).listen(PORT, HOST);
