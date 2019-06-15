@@ -4,6 +4,8 @@ console.time('someFunction');
 const debug = require('./PrettyDebugJS.js');
 const mid = require('./middle.js');
 
+debug.info(debug);
+
 debug.info('This is a test application');
 function test(){
 	debug.info('In test');

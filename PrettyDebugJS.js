@@ -19,14 +19,14 @@ const _ansiColorCodes = {
 };
 
 const _debugColors = {
-	info 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
-	error 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.red		:	'',
-	time 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
-	fileLocation	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.magenta	:	'',
-	functionName 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
-	reset 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.reset		:	'',
-	message 		: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
-	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	''
+	info 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
+	error 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.red		:	'',
+	alert		 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow		:	'',
+	time 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow		:	'',
+	fileLocation	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.magenta	:	'',
+	functionName 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
+	memory 		 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
+	reset 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.reset		:	''
 }
 
 function _checkUniqueStream(targetArray, targetValue){ 
@@ -45,12 +45,11 @@ function _renderTextSegment(text, color, resetColor = ''){
 }
 
 function _renderMessage(tag, functionName, fileLocation, message){
-	let color = _debugColors;
-	return 	_renderTextSegment(new Date().toLocaleTimeString("en-us", _timeOptions), color['time'], ' ')
-			+ _renderTextSegment(functionName, color['functionName'], ' ')
-			+ _renderTextSegment(fileLocation, color['fileLocation'], ' ')
-			+ _renderTextSegment(tag, color[tag.toLowerCase()], ' : ')
-			+ _renderTextSegment(message, color[tag.toLowerCase()], _debugColors.reset);
+	return 	_renderTextSegment(new Date().toLocaleTimeString("en-us", _timeOptions), _debugColors['time'], ' ')
+			+ _renderTextSegment(functionName, _debugColors['functionName'], ' ')
+			+ _renderTextSegment(fileLocation, _debugColors['fileLocation'], ' ')
+			+ _renderTextSegment(tag, _debugColors[tag.toLowerCase()], ' : ')
+			+ _renderTextSegment(message, _debugColors[tag.toLowerCase()], _debugColors.reset);
 }
 
 function _getFunctionCallLocation(){
@@ -69,58 +68,70 @@ function _getFunctionCallLocation(){
 }
 
 module.exports = {
+	nodeMemoryWatermark : '',
+	systemMemoryWatermark : '',
 	debugStreams : [process.stdout],
+
+	_printStream: function _printStream(stream, message){
+		if(stream){
+			stream.write(message + '\n');
+		}
+	},
+
+	_printToAllStreams : function _printAllStreams(message){
+		this.debugStreams.forEach(function(stream){
+			this._printStream(stream, message);
+		}, this);
+	},
+
 	attachStream: function attachStream(stream){
 		if(stream && _checkUniqueStream(this.debugStreams, stream)){
 			this.debugStreams.push(stream);
+			this.alert('New Debug Stream ' + stream + ' Attached');
 		}
 	},
 
 	detachStream: function detachStream(stream){
-		let filteredStream = this.debugStreams.filter(function(value){
+		let filteredStreams = this.debugStreams.filter(function(value){
 		    return ( value != stream );
 		});
-		this.debugStreams = filteredStream;
+		this.debugStreams = filteredStreams;
 	},
 
-	print: function print(){
-	  debugStreams.write(util.format.apply(this, arguments) + '\n');
-	},
-
-	printToAllStreams : function printAllStreams(){
-		let ctx = this;
-		let args = arguments;
-		this.debugStreams.forEach(function(stream){
-			if(stream){
-				stream.write(util.format.apply(ctx, args) + '\n');
-			}
-		});
-	},
-
-	info: function info(message){
-		if(process.env.DEBUG != 1) return;
+	info: function info(){
+		if(process.env.ENABLE_DEBUG != 1) return;
 		const currentLocationInfo = _getFunctionCallLocation();
-		this.printToAllStreams(_renderMessage('INFO',
-											 currentLocationInfo.functionName, 
-											 currentLocationInfo.fileLocation, 
-											 message)
+		this._printToAllStreams(_renderMessage(	'INFO',
+												 currentLocationInfo.functionName, 
+												 currentLocationInfo.fileLocation, 
+												 util.format.apply(this, arguments))
 		);
 	},
 
-	error: function error(message){
-		if(process.env.DEBUG != 1) return;
+	error: function error(){
+		if(process.env.ENABLE_DEBUG != 1) return;
 		const currentLocationInfo = _getFunctionCallLocation();
-		this.printToAllStreams(_renderMessage('ERROR',
-											 currentLocationInfo.functionName, 
-											 currentLocationInfo.fileLocation, 
-											 message)
+		this._printToAllStreams(_renderMessage(	'ERROR',
+												 currentLocationInfo.functionName, 
+												 currentLocationInfo.fileLocation, 
+												 util.format.apply(this, arguments))
 		);
 	},
 
-	nodeMemoryUsage : function nodeMemoryUsage(){
-		if(process.env.DEBUG != 1) return;
+	alert: function alert(){
+		if(process.env.ENABLE_DEBUG != 1) return;
+		const currentLocationInfo = _getFunctionCallLocation();
+		this._printToAllStreams(_renderMessage(	'ALERT',
+												 currentLocationInfo.functionName, 
+												 currentLocationInfo.fileLocation, 
+												 util.format.apply(this, arguments))
+		);
+	},
+
+	nodeMemoryUsage: function nodeMemoryUsage(){
+		if(process.env.ENABLE_DEBUG != 1) return;
 		const nodeMemInfo = process.memoryUsage();
-		this.printToAllStreams(_renderMessage(	'MEMORY',
+		this._printToAllStreams(_renderMessage(	'MEMORY',
 												'Node', 
 												'Process', 
 												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
@@ -129,8 +140,8 @@ module.exports = {
 													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB' )));
 	},
 
-	sysMemoryUsage : function sysMemoryUsage(){
-		if(process.env.DEBUG != 1) return;
+	sysMemoryUsage: function sysMemoryUsage(){
+		if(process.env.ENABLE_DEBUG != 1) return;
 		var ctx = this;
 		fs.readFile('/proc/meminfo', function (err, data){
 			if (err) throw err;
@@ -143,7 +154,7 @@ module.exports = {
 			   info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
 			});
 
-			ctx.printToAllStreams(_renderMessage(	'MEMORY',
+			ctx._printToAllStreams(_renderMessage(	'MEMORY',
 													'System', 
 													'Process', 
 													(	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
@@ -167,9 +178,7 @@ module.exports = {
 };
 
 
-/* TODO : 	1. Print the function name which invoked the fucntion containing debug.info
- *			2. Redesign printDebugMessage() 
- *			3. Investigate if memory is optimized
- *			4. Optimize file and function name regex operation
- *			5. Beautify sysMemoryUsage() and nodeMemoryUsage()
+/* TODO : 	1. Investigate if memory is optimized
+ *			2. Beautify sysMemoryUsage() and nodeMemoryUsage()
+ *			3. Implement RAM High Watermark
  */
