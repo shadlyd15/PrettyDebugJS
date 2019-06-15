@@ -87,7 +87,7 @@ module.exports = {
 	attachStream: function attachStream(stream){
 		if(stream && _checkUniqueStream(this.debugStreams, stream)){
 			this.debugStreams.push(stream);
-			this.alert('New Debug Stream ' + stream + ' Attached');
+			this.alert('New Debug Stream Attached');
 		}
 	},
 
@@ -96,6 +96,7 @@ module.exports = {
 		    return ( value != stream );
 		});
 		this.debugStreams = filteredStreams;
+		this.info('Debug Stream Detached');
 	},
 
 	info: function info(){
