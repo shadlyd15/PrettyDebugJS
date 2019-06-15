@@ -1,6 +1,11 @@
 const fs	=	require('fs');
 const util	=	require('util');
 
+const _timeOptions = {
+    year: "numeric", month: "short", day: "numeric", 
+    hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
+};
+
 const _ansiColorCodes = {
     black     :	'\x1B[30m',
     red       :	'\x1B[31m',
@@ -24,14 +29,16 @@ const _debugColors = {
 	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	''
 }
 
+function _checkUniqueStream(targetArray, targetValue){ 
+    for(let i = 0; i < targetArray.length; i++){
+    	if(targetArray[i] === targetValue) return false;    	
+    }
+    return true;
+}; 
+
 function _paintText(text, color, resetColor = ''){
 	return color + text + resetColor;
 }
-
-const _timeOptions = {
-    year: "numeric", month: "short", day: "numeric", 
-    hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
-};
 
 function _renderTextSegment(text, color, resetColor = ''){
 	return _paintText('[' + text + ']', color, resetColor);
@@ -62,28 +69,28 @@ function _getFunctionCallLocation(){
 }
 
 module.exports = {
-	debugStream : [],
-	attachStream: function attachStream(stream = process.stdout){
-		if(stream){
-			this.debugStream.push(stream);
+	debugStreams : [process.stdout],
+	attachStream: function attachStream(stream){
+		if(stream && _checkUniqueStream(this.debugStreams, stream)){
+			this.debugStreams.push(stream);
 		}
 	},
 
 	detachStream: function detachStream(stream){
-		let filteredStream = this.debugStream.filter(function(value){
+		let filteredStream = this.debugStreams.filter(function(value){
 		    return ( value != stream );
 		});
-		this.debugStream = filteredStream;
+		this.debugStreams = filteredStream;
 	},
 
 	print: function print(){
-	  debugStream.write(util.format.apply(this, arguments) + '\n');
+	  debugStreams.write(util.format.apply(this, arguments) + '\n');
 	},
 
 	printToAllStreams : function printAllStreams(){
 		let ctx = this;
 		let args = arguments;
-		this.debugStream.forEach(function(stream){
+		this.debugStreams.forEach(function(stream){
 			if(stream){
 				stream.write(util.format.apply(ctx, args) + '\n');
 			}
