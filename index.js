@@ -1,26 +1,16 @@
-var net = require('net');
-
-console.time('someFunction');
+const net 	= require('net');
+const mid 	= require('./middle.js');
 const debug = require('./PrettyDebugJS.js');
-const mid = require('./middle.js');
 
-debug.info(debug);
+var PORT = 6969;
+var HOST = '0.0.0.0';
 
 debug.info('This is a test application');
-function test(){
-	debug.info('In test');
-	mid.loga(10, 10);
-}
-
-test();
 
 debug.scheduleHealthCheck(function(){
 	debug.sysMemoryUsage();
 	debug.nodeMemoryUsage();
 }, .01);
-
-var HOST = '0.0.0.0';
-var PORT = 6969;
 
 net.createServer(function(sock){
 	debug.attachStream(sock);
@@ -28,3 +18,8 @@ net.createServer(function(sock){
 		debug.detachStream(sock);
 	}); 
 }).listen(PORT, HOST);
+
+(function test(){
+	debug.info('Here debug context is test()');
+	mid.loga(10, 10);
+})();
