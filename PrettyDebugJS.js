@@ -1,60 +1,49 @@
 const fs	=	require('fs');
 const util	=	require('util');
 
-const colorCodes = {
-    COLOR_BLACK     :	'\x1B[30m',
-    COLOR_RED       :	'\x1B[31m',
-    COLOR_GREEN     :	'\x1B[32m',
-    COLOR_YELLOW    :	'\x1B[33m',
-    COLOR_BLUE      :	'\x1B[34m',
-    COLOR_MAGENTA   :	'\x1B[35m',
-    COLOR_CYAN      :	'\x1B[36m',
-    COLOR_WHITE     :	'\x1B[37m',
-    COLOR_RESET     :	'\x1B[00m'
+const ansiColorCodes = {
+    black     :	'\x1B[30m',
+    red       :	'\x1B[31m',
+    green     :	'\x1B[32m',
+    yellow    :	'\x1B[33m',
+    blue      :	'\x1B[34m',
+    magenta   :	'\x1B[35m',
+    cyan      :	'\x1B[36m',
+    white     :	'\x1B[37m',
+    reset     :	'\x1B[00m'
 };
+
+const debugColors = {
+	info 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.green		:	'',
+	error 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.red		:	'',
+	time 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	'',
+	fileName		: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.magenta	:	'',
+	functionName 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.cyan		:	'',
+	reset 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.reset		:	'',
+	message 		: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	'',
+	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	''
+}
+
+function paintText(text, color, resetColor = ''){
+	return color + text + resetColor;
+}
 
 const timeOptions = {
     year: "numeric", month: "short", day: "numeric", 
     hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
 };
 
-function renderTextSegment(paintColor, text, resetColor = ''){ 
-	return ' ' + paintColor + '[' + text + ']' + resetColor + ' ';
-}
-
-function getColorsIfEnabled(){
-	if(process.env.DISABLE_DEBUG_COLOR !== 1){
-		return {
-			info 			: colorCodes.COLOR_GREEN,
-			error 			: colorCodes.COLOR_RED,
-			time 			: colorCodes.COLOR_YELLOW,
-			fileName		: colorCodes.COLOR_MAGENTA,
-			functionName 	: colorCodes.COLOR_CYAN,
-			reset 			: colorCodes.COLOR_RESET,
-			message 		: colorCodes.COLOR_YELLOW,
-			memory 		 	: colorCodes.COLOR_BLUE
-		};
-	} else{
-		return {
-			info 			: '',
-			error 			: '',
-			time 			: '',
-			fileName		: '',
-			functionName 	: '',
-			reset 			: '',
-			message 		: '',
-			memory 		 	: ''
-		};
-	}
+function renderTextSegment(text, color, resetColor = ''){
+	return paintText('[' + text + ']', color, resetColor);
 }
 
 function renderMessage(tag, functionName, fileName, message){
-	let color = getColorsIfEnabled();
-	return 	renderTextSegment(color['time'], new Date().toLocaleTimeString("en-us", timeOptions))
-			+ renderTextSegment(color['functionName'], functionName)
-			+ renderTextSegment(color['fileName'], fileName)
-			+ renderTextSegment(color[tag.toLowerCase()], tag)
-			+ renderTextSegment(color[tag.toLowerCase()], ' ' + message + ' ', color.reset)
+	let color = debugColors;
+	return 	renderTextSegment(new Date().toLocaleTimeString("en-us", timeOptions), color['time'], ' ')
+			+ renderTextSegment(functionName, color['functionName'], ' ')
+			+ renderTextSegment(fileName, color['fileName'], ' ')
+			+ renderTextSegment(tag, color[tag.toLowerCase()], ' : ')
+			+ renderTextSegment(message, color[tag.toLowerCase()])
 }
 
 function renderMemInfo(){
@@ -80,7 +69,6 @@ const fileInfo = {
 
 module.exports = {
 	debugStream : [],
-
 	attachStream: function attachStream(stream = process.stdout){
 		if(stream){
 			this.debugStream.push(stream);
@@ -99,16 +87,16 @@ module.exports = {
 	},
 
 	printToAllStreams : function printAllStreams(){
-		let context = this;
+		let ctx = this;
 		let args = arguments;
 		this.debugStream.forEach(function(stream){
 			if(stream){
-				stream.write(util.format.apply(context, args) + '\n');
+				stream.write(util.format.apply(ctx, args) + '\n');
 			}
 		});
 	},
 
-	info: function info(message) {
+	info: function info(message){
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
 		this.printToAllStreams(renderMessage('INFO',
@@ -118,7 +106,7 @@ module.exports = {
 		);
 	},
 
-	error: function error(message) {	
+	error: function error(message){
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
 		this.printToAllStreams(renderMessage('ERROR',
@@ -128,7 +116,7 @@ module.exports = {
 		);
 	},
 
-	nodeMemoryUsage : function nodeMemoryUsage() {
+	nodeMemoryUsage : function nodeMemoryUsage(){
 		if(process.env.DEBUG != 1) return;
 		const nodeMemInfo = process.memoryUsage();
 		this.printToAllStreams(renderMessage(	'MEMORY',
@@ -137,30 +125,30 @@ module.exports = {
 												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'Heap Total : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'Heap Used : ' 	+ Math.round(nodeMemInfo.heapUsed  	/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB  ' )));
+													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB' )));
 	},
 
-	sysMemoryUsage : function sysMemoryUsage() {
+	sysMemoryUsage : function sysMemoryUsage(){
 		if(process.env.DEBUG != 1) return;
-		var context = this;
-		fs.readFile('/proc/meminfo', function (err, data) {
+		var ctx = this;
+		fs.readFile('/proc/meminfo', function (err, data){
 			if (err) throw err;
 			var info = {};
 			data.toString().split(/\n/g).forEach(function(line){
 			   line = line.split(':');
-			   if (line.length < 2) {
+			   if (line.length < 2){
 			       return;
 			   }
 			   info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
 			});
 
-			context.printToAllStreams(renderMessage('MEMORY',
+			ctx.printToAllStreams(renderMessage('MEMORY',
 									 'System', 
 									 'Process', 
 									 (	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
 							   			'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
 							   			'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
-							   			'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB ' )));
+							   			'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB' )));
 		});
 	},
 
