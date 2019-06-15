@@ -1,7 +1,7 @@
 const fs	=	require('fs');
 const util	=	require('util');
 
-const ansiColorCodes = {
+const _ansiColorCodes = {
     black     :	'\x1B[30m',
     red       :	'\x1B[31m',
     green     :	'\x1B[32m',
@@ -13,57 +13,51 @@ const ansiColorCodes = {
     reset     :	'\x1B[00m'
 };
 
-const debugColors = {
-	info 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.green		:	'',
-	error 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.red		:	'',
-	time 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	'',
-	fileName		: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.magenta	:	'',
-	functionName 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.cyan		:	'',
-	reset 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.reset		:	'',
-	message 		: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	'',
-	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? ansiColorCodes.yellow		:	''
+const _debugColors = {
+	info 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
+	error 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.red		:	'',
+	time 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
+	fileLocation	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.magenta	:	'',
+	functionName 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
+	reset 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.reset		:	'',
+	message 		: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
+	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	''
 }
 
-function paintText(text, color, resetColor = ''){
+function _paintText(text, color, resetColor = ''){
 	return color + text + resetColor;
 }
 
-const timeOptions = {
+const _timeOptions = {
     year: "numeric", month: "short", day: "numeric", 
     hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
 };
 
-function renderTextSegment(text, color, resetColor = ''){
-	return paintText('[' + text + ']', color, resetColor);
+function _renderTextSegment(text, color, resetColor = ''){
+	return _paintText('[' + text + ']', color, resetColor);
 }
 
-function renderMessage(tag, functionName, fileName, message){
-	let color = debugColors;
-	return 	renderTextSegment(new Date().toLocaleTimeString("en-us", timeOptions), color['time'], ' ')
-			+ renderTextSegment(functionName, color['functionName'], ' ')
-			+ renderTextSegment(fileName, color['fileName'], ' ')
-			+ renderTextSegment(tag, color[tag.toLowerCase()], ' : ')
-			+ renderTextSegment(message, color[tag.toLowerCase()])
+function _renderMessage(tag, functionName, fileLocation, message){
+	let color = _debugColors;
+	return 	_renderTextSegment(new Date().toLocaleTimeString("en-us", _timeOptions), color['time'], ' ')
+			+ _renderTextSegment(functionName, color['functionName'], ' ')
+			+ _renderTextSegment(fileLocation, color['fileLocation'], ' ')
+			+ _renderTextSegment(tag, color[tag.toLowerCase()], ' : ')
+			+ _renderTextSegment(message, color[tag.toLowerCase()], _debugColors.reset);
 }
 
-function renderMemInfo(){
+function _getFunctionCallLocation(){
+	var err = new Error();
+	const regexFile = /\((.*)\)$/;
+	const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
+	const fileLocation = matchFile[1].replace(/^.*[\\\/]/, '');
 
-}
-
-const fileInfo = {
-	currentLocation: function currentLocation(){
-		var err = new Error();
-		const regexFile = /\((.*)\)$/;
-		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
-		const fileName = matchFile[1].replace(/^.*[\\\/]/, '');
-
-		const matchFunc = err.stack.toString().split(/\r\n|\n/, 4)[3];
-		const functionName = matchFunc.replace(/    at |(?=\()(.*)(?<=\))/g, '');
-		
-		return {
-			functionName : functionName,
-			fileName : fileName
-		}
+	const functionName = err.stack
+			                .split('\n', 4)[3]
+			                .replace(/^\s+at\s+(.+?)\s.+/g, '$1' );
+	return {
+		functionName : functionName,
+		fileLocation : fileLocation
 	}
 }
 
@@ -98,20 +92,20 @@ module.exports = {
 
 	info: function info(message){
 		if(process.env.DEBUG != 1) return;
-		const currentLocationInfo = fileInfo.currentLocation();
-		this.printToAllStreams(renderMessage('INFO',
+		const currentLocationInfo = _getFunctionCallLocation();
+		this.printToAllStreams(_renderMessage('INFO',
 											 currentLocationInfo.functionName, 
-											 currentLocationInfo.fileName, 
+											 currentLocationInfo.fileLocation, 
 											 message)
 		);
 	},
 
 	error: function error(message){
 		if(process.env.DEBUG != 1) return;
-		const currentLocationInfo = fileInfo.currentLocation();
-		this.printToAllStreams(renderMessage('ERROR',
+		const currentLocationInfo = _getFunctionCallLocation();
+		this.printToAllStreams(_renderMessage('ERROR',
 											 currentLocationInfo.functionName, 
-											 currentLocationInfo.fileName, 
+											 currentLocationInfo.fileLocation, 
 											 message)
 		);
 	},
@@ -119,11 +113,11 @@ module.exports = {
 	nodeMemoryUsage : function nodeMemoryUsage(){
 		if(process.env.DEBUG != 1) return;
 		const nodeMemInfo = process.memoryUsage();
-		this.printToAllStreams(renderMessage(	'MEMORY',
+		this.printToAllStreams(_renderMessage(	'MEMORY',
 												'Node', 
 												'Process', 
 												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'Heap Total : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
+													'Total Heap : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'Heap Used : ' 	+ Math.round(nodeMemInfo.heapUsed  	/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB' )));
 	},
@@ -142,13 +136,13 @@ module.exports = {
 			   info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
 			});
 
-			ctx.printToAllStreams(renderMessage('MEMORY',
-									 'System', 
-									 'Process', 
-									 (	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
-							   			'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
-							   			'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
-							   			'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB' )));
+			ctx.printToAllStreams(_renderMessage(	'MEMORY',
+													'System', 
+													'Process', 
+													(	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
+														'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
+														'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
+														'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB' )));
 		});
 	},
 
