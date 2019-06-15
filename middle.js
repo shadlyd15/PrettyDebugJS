@@ -6,10 +6,10 @@ function getRandomInt(max) {
 
 module.exports.loga = function(iteration, max){
 	for (var i = 0; i < iteration; i++) {
-		// if(getRandomInt(max)){
+		if(getRandomInt(max) % 3){
 			debug.info("This is test no : " + i + " Rand Value : " + Math.random());
-		// } else{
-			// debug.error("This is test no : " + i + " Rand Value : " + Math.random());
-		// }
+		} else{
+			debug.error("This is test no : " + i + " Rand Value : " + Math.random());
+		}
 	}
 };

@@ -13,48 +13,52 @@ const colorCodes = {
     COLOR_RESET     :	'\x1B[00m'
 };
 
-const color = {
-	info 		: colorCodes.COLOR_GREEN,
-	error 		: colorCodes.COLOR_RED,
-	time 		: colorCodes.COLOR_YELLOW,
-	location 	: colorCodes.COLOR_CYAN,
-	reset 		: colorCodes.COLOR_RESET
-};
-
 const timeOptions = {
     year: "numeric", month: "short", day: "numeric", 
     hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
 };
 
-function paintText(text, paintColor, reset = true){
-	return paintColor + text + (reset?color.reset:'');
+function renderTextSegment(paintColor, text, resetColor = ''){ 
+	return ' ' + paintColor + '[' + text + ']' + resetColor + ' ';
 }
 
-function printDebugMessage(color, fileInfo, functionName, tag, message){
-	if(!functionName) functionName = 'Anonymous';
-	console.log(
-		colorCodes.COLOR_YELLOW	+
-		' [' +
-		new Date().toLocaleTimeString("en-us", timeOptions) +
-		'] ' +		
-		colorCodes.COLOR_CYAN +
-		'[' +
-		functionName +
-		' ' +
-		fileInfo.filename +
-		':' +
-		fileInfo.line +
-		'] ' +
-		color +
-		' [' +
-		tag +
-		']' +
-		colorCodes.COLOR_YELLOW +
-		'\t:\t' +
-		color +
-		message +
-		colorCodes.COLOR_RESET
-	);
+function getColorsIfEnabled(){
+	if(process.env.DISABLE_DEBUG_COLOR !== 1){
+		return {
+			info 			: colorCodes.COLOR_GREEN,
+			error 			: colorCodes.COLOR_RED,
+			time 			: colorCodes.COLOR_YELLOW,
+			fileName		: colorCodes.COLOR_MAGENTA,
+			functionName 	: colorCodes.COLOR_CYAN,
+			reset 			: colorCodes.COLOR_RESET,
+			message 		: colorCodes.COLOR_YELLOW,
+			memory 		 	: colorCodes.COLOR_BLUE
+		};
+	} else{
+		return {
+			info 			: '',
+			error 			: '',
+			time 			: '',
+			fileName		: '',
+			functionName 	: '',
+			reset 			: '',
+			message 		: '',
+			memory 		 	: ''
+		};
+	}
+}
+
+function renderMessage(tag, functionName, fileName, message){
+	let color = getColorsIfEnabled();
+	return 	renderTextSegment(color['time'], new Date().toLocaleTimeString("en-us", timeOptions))
+			+ renderTextSegment(color['functionName'], functionName)
+			+ renderTextSegment(color['fileName'], fileName)
+			+ renderTextSegment(color[tag.toLowerCase()], tag)
+			+ renderTextSegment(color[tag.toLowerCase()], ' ' + message + ' ', color.reset)
+}
+
+function renderMemInfo(){
+
 }
 
 const fileInfo = {
@@ -65,7 +69,7 @@ const fileInfo = {
 		const fileName = matchFile[1].replace(/^.*[\\\/]/, '');
 
 		const matchFunc = err.stack.toString().split(/\r\n|\n/, 4)[3];
-		const functionName = matchFunc.replace(/at |(?=\()(.*)(?<=\))/g, '');
+		const functionName = matchFunc.replace(/    at |(?=\()(.*)(?<=\))/g, '');
 		
 		return {
 			functionName : functionName,
@@ -107,43 +111,57 @@ module.exports = {
 	info: function info(message) {
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
-		this.printToAllStreams(paintText(currentLocationInfo.functionName, color.info) + '(' + currentLocationInfo.fileName + ')');
-		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
+		this.printToAllStreams(renderMessage('INFO',
+											 currentLocationInfo.functionName, 
+											 currentLocationInfo.fileName, 
+											 message)
+		);
 	},
 
 	error: function error(message) {	
 		if(process.env.DEBUG != 1) return;
 		const currentLocationInfo = fileInfo.currentLocation();
-		this.printToAllStreams(currentLocationInfo.functionName + '(' + currentLocationInfo.fileName + ')');
-		// printDebugMessage(colorCodes.COLOR_GREEN, callerInfo, info.caller.name, 'INFO', message);
+		this.printToAllStreams(renderMessage('ERROR',
+											 currentLocationInfo.functionName, 
+											 currentLocationInfo.fileName, 
+											 message)
+		);
 	},
 
 	nodeMemoryUsage : function nodeMemoryUsage() {
 		if(process.env.DEBUG != 1) return;
-		const used = process.memoryUsage();
-		this.printToAllStreams(used);
-		const infos = [];
-		for (let key in used) {
-		  infos.push(`${key} : ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
-		}
-		this.printToAllStreams(infos);
+		const nodeMemInfo = process.memoryUsage();
+		this.printToAllStreams(renderMessage(	'MEMORY',
+												'Node', 
+												'Process', 
+												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
+													'Heap Total : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
+													'Heap Used : ' 	+ Math.round(nodeMemInfo.heapUsed  	/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
+													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB  ' )));
 	},
 
 	sysMemoryUsage : function sysMemoryUsage() {
 		if(process.env.DEBUG != 1) return;
-		var info = {};
-	    var data = fs.readFileSync('/proc/meminfo').toString();
-	    data.split(/\n/g).forEach(function(line){
-	        line = line.split(':');
-	        if (line.length < 2) {
-	            return;
-	        }
-	        info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
-	    });
-	    this.printToAllStreams(	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
-							   	'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
-							   	'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
-							   	'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB '  );
+		var context = this;
+		fs.readFile('/proc/meminfo', function (err, data) {
+			if (err) throw err;
+			var info = {};
+			data.toString().split(/\n/g).forEach(function(line){
+			   line = line.split(':');
+			   if (line.length < 2) {
+			       return;
+			   }
+			   info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
+			});
+
+			context.printToAllStreams(renderMessage('MEMORY',
+									 'System', 
+									 'Process', 
+									 (	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
+							   			'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
+							   			'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
+							   			'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB ' )));
+		});
 	},
 
 	scheduleHealthCheck : function scheduleHealthCheck(inputFunc, timeInMinutes){
