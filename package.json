@@ -1,6 +1,6 @@
 {
   "name": "pretty-debug",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Minimal Debug Library For JavaScript",
   "main": "PrettyDebugJS.js",
   "scripts": {
@@ -10,8 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/shadlyd15/PrettyDebugJS.git"
   },
+  "keywords": [
+    "debug",
+    "color",
+    "pretty",
+    "prettify",
+    "console",
+    "log"
+    "error",
+    "readable",
+    "human",
+    "colorful",
+    "pipe"
+  ],
   "author": "Shadly Salahuddin",
-  "license": "MIT",
+  "license": "MIT", 
   "bugs": {
     "url": "https://github.com/shadlyd15/PrettyDebugJS/issues"
   },
