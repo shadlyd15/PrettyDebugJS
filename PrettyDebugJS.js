@@ -71,6 +71,17 @@ function _getFunctionCallLocation(){
 	}
 }
 
+function _bytesToMb(kilo){
+	return Math.round(kilo / 1024 / 1024 * 100) / 100;
+}
+
+function _setWaterMark(watermark, currentValue){
+	if(watermark.value <= currentValue){
+		watermark.value = currentValue;
+		watermark.time 	= new Date().toLocaleTimeString('en-US', _timeOptions);
+	}
+}
+
 module.exports = {
 	
 	nodeHeapWatermark : {time : '', value : 0},
@@ -149,18 +160,15 @@ module.exports = {
 	nodeMemoryUsage: function nodeMemoryUsage(){
 		if(process.env.ENABLE_DEBUG != 1) return;
 		const nodeMemInfo = process.memoryUsage();
-
-		// let nodeHeapUsedCurrent = info['MemTotal'] - info['MemAvailable'];
-		// (nodeHeapUsedCurrent.value > this.nodeHeapWatermark) ? this.nodeHeapWatermark = nodeHeapUsedCurrent.value;
-
-		this._printToAllStreams(_renderMessage(	'MEMORY',
-												'Node', 
-												'Process', 
-												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'Total Heap : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'Heap Used : ' 	+ Math.round(nodeMemInfo.heapUsed  	/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB 	' +
-													'Heap Peak : ')));
+		let message = _renderMessage(	'MEMORY',
+										'Node', 
+										'Process', 
+										(	'RSS : ' 		+ _bytesToMb(nodeMemInfo.rss)		+ ' MB, ' +
+											'Total Heap : '	+ _bytesToMb(nodeMemInfo.heapTotal)	+ ' MB, ' +
+											'Heap Used : ' 	+ _bytesToMb(nodeMemInfo.heapUsed)	+ ' MB, ' +
+											'External : ' 	+ _bytesToMb(nodeMemInfo.external)	+ ' MB' ));
+		_setWaterMark(this.nodeHeapWatermark, nodeMemInfo.heapUsed);
+		this._printToAllStreams(message);
 
 	},
 
@@ -186,15 +194,21 @@ module.exports = {
 														'SwapTotal' 	+ ' : ' + info['SwapTotal']		+ ' MB, ' +
 														'SwapFree' 		+ ' : ' + info['SwapFree']		+ ' MB' )));
 
-			// let systemSwapUsedCurrent = info['MemTotal'] - info['MemAvailable'];
-			// let systemMemoryUsedCurrent = info['MemTotal'] - info['MemAvailable'];
-
-			// (systemSwapUsedCurrent.value > this.systemSwapWatermark) ? this.systemSwapWatermark = systemSwapUsedCurrent.value;
-			// (systemMemoryUsedCurrent.value > this.systemMemoryWatermark) ? this.systemMemoryWatermark = systemMemoryUsedCurrent.value;
+			_setWaterMark(ctx.systemSwapWatermark, info['SwapTotal'] - info['SwapFree']);
+			_setWaterMark(ctx.systemMemoryWatermark, info['MemTotal'] - info['MemAvailable']);
 		});
 	},
 
-	scheduleHealthCheck : function scheduleHealthCheck(inputFunc, timeInMinutes){
+	memoryWatermark: function memoryWatermark(){
+		console.log('this.nodeHeapWatermark.time : ' + this.nodeHeapWatermark.time);
+		console.log('this.nodeHeapWatermark.value : ' + _bytesToMb(this.nodeHeapWatermark.value) + ' MB');
+		console.log('this.systemSwapWatermark.time : ' + this.systemSwapWatermark.time);
+		console.log('this.systemSwapWatermark.value : ' + this.systemSwapWatermark.value + ' MB');
+		console.log('this.systemMemoryWatermark.time : ' + this.systemMemoryWatermark.time);
+		console.log('this.systemMemoryWatermark.value : ' + this.systemMemoryWatermark.value + ' MB');
+	},
+
+	scheduleHealthCheck: function scheduleHealthCheck(inputFunc, timeInMinutes){
 		setTimeout(function(){
 			if(global.gc){
 				global.gc();

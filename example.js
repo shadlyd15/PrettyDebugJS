@@ -9,7 +9,8 @@ debug.info('This is a test application');
 debug.scheduleHealthCheck(function(){
 	debug.sysMemoryUsage();
 	debug.nodeMemoryUsage();
-}, .5);
+	debug.memoryWatermark();
+}, .01);
 
 net.createServer(function(sock){
 	debug.attachStream(sock);
