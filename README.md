@@ -16,7 +16,7 @@ A **lightweight debug library** that prints debug messages beautifully. It works
 
 ## Install
 ```bash
-npm install prettyDebugJs
+npm install pretty-debug
 ```
 
 ## Usage
