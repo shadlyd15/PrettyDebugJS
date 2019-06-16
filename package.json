@@ -10,23 +10,23 @@
     "type": "git",
     "url": "git+https://github.com/shadlyd15/PrettyDebugJS.git"
   },
+  "author": "Shadly Salahuddin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shadlyd15/PrettyDebugJS/issues"
+  },
+  "homepage": "https://github.com/shadlyd15/PrettyDebugJS#readme",
   "keywords": [
     "debug",
     "color",
     "pretty",
     "prettify",
     "console",
-    "log"
+    "log",
     "error",
     "readable",
     "human",
     "colorful",
     "pipe"
-  ],
-  "author": "Shadly Salahuddin",
-  "license": "MIT", 
-  "bugs": {
-    "url": "https://github.com/shadlyd15/PrettyDebugJS/issues"
-  },
-  "homepage": "https://github.com/shadlyd15/PrettyDebugJS#readme"
+  ]
 }
