@@ -1,6 +1,6 @@
 {
   "name": "pretty-debug",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Minimal Debug Library For JavaScript",
   "main": "PrettyDebugJS.js",
   "scripts": {
