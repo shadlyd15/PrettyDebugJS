@@ -1,6 +1,8 @@
 # Pretty Debug JavaScript
 A **lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browsers with very low memory footprint. 
 
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/prettyDebug.png" alt ="Sample Output"/></div>
+
 ## Features
 - Very low memory footprint
 - Beautifully colored and formatted
@@ -57,6 +59,10 @@ setInterval(function(){
 	generateRandomLog();
 }, 1111)
 ```
+## Sample Output
+
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/prettyDebug.png" alt ="Sample Output"/></div>
+
 ## Run Example
 To the above example simply put this command
 ```bash
