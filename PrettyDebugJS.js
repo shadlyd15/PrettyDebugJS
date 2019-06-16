@@ -56,8 +56,10 @@ function _getFunctionCallLocation(){
 	var err = new Error();
 	const regexFile = /\((.*)\)$/;
 	const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
-	const fileLocation = matchFile[1].replace(/^.*[\\\/]/, '');
-
+	let fileLocation = '';
+	if((matchFile != null) && (matchFile.length > 1)){
+		fileLocation = matchFile[1].replace(/^.*[\\\/]/, '');
+	}
 	const functionName = err.stack
 			                .split('\n', 4)[3]
 			                .replace(/^\s+at\s+(.+?)\s.+/g, '$1' );
