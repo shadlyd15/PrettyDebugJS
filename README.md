@@ -25,9 +25,10 @@ Pretty Debug exposes a debug object. Just attach any stream you want to the modu
 
 ## Example
 In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example. 
+
 ```javascript
 const net 	= require('net');
-const debug = require('./PrettyDebugJS.js');
+const debug = require('pretty-debug');
 
 var PORT = 6969;
 var HOST = '0.0.0.0';

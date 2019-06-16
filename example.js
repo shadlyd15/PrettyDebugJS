@@ -1,5 +1,5 @@
 const net 	= require('net');
-const debug = require('./PrettyDebugJS.js');
+const debug = require('pretty-debug');
 
 var PORT = 6969;
 var HOST = '0.0.0.0';
