@@ -3,7 +3,8 @@ const util	=	require('util');
 
 const _timeOptions = {
     year: "numeric", month: "short", day: "numeric", 
-    hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit"
+    hour: "2-digit", minute: "2-digit", second: "2-digit", millis: "2-digit",
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
 };
 
 const _ansiColorCodes = {
@@ -19,14 +20,15 @@ const _ansiColorCodes = {
 };
 
 const _debugColors = {
-	info 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
-	error 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.red		:	'',
-	alert		 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow		:	'',
-	time 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow		:	'',
-	fileLocation	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.magenta	:	'',
-	functionName 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
-	memory 		 	: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
-	reset 			: !process.env.DISABLE_ENABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.reset		:	''
+	log 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
+	info 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.green		:	'',
+	error 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.red		:	'',
+	alert		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
+	time 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.yellow	:	'',
+	fileLocation	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.magenta	:	'',
+	functionName 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
+	memory 		 	: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.cyan		:	'',
+	reset 			: !process.env.DISABLE_DEBUG_COLOR == 1 ? _ansiColorCodes.reset		:	''
 }
 
 function _checkUniqueStream(targetArray, targetValue){ 
@@ -45,7 +47,7 @@ function _renderTextSegment(text, color, resetColor = ''){
 }
 
 function _renderMessage(tag, functionName, fileLocation, message){
-	return 	_renderTextSegment(new Date().toLocaleTimeString("en-us", _timeOptions), _debugColors['time'], ' ')
+	return	_renderTextSegment(new Date().toLocaleTimeString('en-US', _timeOptions), _debugColors['time'], ' ')
 			+ _renderTextSegment(functionName, _debugColors['functionName'], ' ')
 			+ _renderTextSegment(fileLocation, _debugColors['fileLocation'], ' ')
 			+ _renderTextSegment(tag, _debugColors[tag.toLowerCase()], ' : ')
@@ -70,8 +72,11 @@ function _getFunctionCallLocation(){
 }
 
 module.exports = {
-	nodeMemoryWatermark : '',
-	systemMemoryWatermark : '',
+	
+	nodeHeapWatermark : {time : '', value : 0},
+	systemSwapWatermark : {time : '', value : 0},
+	systemMemoryWatermark : {time : '', value : 0},
+
 	debugStreams : [process.stdout],
 
 	_printStream: function _printStream(stream, message){
@@ -99,6 +104,16 @@ module.exports = {
 		});
 		this.debugStreams = filteredStreams;
 		this.info('Debug Stream Detached');
+	},
+	
+	log: function log(){
+		if(process.env.ENABLE_DEBUG != 1) return;
+		const currentLocationInfo = _getFunctionCallLocation();
+		this._printToAllStreams(_renderMessage(	'LOG',
+												 currentLocationInfo.functionName, 
+												 currentLocationInfo.fileLocation, 
+												 util.format.apply(this, arguments))
+		);
 	},
 
 	info: function info(){
@@ -134,13 +149,19 @@ module.exports = {
 	nodeMemoryUsage: function nodeMemoryUsage(){
 		if(process.env.ENABLE_DEBUG != 1) return;
 		const nodeMemInfo = process.memoryUsage();
+
+		// let nodeHeapUsedCurrent = info['MemTotal'] - info['MemAvailable'];
+		// (nodeHeapUsedCurrent.value > this.nodeHeapWatermark) ? this.nodeHeapWatermark = nodeHeapUsedCurrent.value;
+
 		this._printToAllStreams(_renderMessage(	'MEMORY',
 												'Node', 
 												'Process', 
 												(	'RSS : ' 		+ Math.round(nodeMemInfo.rss  		/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'Total Heap : '	+ Math.round(nodeMemInfo.heapTotal  / 1024 / 1024 * 100) / 100 	+ ' MB, ' +
 													'Heap Used : ' 	+ Math.round(nodeMemInfo.heapUsed  	/ 1024 / 1024 * 100) / 100 	+ ' MB, ' +
-													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB' )));
+													'External : ' 	+ Math.round(nodeMemInfo.external  	/ 1024 / 1024 * 100) / 100 	+ ' MB 	' +
+													'Heap Peak : ')));
+
 	},
 
 	sysMemoryUsage: function sysMemoryUsage(){
@@ -160,10 +181,16 @@ module.exports = {
 			ctx._printToAllStreams(_renderMessage(	'MEMORY',
 													'System', 
 													'Process', 
-													(	'MemTotal' 	+ ' : ' + info['MemTotal'] 	+ ' MB, ' + 
-														'MemFree' 	+ ' : ' + info['MemFree'] 	+ ' MB, ' + 
-														'SwapTotal' + ' : ' + info['SwapTotal'] + ' MB, ' +
-														'SwapFree' 	+ ' : ' + info['SwapFree'] 	+ ' MB' )));
+													(	'MemTotal' 		+ ' : ' + info['MemTotal']		+ ' MB, ' + 
+														'MemAvailable' 	+ ' : ' + info['MemAvailable'] 	+ ' MB, ' + 
+														'SwapTotal' 	+ ' : ' + info['SwapTotal']		+ ' MB, ' +
+														'SwapFree' 		+ ' : ' + info['SwapFree']		+ ' MB' )));
+
+			// let systemSwapUsedCurrent = info['MemTotal'] - info['MemAvailable'];
+			// let systemMemoryUsedCurrent = info['MemTotal'] - info['MemAvailable'];
+
+			// (systemSwapUsedCurrent.value > this.systemSwapWatermark) ? this.systemSwapWatermark = systemSwapUsedCurrent.value;
+			// (systemMemoryUsedCurrent.value > this.systemMemoryWatermark) ? this.systemMemoryWatermark = systemMemoryUsedCurrent.value;
 		});
 	},
 
@@ -182,6 +209,6 @@ module.exports = {
 
 
 /* TODO : 	1. Investigate if memory is optimized
- *			2. Beautify sysMemoryUsage() and nodeMemoryUsage()
- *			3. Implement RAM High Watermark
+ *			2. Implement RAM High Watermark
+ *			3. Beautify sysMemoryUsage() and nodeMemoryUsage()
  */
