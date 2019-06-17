@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-Pretty%2520Debug%2520Library.html">Pretty Debug Library</a></li></ul><h3>Global</h3><ul><li><a href="global.html#buildNav">buildNav</a></li><li><a href="global.html#publish">publish</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Title</p>
+                        <h1>Home</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Pretty Debug JavaScript</h1>
+<p>A <strong>highly configurable &amp; lightweight debug library</strong> that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" alt ="Sample Output"/></div>
+<h2>Features</h2>
+<ul>
+<li>Highly configurable</li>
+<li>Very low memory footprint</li>
+<li>Beautifully colored and formatted</li>
+<li>Attach multiple streams on runtime and pipe output</li>
+<li>Node process and System process health check</li>
+<li>Alarm on crossing memory thresholds</li>
+<li>Monitor system memory high watermark</li>
+<li>No third party library dependencies</li>
+</ul>
+<h2>Install</h2>
+<pre class="prettyprint source lang-bash"><code>npm install pretty-debug
+</code></pre>
+<h2>Usage</h2>
+<p>Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.</p>
+<h2>API</h2>
+<h2>Customization</h2>
+<p>As it was mentioned earlier, this library is highly configurable.</p>
+<h3>Show/Hide Section</h3>
+<h3>Change Section Color</h3>
+<p>Let's say we want to change the color of <strong>Timestamp</strong> to Green and hide the File Name section.</p>
+<h2>Example</h2>
+<p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
+<pre class="prettyprint source lang-javascript"><code>const net 	= require('net');
+const debug = require('./PrettyDebugJS.js');
+
+var PORT = 6969;
+var HOST = '0.0.0.0';
+
+debug.setOptions({
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
+	}
+});
+
+debug.info('Hello Pretty World');
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+			heapTotal: { upperLimit : 5 }
+		}, function(){
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
+		});
+}, .02);
+
+net.createServer(function(sock){
+	debug.attachStream(sock);
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	}); 
+}).listen(PORT, HOST);
+
+function generateRandomLog(){
+	debug.log('The quick brown fox jumps over the lazy dog');
+	debug.info('The quick brown fox jumps over the lazy dog');
+	debug.alert('The quick brown fox jumps over the lazy dog');
+	debug.warn('The quick brown fox jumps over the lazy dog');
+	debug.error('The quick brown fox jumps over the lazy dog');
+	debug.critical('The quick brown fox jumps over the lazy dog');
+}
+
+setInterval(function(){
+	generateRandomLog();
+}, 666)
+</code></pre>
+<h2>Sample Output</h2>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" alt ="Sample Output"/></div>
+<h2>Run Example</h2>
+<p>To the above example simply put this command</p>
+<pre class="prettyprint source lang-bash"><code>ENABLE_DEBUG=1 node example.js
+</code></pre>
+<h2>Environment Variable</h2>
+<pre class="prettyprint source lang-bash"><code>ENABLE_DEBUG : To enable/disable debug print
+</code></pre>
+<pre class="prettyprint source lang-bash"><code>DISABLE_DEBUG_COLOR : To enable/disable debug color
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>PrettyDebugJS.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Pretty Debug Javascript</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>2.0.1</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>&lt;a href="mailto:shadlyd15@gmail.com">Shadly Salahuddin&lt;/a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="PrettyDebugJS.js.html" class="button">View Source</a>
+            <span>
+                <a href="PrettyDebugJS.js.html">PrettyDebugJS.js</a>, <a href="PrettyDebugJS.js.html#line1">line 1</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jun 18 2019 04:47:00 GMT+0600 (+06)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
+        </p>
+    </div>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

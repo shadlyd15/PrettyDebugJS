@@ -28,5 +28,9 @@
     "human",
     "colorful",
     "pipe"
-  ]
+  ],
+  "devDependencies": {
+    "better-docs": "^1.1.6",
+    "docma": "^3.2.2"
+  }
 }

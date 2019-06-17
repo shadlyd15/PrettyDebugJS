@@ -1,3 +1,15 @@
+/**
+ * @fileOverview Pretty Debug Javascript
+ * @author <a href="mailto:shadlyd15@gmail.com">Shadly Salahuddin</a>
+ * @version 2.0.1
+ */
+
+/**
+ * @module Pretty Debug Library
+ * @desc A highly configurable & lightweight debug library that prints debug messages beautifully. 
+ * It works in Node.js and Web browser environments with very low memory footprint. 
+ */
+
 const fs	=	require('fs');
 const util	=	require('util');
 const options = require('./defaultOptions');
@@ -129,20 +141,26 @@ function _printToAllStreams(message){
 };
 
 module.exports = {
+
+  /**
+	* @type {Object.<string>}
+	*/
 	color : ansiColors,
 
-	/// @function setOptions
-	/// Overwrites default options and debug text formats
-	/// @param {userOptions} Different user specific options
+  /**
+	* Overwrites default options and debug text formats
+	* @param {Object.<userOptions>} userOptions - Options User specific options
+	*/
 	setOptions: function setOptions(userOptions){
 		_updateOptions(options, userOptions);
 	},
 
-	/// @function generatePolicy
-	/// Generates policy for different memory monitors
-	/// @param {lower} Lower limit
-	/// @param {Upper} Upper limit
-	/// @return Return policy object
+  /**
+	* Generates policy for different memory monitors
+	* @param {number} lowerLimit - Lower limit
+	* @param {number} upperLimit - Upper limit
+	* @return {object} { lowerLimit : number, upperLimit : number }
+	*/
 	generatePolicy: function generatePolicy(lower = 0, upper = 100){
 		return {
 			lowerLimit : `${lower}`,
@@ -150,9 +168,10 @@ module.exports = {
 		};
 	},
 
-	/// @function attachStream
-	/// Attaches stream to pipe debug output
-	/// @param {stream} Stream to pipe debug output
+  /**
+	* Attaches stream to pipe debug output
+	* @param {Object.<stream>} stream - Stream to attach
+	*/
 	attachStream: function attachStream(stream){
 		if(stream && _checkUniqueStream(debugStreams, stream)){
 			debugStreams.push(stream);
@@ -160,9 +179,10 @@ module.exports = {
 		}
 	},
 
-	/// @function detachStream
-	/// Detaches stream from debug output
-	/// @param {stream} Stream to detach
+  /**
+	* Detaches stream from debug output
+	* @param {Object.<stream>} stream - Stream to detach
+	*/
 	detachStream: function detachStream(stream){
 		let filteredStreams = debugStreams.filter(function(value){
 		    return ( value != stream );
@@ -170,35 +190,42 @@ module.exports = {
 		debugStreams = filteredStreams;
 		this.info('Debug Stream Detached');
 	},
-	
-	/// @function log
-	/// Prints debug messages in level 6
+
+  /**
+	* Prints log messages in level 6
+	*/
 	log			: _generateFunction('log'),
 
-	/// @function info
-	/// Prints debug messages in level 5
+  /**
+	* Prints info messages in level 5
+	*/
 	info		: _generateFunction('info'),
 
-	/// @function alert
-	/// Prints debug messages in level 4
+  /**
+	* Prints alert messages in level 4
+	*/
 	alert		: _generateFunction('alert'),
-
-	/// @function warn
-	/// Prints debug messages in level 3
+  
+  /**
+	* Prints warn messages in level 3
+	*/
 	warn		: _generateFunction('warn'),
 
-	/// @function error
-	/// Prints debug messages in level 2
+  /**
+	* Prints error messages in level 2
+	*/
 	error		: _generateFunction('error'),
 
-	/// @function critical
-	/// Prints debug messages in level 1
+  /**
+	* Prints critical messages in level 1
+	*/
 	critical	: _generateFunction('critical'),
 
-	/// @function nodeMemoryMonitor
-	/// Prints RAM usage by Node.js
-	/// @param {alarmPolicy} Policy object to trigger alarm
-	/// @param {callback} Function to invoke when alarm triggers
+  /**
+	* Prints RAM usage by Node.js
+	* @param {Object.<stream>} stream - Stream Object
+	* @param {function} callback - Callback function to invoke when alarm triggers
+	*/
 	nodeMemoryMonitor: function nodeMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
 		const nodeMemInfo = process.memoryUsage();
@@ -217,10 +244,11 @@ module.exports = {
 		if(_checkAlarmPolicy(alarmPolicy, nodeMemInfo) && callback) callback();
 	},
 
-	/// @function sysMemoryMonitor
-	/// Prints RAM usage by operating system
-	/// @param {alarmPolicy} Policy object to trigger alarm
-	/// @param {callback} Function to invoke when alarm triggers
+  /**
+	* Prints RAM usage by operating system
+	* @param {Object.<alarmPolicy>} alarmPolicy - Policy object to trigger alarm
+	* @param {function} callback - Callback function to invoke when alarm triggers
+	*/
 	sysMemoryMonitor: function sysMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
 		fs.readFile('/proc/meminfo', function (err, data){
@@ -230,7 +258,7 @@ module.exports = {
 			   line = line.split(':');
 			   if (line.length < 2){
 			       return;
-			   }
+			   }	
 			   info[line[0]] = Math.round(parseInt(line[1].trim(), 10) / 1024);
 			});
 
@@ -251,8 +279,9 @@ module.exports = {
 		});
 	},
 
-	/// @function memoryWatermark
-	/// Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.
+  /**
+	* Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.
+	*/
 	memoryWatermark: function memoryWatermark(){
 		if(options.enable != true) return;
 		let message = _renderMessage(	'Watermark',
@@ -266,10 +295,11 @@ module.exports = {
 		_printToAllStreams(message);
 	},
 
-	/// @function scheduleHealthCheck
-	/// Set Schedule to perform healthcheck
-	/// @param {inputFunc} Healthcheck function
-	/// @param {timeInMinutes} Interval in minutes
+  /**
+	* Set Schedule to perform healthcheck
+	* @param {function} inputFunc - Healthcheck function
+	* @param {numbers} timeInMinutes - Interval in minutes
+	*/
 	scheduleHealthCheck: function scheduleHealthCheck(inputFunc, timeInMinutes){
 		if(options.enable != true) return;
 		setTimeout(function(){

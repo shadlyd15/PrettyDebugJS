@@ -76,7 +76,7 @@ module.exports = {
 	},
 	memoryWatermark:{
 		tag: "WATERMARK",
-		color: ansiColors.cyan,
+		color: ansiColors.yellow,
 		text: "RAM Watermark",
 		fields:{
 			RAM 	: {time : '', peak : 0},
