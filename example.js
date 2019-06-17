@@ -16,7 +16,7 @@ debug.info('Hello Pretty World');
 debug.scheduleHealthCheck(function(){
 	debug.sysMemoryMonitor();
 	debug.nodeMemoryMonitor({
-			heapTotal: debug.generatePolicy(0, 5)
+			heapTotal: { upperLimit : 5 }
 		}, function(){
 			debug.critical('Chude Gese');
 		});
@@ -37,14 +37,8 @@ function generateRandomLog(){
 	debug.warn('The quick brown fox jumps over the lazy dog');
 	debug.error('The quick brown fox jumps over the lazy dog');
 	debug.critical('The quick brown fox jumps over the lazy dog');
-	// let UUID = Math.random().toString(36).substr(2, 40);
-	// if(Math.floor(Math.random() * Math.floor(9)) % 3){
-	// 	debug.info('Correct UUID : ' + UUID);
-	// } else{
-	// 	debug.error('Incorrect UUID : ' + UUID);
-	// }
 }
 
-// setInterval(function(){
-// 	generateRandomLog();
-// }, 511)
+setInterval(function(){
+	generateRandomLog();
+}, 511)

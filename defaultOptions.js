@@ -79,10 +79,17 @@ module.exports = {
 		color: ansiColors.cyan,
 		text: "RAM Watermark",
 		fields:{
-			MemTotal: true,
-			MemAvailable: true,
-			SwapTotal: true,
-			SwapFree: true
+			RAM 	: {time : '', peak : 0},
+			Swap 	: {time : '', peak : 0},
+			Node 	: {time : '', peak : 0},
+		},
+		dateTime:{
+			show: true,
+			format: {
+			    year: "2-digit", month: "numeric", day: "numeric", 
+			    hour: "2-digit", minute: "2-digit",
+			    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+			}
 		}
 	},
 	saveLog: false

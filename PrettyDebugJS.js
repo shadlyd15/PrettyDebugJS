@@ -76,7 +76,7 @@ function _setWaterMark(watermark, currentValue){
 	watermark.now = currentValue;
 	if(watermark.peak <= currentValue){
 		watermark.peak = currentValue;
-		watermark.time 	= new Date().toLocaleTimeString('en-US', options['dateTime']['format']);
+		watermark.time 	= new Date().toLocaleTimeString('en-US', options['memoryWatermark']['dateTime']['format']);
 	}
 }
 
@@ -91,7 +91,7 @@ function _checkAlarmPolicy(policy, currentValue){
 	}
 }
 
-function generateFunction(tag){
+function _generateFunction(tag){
 	return function(){
 		if((options.enable != true) || options[tag]['level'] > options['debugLevel']) return;
 		const currentLocationInfo = _getFunctionCallLocation();
@@ -104,12 +104,18 @@ function generateFunction(tag){
 	};
 }
 
+function _generateTextFromObj(obj, callback){
+	let text = '';
+	for(let key in obj){
+		if(obj[key]){
+			text = text + callback(key) ;
+		}
+	}
+	return text;
+}
+
 module.exports = {
 	color : ansiColors,
-	nodeHeapWatermark : {time : '', peak : 0, now : 0},
-	systemSwapWatermark : {time : '', peak : 0, now : 0},
-	systemMemoryWatermark : {time : '', peak : 0, now : 0},
-
 	debugStreams : [process.stdout],
 
 	_printStream: function _printStream(stream, message){
@@ -129,7 +135,6 @@ module.exports = {
 	},
 
 	generatePolicy: function generatePolicy(lower = 0, upper = 100){
-		if(options.enable != true) return;
 		return {
 			lowerLimit : `${lower}`,
 			upperLimit : `${upper}`
@@ -151,26 +156,26 @@ module.exports = {
 		this.info('Debug Stream Detached');
 	},
 	
-	log: generateFunction('log'),
-	info: generateFunction('info'),
-	alert: generateFunction('alert'),
-	warn: generateFunction('warn'),
-	error: generateFunction('error'),
-	critical: generateFunction('critical'),
+	log			: _generateFunction('log'),
+	info		: _generateFunction('info'),
+	alert		: _generateFunction('alert'),
+	warn		: _generateFunction('warn'),
+	error		: _generateFunction('error'),
+	critical	: _generateFunction('critical'),
 
 	nodeMemoryMonitor: function nodeMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
 		const nodeMemInfo = process.memoryUsage();
+
 		let message = _renderMessage(	'MEMORY',
 										'Node', 
-										'Process', 
-										(	'RSS : ' 		+ _bytesToMb(nodeMemInfo['rss'])		+ ' MB, ' +
-											'Total Heap : '	+ _bytesToMb(nodeMemInfo['heapTotal'])	+ ' MB, ' +
-											'Heap Used : ' 	+ _bytesToMb(nodeMemInfo['heapUsed'])	+ ' MB, ' +
-											'External : ' 	+ _bytesToMb(nodeMemInfo['external'])	+ ' MB' ),
+										undefined, 
+										_generateTextFromObj(options.nodeMemoryMonitor.fields, function(key){
+											return `| ${key} : ${_bytesToMb(nodeMemInfo[key])} MB |`;
+										}),
 										options['nodeMemoryMonitor']['color']);
 
-		_setWaterMark(this.nodeHeapWatermark, nodeMemInfo.heapUsed);
+		_setWaterMark(options.memoryWatermark.fields['Node'], _bytesToMb(nodeMemInfo.heapUsed));
 		this._printToAllStreams(message);
 
 		if(_checkAlarmPolicy(alarmPolicy, nodeMemInfo) && callback) callback();
@@ -192,15 +197,14 @@ module.exports = {
 
 			let message = _renderMessage(	'MEMORY',
 											'System', 
-											'Process', 
-											(	'MemTotal' 		+ ' : ' + info['MemTotal']		+ ' MB, ' + 
-												'MemAvailable' 	+ ' : ' + info['MemAvailable'] 	+ ' MB, ' + 
-												'SwapTotal' 	+ ' : ' + info['SwapTotal']		+ ' MB, ' +
-												'SwapFree' 		+ ' : ' + info['SwapFree']		+ ' MB' ),
+											undefined,
+											_generateTextFromObj(options.sysMemoryMonitor.fields, function(key){
+												return `| ${key} : ${info[key]} MB |`;
+											}),
 											options['sysMemoryMonitor'].color);
 
-			_setWaterMark(ctx.systemSwapWatermark, info['SwapTotal'] - info['SwapFree']);
-			_setWaterMark(ctx.systemMemoryWatermark, info['MemTotal'] - info['MemAvailable']);
+			_setWaterMark(options.memoryWatermark.fields['Swap'], info['SwapTotal'] - info['SwapFree']);
+			_setWaterMark(options.memoryWatermark.fields['RAM'], info['MemTotal'] - info['MemAvailable']);
 
 			ctx._printToAllStreams(message);
 		});
@@ -208,17 +212,11 @@ module.exports = {
 
 	memoryWatermark: function memoryWatermark(){
 		let message = _renderMessage(	'Watermark',
-										'Peak', 
-										'Memory', 
-										(	'Node : ' +
-											_bytesToMb(this.nodeHeapWatermark.peak) +
-											' MB @ ' + this.nodeHeapWatermark.time +
-											' | RAM : ' +
-											this.systemMemoryWatermark.peak +
-											' MB @ ' + this.systemMemoryWatermark.time +
-											' | Swap : ' +
-											this.systemSwapWatermark.peak +
-											' MB @ ' + this.systemSwapWatermark.time	),
+										undefined, 
+										undefined,
+										_generateTextFromObj(options.memoryWatermark.fields, function(key){
+											return `| ${key} : ${options.memoryWatermark.fields[key].peak} MB @ ${options.memoryWatermark.fields[key].time} |`;
+										}),
 										options['memoryWatermark'].color	);
 
 		this._printToAllStreams(message);
