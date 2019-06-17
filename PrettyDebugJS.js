@@ -52,7 +52,7 @@ function _getFunctionCallLocation(){
 		const regexFile = /\((.*)\)$/;
 		const matchFile = regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
 		if((matchFile != null) && (matchFile.length > 1)){
-			fileLocation = matchFile[1].replace(/^.*[[\/|\\]]/, '');
+			fileLocation = matchFile[1].replace(/^.*[\\\/]/, '');
 		}
 	}
 	if(options.funcName.show === true && fileLocation){
