@@ -36,8 +36,8 @@ var HOST = '0.0.0.0';
 debug.info('This is a test application');
 
 debug.scheduleHealthCheck(function(){
-	debug.sysMemoryUsage();
-	debug.nodeMemoryUsage();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor();
 }, .5);
 
 net.createServer(function(sock){
