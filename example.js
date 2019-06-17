@@ -14,13 +14,14 @@ debug.setOptions({
 debug.info('Hello Pretty World');
 
 debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
 	debug.sysMemoryMonitor();
 	debug.nodeMemoryMonitor({
 			heapTotal: { upperLimit : 5 }
 		}, function(){
-			debug.critical('Chude Gese');
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
 		});
-	debug.memoryWatermark();
 }, .02);
 
 net.createServer(function(sock){

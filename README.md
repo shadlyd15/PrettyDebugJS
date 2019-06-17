@@ -62,7 +62,7 @@ setInterval(function(){
 ```
 ## Sample Output
 
-<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/prettyDebug.png" alt ="Sample Output"/></div>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" alt ="Sample Output"/></div>
 
 ## Run Example
 To the above example simply put this command
