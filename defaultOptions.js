@@ -3,7 +3,7 @@ const ansiColors = require('./ansiColors');
 module.exports = {
 	enable: true,
 	enableColor: true,
-	enableGC: true,
+	enableGC: false,
 	debugLevel: 6,
 	dateTime:{
 		show: true,
@@ -57,10 +57,10 @@ module.exports = {
 		color: ansiColors.blue,
 		text: "Node Monitor",
 		fields:{
-			rss: false,
+			rss: true,
 			heapTotal: true, 
 			heapUsed: true,
-			external: false
+			external: true
 		}
 	},
 	sysMemoryMonitor:{

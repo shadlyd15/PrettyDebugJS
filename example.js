@@ -5,9 +5,11 @@ var PORT = 6969;
 var HOST = '0.0.0.0';
 
 debug.setOptions({
-	fileLocation:{
-		// show: true,
-		// color: debug.color.red
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
 	}
 });
 
@@ -42,4 +44,4 @@ function generateRandomLog(){
 
 setInterval(function(){
 	generateRandomLog();
-}, 511)
+}, 666)

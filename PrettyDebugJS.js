@@ -95,11 +95,11 @@ function _generateFunction(tag){
 	return function(){
 		if((options.enable != true) || options[tag]['level'] > options['debugLevel']) return;
 		const currentLocationInfo = _getFunctionCallLocation();
-		this._printToAllStreams(_renderMessage(	options[tag]['tag'],
-												currentLocationInfo['functionName'], 
-												currentLocationInfo['fileLocation'], 
-												util.format.apply(this, arguments),
-												options[tag].color)
+		_printToAllStreams(_renderMessage(	options[tag]['tag'],
+											currentLocationInfo['functionName'], 
+											currentLocationInfo['fileLocation'], 
+											util.format.apply(this, arguments),
+											options[tag].color)
 		);
 	};
 }
@@ -114,26 +114,35 @@ function _generateTextFromObj(obj, callback){
 	return text;
 }
 
+const debugStreams = [process.stdout];
+
+function _printStream(stream, message){
+	if(stream){
+		stream.write(message + '\n');
+	}
+};
+
+function _printToAllStreams(message){
+	debugStreams.forEach(function(stream){
+		_printStream(stream, message);
+	});
+};
+
 module.exports = {
 	color : ansiColors,
-	debugStreams : [process.stdout],
 
-	_printStream: function _printStream(stream, message){
-		if(stream){
-			stream.write(message + '\n');
-		}
-	},
-
-	_printToAllStreams : function _printAllStreams(message){
-		this.debugStreams.forEach(function(stream){
-			this._printStream(stream, message);
-		}, this);
-	},
-
+	/// @function setOptions
+	/// Overwrites default options and debug text formats
+	/// @param {userOptions} Different user specific options
 	setOptions: function setOptions(userOptions){
 		_updateOptions(options, userOptions);
 	},
 
+	/// @function generatePolicy
+	/// Generates policy for different memory monitors
+	/// @param {lower} Lower limit
+	/// @param {Upper} Upper limit
+	/// @return Return policy object
 	generatePolicy: function generatePolicy(lower = 0, upper = 100){
 		return {
 			lowerLimit : `${lower}`,
@@ -141,28 +150,55 @@ module.exports = {
 		};
 	},
 
+	/// @function attachStream
+	/// Attaches stream to pipe debug output
+	/// @param {stream} Stream to pipe debug output
 	attachStream: function attachStream(stream){
-		if(stream && _checkUniqueStream(this.debugStreams, stream)){
-			this.debugStreams.push(stream);
+		if(stream && _checkUniqueStream(debugStreams, stream)){
+			debugStreams.push(stream);
 			this.alert('New Debug Stream Attached');
 		}
 	},
 
+	/// @function detachStream
+	/// Detaches stream from debug output
+	/// @param {stream} Stream to detach
 	detachStream: function detachStream(stream){
-		let filteredStreams = this.debugStreams.filter(function(value){
+		let filteredStreams = debugStreams.filter(function(value){
 		    return ( value != stream );
 		});
-		this.debugStreams = filteredStreams;
+		debugStreams = filteredStreams;
 		this.info('Debug Stream Detached');
 	},
 	
+	/// @function log
+	/// Prints debug messages in level 6
 	log			: _generateFunction('log'),
+
+	/// @function info
+	/// Prints debug messages in level 5
 	info		: _generateFunction('info'),
+
+	/// @function alert
+	/// Prints debug messages in level 4
 	alert		: _generateFunction('alert'),
+
+	/// @function warn
+	/// Prints debug messages in level 3
 	warn		: _generateFunction('warn'),
+
+	/// @function error
+	/// Prints debug messages in level 2
 	error		: _generateFunction('error'),
+
+	/// @function critical
+	/// Prints debug messages in level 1
 	critical	: _generateFunction('critical'),
 
+	/// @function nodeMemoryMonitor
+	/// Prints RAM usage by Node.js
+	/// @param {alarmPolicy} Policy object to trigger alarm
+	/// @param {callback} Function to invoke when alarm triggers
 	nodeMemoryMonitor: function nodeMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
 		const nodeMemInfo = process.memoryUsage();
@@ -176,14 +212,17 @@ module.exports = {
 										options['nodeMemoryMonitor']['color']);
 
 		_setWaterMark(options.memoryWatermark.fields['Node'], _bytesToMb(nodeMemInfo.heapUsed));
-		this._printToAllStreams(message);
+		_printToAllStreams(message);
 
 		if(_checkAlarmPolicy(alarmPolicy, nodeMemInfo) && callback) callback();
 	},
 
+	/// @function sysMemoryMonitor
+	/// Prints RAM usage by operating system
+	/// @param {alarmPolicy} Policy object to trigger alarm
+	/// @param {callback} Function to invoke when alarm triggers
 	sysMemoryMonitor: function sysMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
-		var ctx = this;
 		fs.readFile('/proc/meminfo', function (err, data){
 			if (err) throw err;
 			var info = {};
@@ -206,23 +245,33 @@ module.exports = {
 			_setWaterMark(options.memoryWatermark.fields['Swap'], info['SwapTotal'] - info['SwapFree']);
 			_setWaterMark(options.memoryWatermark.fields['RAM'], info['MemTotal'] - info['MemAvailable']);
 
-			ctx._printToAllStreams(message);
+			_printToAllStreams(message);
+
+			if(_checkAlarmPolicy(alarmPolicy, info) && callback) callback();
 		});
 	},
 
+	/// @function memoryWatermark
+	/// Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.
 	memoryWatermark: function memoryWatermark(){
+		if(options.enable != true) return;
 		let message = _renderMessage(	'Watermark',
 										undefined, 
 										undefined,
 										_generateTextFromObj(options.memoryWatermark.fields, function(key){
 											return `| ${key} : ${options.memoryWatermark.fields[key].peak} MB @ ${options.memoryWatermark.fields[key].time} |`;
 										}),
-										options['memoryWatermark'].color	);
+										options['memoryWatermark'].color);
 
-		this._printToAllStreams(message);
+		_printToAllStreams(message);
 	},
 
+	/// @function scheduleHealthCheck
+	/// Set Schedule to perform healthcheck
+	/// @param {inputFunc} Healthcheck function
+	/// @param {timeInMinutes} Interval in minutes
 	scheduleHealthCheck: function scheduleHealthCheck(inputFunc, timeInMinutes){
+		if(options.enable != true) return;
 		setTimeout(function(){
 			if(options['enableGC'] && global.gc){
 				global.gc();
@@ -234,9 +283,3 @@ module.exports = {
 		}, timeInMinutes * 60 * 1000);
 	}
 };
-
-/* TODO : 	1. Investigate if memory is optimized
- *			2. Implement RAM High Watermark
- *			3. Beautify sysMemoryMonitor() and nodeMemoryMonitor()
- *			4. Set Policies
- */
