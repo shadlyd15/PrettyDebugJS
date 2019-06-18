@@ -23,7 +23,8 @@ npm install pretty-debug
 
 Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.
 
-## API 
+## API Documention
+<a href="https://shadlyd15.github.io/PrettyDebugJS/">See API Documention Here.
 
 ## Customization
 As it was mentioned earlier, this library is highly configurable. 
