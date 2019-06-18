@@ -15,7 +15,7 @@ A **highly configurable & lightweight debug library** that prints debug messages
 - No third party library dependencies
 
 ## Install
-```bash
+```sh
 npm install pretty-debug
 ```
 
@@ -24,7 +24,10 @@ npm install pretty-debug
 Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.
 
 ## API Documention
-<a href="https://shadlyd15.github.io/PrettyDebugJS/">See API Documention Here.
+
+```javascript
+	const debug = require('./PrettyDebugJS.js');
+```
 
 ## Customization
 As it was mentioned earlier, this library is highly configurable. 
@@ -92,6 +95,6 @@ setInterval(function(){
 
 ## Run Example
 To the above example simply put this command
-```bash
+```sh
 node example.js
 ```

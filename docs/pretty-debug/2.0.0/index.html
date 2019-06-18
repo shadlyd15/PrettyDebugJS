@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>pretty-debug 2.0.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Pretty Debug JavaScript</h1>
+<p>A <strong>highly configurable &amp; lightweight debug library</strong> that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.</p>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<h2>Features</h2>
+<ul>
+<li>Highly configurable</li>
+<li>Very low memory footprint</li>
+<li>Beautifully colored and formatted</li>
+<li>Attach multiple streams on runtime and pipe output</li>
+<li>Node process and System process health check</li>
+<li>Alarm on crossing memory thresholds</li>
+<li>Monitor system memory high watermark</li>
+<li>No third party library dependencies</li>
+</ul>
+<h2>Install</h2>
+<pre class="prettyprint source lang-sh"><code>npm install pretty-debug
+</code></pre>
+<h2>Usage</h2>
+<p>Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.</p>
+<h2>API Documention</h2>
+<pre class="prettyprint source lang-javascript"><code>	const debug = require('./PrettyDebugJS.js');
+</code></pre>
+<h2>Customization</h2>
+<p>As it was mentioned earlier, this library is highly configurable.</p>
+<h3>Show/Hide Section</h3>
+<h3>Change Section Color</h3>
+<p>Let's say we want to change the color of <strong>Timestamp</strong> to Green and hide the File Name section.</p>
+<h2>Example</h2>
+<p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
+<pre class="prettyprint source lang-javascript"><code>const net 	= require('net');
+const debug = require('./PrettyDebugJS.js');
+
+var PORT = 6969;
+var HOST = '0.0.0.0';
+
+debug.setOptions({
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
+	}
+});
+
+debug.info('Hello Pretty World');
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+			heapTotal: { upperLimit : 5 }
+		}, function(){
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
+		});
+}, .02);
+
+net.createServer(function(sock){
+	debug.attachStream(sock);
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	}); 
+}).listen(PORT, HOST);
+
+function generateRandomLog(){
+	debug.log('The quick brown fox jumps over the lazy dog');
+	debug.info('The quick brown fox jumps over the lazy dog');
+	debug.alert('The quick brown fox jumps over the lazy dog');
+	debug.warn('The quick brown fox jumps over the lazy dog');
+	debug.error('The quick brown fox jumps over the lazy dog');
+	debug.critical('The quick brown fox jumps over the lazy dog');
+}
+
+setInterval(function(){
+	generateRandomLog();
+}, 666)
+</code></pre>
+<h2>Sample Output</h2>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<h2>Run Example</h2>
+<p>To the above example simply put this command</p>
+<pre class="prettyprint source lang-sh"><code>node example.js
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>PrettyDebugJS.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Pretty Debug Javascript</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>2.0.1</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Shadly Salahuddin</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="PrettyDebugJS.js.html">PrettyDebugJS.js</a>, <a href="PrettyDebugJS.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pretty-debug.html">pretty-debug</a></li></ul><h3>Externals</h3><ul><li><a href="external-Default%2520Options.html">Default Options</a></li><li><a href="external-Example.html">Example</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Wed Jun 19 2019 03:40:24 GMT+0600 (+06)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

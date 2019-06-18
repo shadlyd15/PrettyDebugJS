@@ -4,7 +4,8 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "source": {
-        "include": [""],
+        "include": ["./Examples/example.js", "defaultOptions.js", "PrettyDebugJS.js", "package.json", "README.md"],
+        "exclude": ["/node_modules"],
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_"
     },
@@ -20,7 +21,7 @@
     },
     "opts": {
         "destination": "docs",
-        "recurse": true,
+        "recurse": false,
         "readme": "README.md",
         "lenient": false,
         "sort": false

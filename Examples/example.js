@@ -1,5 +1,13 @@
+/**
+ * @fileOverview Generic Example
+ * @external Example
+ * @author Shadly Salahuddin
+ * @link mailto:shadlyd15@gmail.com
+ * @version 2.0.1
+ */
+
 const net 	= require('net');
-const debug = require('./PrettyDebugJS.js');
+const debug 	= require('./PrettyDebugJS.js');
 
 var PORT = 6969;
 var HOST = '0.0.0.0';

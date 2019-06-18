@@ -1,6 +1,7 @@
 /**
  * @fileOverview Pretty Debug Javascript
- * @author <a href="mailto:shadlyd15@gmail.com">Shadly Salahuddin</a>
+ * @author Shadly Salahuddin
+ * @link mailto:shadlyd15@gmail.com
  * @version 2.0.1
  */
 
