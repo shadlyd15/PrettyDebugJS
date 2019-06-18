@@ -12,8 +12,11 @@
         "plugins/markdown"
     ],
     "templates": {
-        "cleverLinks": true,
-        "monospaceLinks": true
+        "referenceTitle": "Pretty Debug Javascript API",
+        "disableSort": true,
+        "resources": {
+            "Github": "https://github.com/shadlyd15/PrettyDebugJS"
+        }
     },
     "opts": {
         "destination": "docs",
