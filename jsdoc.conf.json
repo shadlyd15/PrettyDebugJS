@@ -18,6 +18,8 @@
     "opts": {
         "destination": "docs",
         "recurse": true,
-        "readme": "README.md"
+        "readme": "README.md",
+        "lenient": false,
+        "sort": false
     }
 }

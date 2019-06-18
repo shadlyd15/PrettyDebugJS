@@ -1,6 +1,6 @@
 {
   "name": "pretty-debug",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "A Minimal Debug Library For JavaScript",
   "main": "PrettyDebugJS.js",
   "scripts": {
@@ -27,10 +27,7 @@
     "readable",
     "human",
     "colorful",
-    "pipe"
-  ],
-  "devDependencies": {
-    "better-docs": "^1.1.6",
-    "docma": "^3.2.2"
-  }
+    "pipe",
+    "diagnostic"
+  ]
 }

@@ -50,7 +50,7 @@ module.exports = {
 	critical:{
 		level: 1,
 		tag: "CRITICAL",
-		color: ansiColors.bgRed
+		color: ansiColors.reset + ansiColors.bgRed
 	},
 	nodeMemoryMonitor:{
 		tag: "NODE MONITOR",

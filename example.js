@@ -19,11 +19,11 @@ debug.scheduleHealthCheck(function(){
 	debug.memoryWatermark();
 	debug.sysMemoryMonitor();
 	debug.nodeMemoryMonitor({
-			heapTotal: { upperLimit : 5 }
-		}, function(){
-			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
-			// Do other things like send email!
-		});
+		heapTotal: { upperLimit : 5 }
+	}, function(){
+		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+		// Do other things like send email!
+	});
 }, .02);
 
 net.createServer(function(sock){

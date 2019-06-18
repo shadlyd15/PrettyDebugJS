@@ -4,12 +4,6 @@
  * @version 2.0.1
  */
 
-/**
- * @module Pretty Debug Library
- * @desc A highly configurable & lightweight debug library that prints debug messages beautifully. 
- * It works in Node.js and Web browser environments with very low memory footprint. 
- */
-
 const fs	=	require('fs');
 const util	=	require('util');
 const options = require('./defaultOptions');
@@ -140,10 +134,34 @@ function _printToAllStreams(message){
 	});
 };
 
+
+/**
+ * @module pretty-debug
+ * @desc A highly configurable & lightweight debug library that prints debug messages beautifully. 
+ * It works in Node.js and Web browser environments with very low memory footprint. 
+ */
+
 module.exports = {
 
   /**
 	* @type {Object.<string>}
+	* @property {string} reset		- Text Color Reset
+    * @property {string} black 		- Text Color Block
+    * @property {string} red 		- Text Color Red
+    * @property {string} green 		- Text Color Green
+    * @property {string} yellow 	- Text Color Yellow
+    * @property {string} blue 		- Text Color Blue
+    * @property {string} magenta 	- Text Color Magenta
+    * @property {string} cyan 		- Text Color Cyan
+    * @property {string} white 		- Text Color Cyan
+	* @property {string} bgBlack 	- Background Color Black
+	* @property {string} bgRed 		- Background Color Red
+	* @property {string} bgGreen 	- Background Color Green
+	* @property {string} bgYellow 	- Background Color Yellow
+	* @property {string} bgBlue 	- Background Color Blue
+	* @property {string} bgMagenta 	- Background Color Magenta
+	* @property {string} bgCyan 	- Background Color Cyan
+	* @property {string} bgWhite 	- Background Color White
 	*/
 	color : ansiColors,
 
@@ -159,7 +177,7 @@ module.exports = {
 	* Generates policy for different memory monitors
 	* @param {number} lowerLimit - Lower limit
 	* @param {number} upperLimit - Upper limit
-	* @return {object} { lowerLimit : number, upperLimit : number }
+	* @return {Object.<policy>}
 	*/
 	generatePolicy: function generatePolicy(lower = 0, upper = 100){
 		return {
@@ -193,31 +211,73 @@ module.exports = {
 
   /**
 	* Prints log messages in level 6
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.log("Just a simple log message");
+	* @example
+	* const policy = { upperLimit : 70, lowerLimit : 20 };
+	* debug.log(policy);
 	*/
 	log			: _generateFunction('log'),
 
   /**
 	* Prints info messages in level 5
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.info("Here is an info message.");
+	* @example
+	* const birthTimestamp = { date : "15/12/1993", time : "12:05 AM" };
+	* debug.info(birthTimestamp);
 	*/
 	info		: _generateFunction('info'),
 
   /**
 	* Prints alert messages in level 4
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.alert("An alert message!");
+	* @example
+	* const birthTimestamp = { date : "15/12/1993", time : "12:05 AM" };
+	* debug.alert(birthTimestamp);
 	*/
 	alert		: _generateFunction('alert'),
   
   /**
 	* Prints warn messages in level 3
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.warn("This is your last warning.");
+	* @example
+	* const resource = { RAM : 10, CPU : 60 };
+	* debug.warn(resource);
 	*/
 	warn		: _generateFunction('warn'),
 
   /**
 	* Prints error messages in level 2
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.error("Error in recording server");
+	* @example
+	* const errorMessage = { message : "Some Error", errorCode : 4 };
+	* debug.error(errorMessage);
 	*/
 	error		: _generateFunction('error'),
 
   /**
 	* Prints critical messages in level 1
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.critical("API server critical error");
+	* @example
+	* const criticalMessage = { message : "Some Critical Error" };
+	* debug.critical(criticalMessage);
 	*/
 	critical	: _generateFunction('critical'),
 
@@ -225,6 +285,13 @@ module.exports = {
 	* Prints RAM usage by Node.js
 	* @param {Object.<stream>} stream - Stream Object
 	* @param {function} callback - Callback function to invoke when alarm triggers
+	* @example
+	* debug.nodeMemoryMonitor({
+	*		heapTotal: { upperLimit : 100 }
+	* 	}, function(){
+	*		debug.critical('Memory Usage Alarm : Total heap usage is above 100 MB');
+	*	}
+	* );
 	*/
 	nodeMemoryMonitor: function nodeMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
@@ -247,7 +314,14 @@ module.exports = {
   /**
 	* Prints RAM usage by operating system
 	* @param {Object.<alarmPolicy>} alarmPolicy - Policy object to trigger alarm
-	* @param {function} callback - Callback function to invoke when alarm triggers
+	* @param {function} callback - Callback function to invoke when alarm triggers	
+	* @example
+	* debug.sysMemoryMonitor({
+	*		MemTotal: { upperLimit : 700 }
+	* 	}, function(){
+	*		debug.critical('Memory Usage Alarm : Total system memory usage is above 700 MB');
+	*	}
+	* );
 	*/
 	sysMemoryMonitor: function sysMemoryMonitor(alarmPolicy = {}, callback = null){
 		if(options.enable != true) return;
@@ -281,6 +355,7 @@ module.exports = {
 
   /**
 	* Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.
+	* @example memoryWatermark();
 	*/
 	memoryWatermark: function memoryWatermark(){
 		if(options.enable != true) return;
@@ -299,6 +374,16 @@ module.exports = {
 	* Set Schedule to perform healthcheck
 	* @param {function} inputFunc - Healthcheck function
 	* @param {numbers} timeInMinutes - Interval in minutes
+	* @example
+	* debug.scheduleHealthCheck(function(){
+	* 	debug.memoryWatermark();
+	* 	debug.sysMemoryMonitor();
+	* 	debug.nodeMemoryMonitor({
+	* 		heapTotal: { upperLimit : 5 }
+	* 	}, function(){
+	* 		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+	* 	});
+	* }, 10);
 	*/
 	scheduleHealthCheck: function scheduleHealthCheck(inputFunc, timeInMinutes){
 		if(options.enable != true) return;
@@ -313,3 +398,6 @@ module.exports = {
 		}, timeInMinutes * 60 * 1000);
 	}
 };
+
+
+

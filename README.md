@@ -92,12 +92,5 @@ setInterval(function(){
 ## Run Example
 To the above example simply put this command
 ```bash
-ENABLE_DEBUG=1 node example.js
-```
-## Environment Variable
-```bash
-ENABLE_DEBUG : To enable/disable debug print
-```
-```bash
-DISABLE_DEBUG_COLOR : To enable/disable debug color
+node example.js
 ```
