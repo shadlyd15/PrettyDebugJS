@@ -90,8 +90,8 @@ setInterval(function(){
 }, 666)
 ```
 ## Sample Output
-
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+
 
 ## Run Example
 To the above example simply put this command
