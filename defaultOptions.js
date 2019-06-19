@@ -150,7 +150,7 @@ module.exports = {
 	critical:{
 		level: 1,
 		tag: "CRITICAL",
-		color: ansiColors.red + ansiColors.bgRed
+		color: ansiColors.reset + ansiColors.bgRed
 	},
 
 	/**

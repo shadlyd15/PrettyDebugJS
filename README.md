@@ -2,7 +2,7 @@
 # Pretty Debug JavaScript
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Features
 - Highly configurable
@@ -91,7 +91,7 @@ setInterval(function(){
 ```
 ## Sample Output
 
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/sample_output.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Run Example
 To the above example simply put this command
