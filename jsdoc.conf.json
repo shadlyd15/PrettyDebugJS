@@ -7,7 +7,7 @@
         "include": ["./Examples/example.js", "PrettyDebugJS.js", "defaultOptions.js", "ansiColors.js", "package.json", "README.md"],
         "exclude": ["/node_modules"],
         "includePattern": ".+\\.js(doc|x)?$",
-        "excludePattern": "(^|\\/|\\\\)_"
+        "excludePattern": "(node_modules/|docs)"
     },
     "plugins": [
         "plugins/markdown"

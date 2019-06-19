@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: API</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: API</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>API</h2>
+</header>
+
+<article>
+    <p><a name="module_pretty-debug"></a></p>
+<h2>pretty-debug</h2>
+<p>A highly configurable &amp; lightweight debug library that prints debug messages beautifully.
+It works in Node.js and Web browser environments with very low memory footprint.</p>
+<ul>
+<li><a href="#module_pretty-debug">pretty-debug</a>
+<ul>
+<li><a href="#module_pretty-debug.color">.color</a> : <code>Object.&lt;string&gt;</code></li>
+<li><a href="#module_pretty-debug.setOptions">.setOptions(userOptions)</a></li>
+<li><a href="#module_pretty-debug.generatePolicy">.generatePolicy(lowerLimit, upperLimit)</a> ⇒ <code>Object.&lt;policy&gt;</code></li>
+<li><a href="#module_pretty-debug.attachStream">.attachStream(stream)</a></li>
+<li><a href="#module_pretty-debug.detachStream">.detachStream(stream)</a></li>
+<li><a href="#module_pretty-debug.log">.log(...var_args)</a></li>
+<li><a href="#module_pretty-debug.info">.info(...var_args)</a></li>
+<li><a href="#module_pretty-debug.alert">.alert(...var_args)</a></li>
+<li><a href="#module_pretty-debug.warn">.warn(...var_args)</a></li>
+<li><a href="#module_pretty-debug.error">.error(...var_args)</a></li>
+<li><a href="#module_pretty-debug.critical">.critical(...var_args)</a></li>
+<li><a href="#module_pretty-debug.nodeMemoryMonitor">.nodeMemoryMonitor(stream, callback)</a></li>
+<li><a href="#module_pretty-debug.sysMemoryMonitor">.sysMemoryMonitor(alarmPolicy, callback)</a></li>
+<li><a href="#module_pretty-debug.memoryWatermark">.memoryWatermark()</a></li>
+<li><a href="#module_pretty-debug.scheduleHealthCheck">.scheduleHealthCheck(inputFunc, timeInMinutes)</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="module_pretty-debug.color"></a></p>
+<h3>pretty-debug.color : <code>Object.&lt;string&gt;</code></h3>
+<p><strong>Kind</strong>: static property of <a href="#module_pretty-debug"><code>pretty-debug</code></a><br>
+<strong>Properties</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reset</td>
+<td><code>string</code></td>
+<td>Text Color Reset</td>
+</tr>
+<tr>
+<td>black</td>
+<td><code>string</code></td>
+<td>Text Color Block</td>
+</tr>
+<tr>
+<td>red</td>
+<td><code>string</code></td>
+<td>Text Color Red</td>
+</tr>
+<tr>
+<td>green</td>
+<td><code>string</code></td>
+<td>Text Color Green</td>
+</tr>
+<tr>
+<td>yellow</td>
+<td><code>string</code></td>
+<td>Text Color Yellow</td>
+</tr>
+<tr>
+<td>blue</td>
+<td><code>string</code></td>
+<td>Text Color Blue</td>
+</tr>
+<tr>
+<td>magenta</td>
+<td><code>string</code></td>
+<td>Text Color Magenta</td>
+</tr>
+<tr>
+<td>cyan</td>
+<td><code>string</code></td>
+<td>Text Color Cyan</td>
+</tr>
+<tr>
+<td>white</td>
+<td><code>string</code></td>
+<td>Text Color Cyan</td>
+</tr>
+<tr>
+<td>bgBlack</td>
+<td><code>string</code></td>
+<td>Background Color Black</td>
+</tr>
+<tr>
+<td>bgRed</td>
+<td><code>string</code></td>
+<td>Background Color Red</td>
+</tr>
+<tr>
+<td>bgGreen</td>
+<td><code>string</code></td>
+<td>Background Color Green</td>
+</tr>
+<tr>
+<td>bgYellow</td>
+<td><code>string</code></td>
+<td>Background Color Yellow</td>
+</tr>
+<tr>
+<td>bgBlue</td>
+<td><code>string</code></td>
+<td>Background Color Blue</td>
+</tr>
+<tr>
+<td>bgMagenta</td>
+<td><code>string</code></td>
+<td>Background Color Magenta</td>
+</tr>
+<tr>
+<td>bgCyan</td>
+<td><code>string</code></td>
+<td>Background Color Cyan</td>
+</tr>
+<tr>
+<td>bgWhite</td>
+<td><code>string</code></td>
+<td>Background Color White</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_pretty-debug.setOptions"></a></p>
+<h3>pretty-debug.setOptions(userOptions)</h3>
+<p>Overwrites default options and debug text formats</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userOptions</td>
+<td><code>Object.&lt;userOptions&gt;</code></td>
+<td>Options User specific options</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_pretty-debug.generatePolicy"></a></p>
+<h3>pretty-debug.generatePolicy(lowerLimit, upperLimit) ⇒ <code>Object.&lt;policy&gt;</code></h3>
+<p>Generates policy for different memory monitors</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lowerLimit</td>
+<td><code>number</code></td>
+<td>Lower limit</td>
+</tr>
+<tr>
+<td>upperLimit</td>
+<td><code>number</code></td>
+<td>Upper limit</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_pretty-debug.attachStream"></a></p>
+<h3>pretty-debug.attachStream(stream)</h3>
+<p>Attaches stream to pipe debug output</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stream</td>
+<td><code>Object.&lt;stream&gt;</code></td>
+<td>Stream to attach</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_pretty-debug.detachStream"></a></p>
+<h3>pretty-debug.detachStream(stream)</h3>
+<p>Detaches stream from debug output</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stream</td>
+<td><code>Object.&lt;stream&gt;</code></td>
+<td>Stream to detach</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_pretty-debug.log"></a></p>
+<h3>pretty-debug.log(...var_args)</h3>
+<p>Prints log messages in level 6</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.log(&quot;Just a simple log message&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const policy = { upperLimit : 70, lowerLimit : 20 };
+debug.log(policy);
+</code></pre>
+<p><a name="module_pretty-debug.info"></a></p>
+<h3>pretty-debug.info(...var_args)</h3>
+<p>Prints info messages in level 5</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.info(&quot;Here is an info message.&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const birthTimestamp = { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+debug.info(birthTimestamp);
+</code></pre>
+<p><a name="module_pretty-debug.alert"></a></p>
+<h3>pretty-debug.alert(...var_args)</h3>
+<p>Prints alert messages in level 4</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.alert(&quot;An alert message!&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const birthTimestamp = { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+debug.alert(birthTimestamp);
+</code></pre>
+<p><a name="module_pretty-debug.warn"></a></p>
+<h3>pretty-debug.warn(...var_args)</h3>
+<p>Prints warn messages in level 3</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.warn(&quot;This is your last warning.&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const resource = { RAM : 10, CPU : 60 };
+debug.warn(resource);
+</code></pre>
+<p><a name="module_pretty-debug.error"></a></p>
+<h3>pretty-debug.error(...var_args)</h3>
+<p>Prints error messages in level 2</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.error(&quot;Error in recording server&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const errorMessage = { message : &quot;Some Error&quot;, errorCode : 4 };
+debug.error(errorMessage);
+</code></pre>
+<p><a name="module_pretty-debug.critical"></a></p>
+<h3>pretty-debug.critical(...var_args)</h3>
+<p>Prints critical messages in level 1</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...var_args</td>
+<td><code>*</code></td>
+<td>Variadic Argument</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.critical(&quot;API server critical error&quot;);
+</code></pre>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>const criticalMessage = { message : &quot;Some Critical Error&quot; };
+debug.critical(criticalMessage);
+</code></pre>
+<p><a name="module_pretty-debug.nodeMemoryMonitor"></a></p>
+<h3>pretty-debug.nodeMemoryMonitor(stream, callback)</h3>
+<p>Prints RAM usage by Node.js</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stream</td>
+<td><code>Object.&lt;stream&gt;</code></td>
+<td>Stream Object</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function to invoke when alarm triggers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.nodeMemoryMonitor({
+		heapTotal: { upperLimit : 100 }
+	}, function(){
+		debug.critical('Memory Usage Alarm : Total heap usage is above 100 MB');
+	}
+);
+</code></pre>
+<p><a name="module_pretty-debug.sysMemoryMonitor"></a></p>
+<h3>pretty-debug.sysMemoryMonitor(alarmPolicy, callback)</h3>
+<p>Prints RAM usage by operating system</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alarmPolicy</td>
+<td><code>Object.&lt;alarmPolicy&gt;</code></td>
+<td>Policy object to trigger alarm</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function to invoke when alarm triggers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.sysMemoryMonitor({
+		MemTotal: { upperLimit : 700 }
+	}, function(){
+		debug.critical('Memory Usage Alarm : Total system memory usage is above 700 MB');
+	}
+);
+</code></pre>
+<p><a name="module_pretty-debug.memoryWatermark"></a></p>
+<h3>pretty-debug.memoryWatermark()</h3>
+<p>Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a><br>
+<strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>memoryWatermark();
+</code></pre>
+<p><a name="module_pretty-debug.scheduleHealthCheck"></a></p>
+<h3>pretty-debug.scheduleHealthCheck(inputFunc, timeInMinutes)</h3>
+<p>Set Schedule to perform healthcheck</p>
+<p><strong>Kind</strong>: static method of <a href="#module_pretty-debug"><code>pretty-debug</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inputFunc</td>
+<td><code>function</code></td>
+<td>Healthcheck function</td>
+</tr>
+<tr>
+<td>timeInMinutes</td>
+<td><code>numbers</code></td>
+<td>Interval in minutes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="prettyprint source lang-js"><code>debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+		heapTotal: { upperLimit : 5 }
+	}, function(){
+		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+	});
+}, 10);
+</code></pre>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ANSI%2520Color%2520Codes.html">ANSI Color Codes</a></li><li><a href="module-Default%2520Options.html">Default Options</a></li><li><a href="module-pretty-debug.html">pretty-debug</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-API.html">API</a></li><li><a href="tutorial-Basics.html">Basics</a></li><li><a href="tutorial-multiple-stream.html">multiple-stream</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Thu Jun 20 2019 02:45:21 GMT+0600 (+06)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

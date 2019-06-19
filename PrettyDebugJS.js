@@ -121,8 +121,6 @@ function _generateTextFromObj(obj, callback){
 	return text;
 }
 
-const debugStreams = [process.stdout];
-
 function _printStream(stream, message){
 	if(stream){
 		stream.write(message + '\n');
@@ -141,6 +139,8 @@ function _printToAllStreams(message){
  * @desc A highly configurable & lightweight debug library that prints debug messages beautifully. 
  * It works in Node.js and Web browser environments with very low memory footprint. 
  */
+
+const debugStreams = [process.stdout];
 
 module.exports = {
   /** Different ANSI color to decorate different segments
