@@ -4,7 +4,7 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "source": {
-        "include": ["./Examples/example.js", "defaultOptions.js", "PrettyDebugJS.js", "package.json", "README.md"],
+        "include": ["./Examples/example.js", "PrettyDebugJS.js", "defaultOptions.js", "ansiColors.js", "package.json", "README.md"],
         "exclude": ["/node_modules"],
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_"
@@ -13,15 +13,18 @@
         "plugins/markdown"
     ],
     "templates": {
-        "referenceTitle": "Pretty Debug Javascript API",
+        "referenceTitle": "API Documentation",
         "disableSort": true,
         "resources": {
             "Github": "https://github.com/shadlyd15/PrettyDebugJS"
+        },
+        "examples": {
+            "Generic Example": "/Examples_example.js.html"
         }
     },
     "opts": {
         "destination": "docs",
-        "recurse": false,
+        "recurse": true,
         "readme": "README.md",
         "lenient": false,
         "sort": false

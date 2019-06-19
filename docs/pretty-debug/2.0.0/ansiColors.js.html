@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      Examples/example.js - Documentation
+      ansiColors.js - Documentation
   </title>
 
   <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
@@ -99,7 +99,7 @@
   <div id="main">
     
       <h1 class="page-title">
-        Examples/example.js
+        ansiColors.js
       </h1>
     
 
@@ -109,59 +109,61 @@
 <section>
   <article>
     <pre class="prettyprint source linenums"><code>/**
- * @fileOverview Generic Example
+ * @fileOverview ANSI color codes
  * @author Shadly Salahuddin
  * @link mailto:shadlyd15@gmail.com
  * @version 2.0.1
  */
 
-const net 	= require('net');
-const debug 	= require('./PrettyDebugJS.js');
+/**
+ * @module ANSI Color Codes
+ * @desc Definition of common colors in ansi escape code
+ * @exports {ansiColors}
+ */
 
-var PORT = 6969;
-var HOST = '0.0.0.0';
+/**
+ * Default options for Pretty Debug library
+ * @typedef {Object} ansiColors
+ * @property {string} reset='\x1B[00m' ANSI color code : reset
+ * @property {string} black='\x1B[30m' ANSI color code : black
+ * @property {string} red='\x1B[31m' ANSI color code : red
+ * @property {string} red='\x1B[32m' ANSI color code : red
+ * @property {string} yellow='\x1B[33m' ANSI color code : yellow
+ * @property {string} blue='\x1B[34m' ANSI color code : blue
+ * @property {string} magenta='\x1B[35m' ANSI color code : magenta
+ * @property {string} cyan='\x1B[36m' ANSI color code : cyan
+ * @property {string} white='\x1B[37m' ANSI color code : white
+ * @property {string} bgBlack='\x1B[40m' ANSI color code : bgBlack
+ * @property {string} bgRed='\x1B[41m' ANSI color code : bgRed
+ * @property {string} bgGreen='\x1B[42m' ANSI color code : bgGreen
+ * @property {string} bgYellow='\x1B[43m' ANSI color code : bgYellow
+ * @property {string} bgBlue='\x1B[44m' ANSI color code : bgBlue
+ * @property {string} bgMagenta='\x1B[45m' ANSI color code : bgMagenta
+ * @property {string} bgCyan='\x1B[46m' ANSI color code : bgCyan
+ * @property {string} bgWhite='\x1B[47m' ANSI color code : bgWhite
+ */
 
-debug.setOptions({
-	nodeMemoryMonitor:{
-		fields: {
-			rss: false,
-			external: false
-		}
-	}
-});
+module.exports = {
+    reset		: 	'\x1B[00m',
 
-debug.info('Hello Pretty World');
+    black     	: 	'\x1B[30m',
+    red       	: 	'\x1B[31m',
+    green     	: 	'\x1B[32m',
+    yellow    	: 	'\x1B[33m',
+    blue      	: 	'\x1B[34m',
+    magenta   	: 	'\x1B[35m',
+    cyan      	: 	'\x1B[36m',
+    white     	: 	'\x1B[37m',
 
-debug.scheduleHealthCheck(function(){
-	debug.memoryWatermark();
-	debug.sysMemoryMonitor();
-	debug.nodeMemoryMonitor({
-		heapTotal: { upperLimit : 5 }
-	}, function(){
-		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
-		// Do other things like send email!
-	});
-}, .02);
-
-net.createServer(function(sock){
-	debug.attachStream(sock);
-	sock.on('end', function() {
-		debug.detachStream(sock);
-	}); 
-}).listen(PORT, HOST);
-
-function generateRandomLog(){
-	debug.log('The quick brown fox jumps over the lazy dog');
-	debug.info('The quick brown fox jumps over the lazy dog');
-	debug.alert('The quick brown fox jumps over the lazy dog');
-	debug.warn('The quick brown fox jumps over the lazy dog');
-	debug.error('The quick brown fox jumps over the lazy dog');
-	debug.critical('The quick brown fox jumps over the lazy dog');
-}
-
-setInterval(function(){
-	generateRandomLog();
-}, 666)</code></pre>
+	bgBlack		:	'\x1B[40m',
+	bgRed		:	'\x1B[41m',
+	bgGreen		:	'\x1B[42m',
+	bgYellow	:	'\x1B[43m',
+	bgBlue		:	'\x1B[44m',
+	bgMagenta	:	'\x1B[45m',
+	bgCyan		:	'\x1B[46m',
+	bgWhite		:	'\x1B[47m'
+};</code></pre>
   </article>
 </section>
 

@@ -143,8 +143,7 @@ function _printToAllStreams(message){
  */
 
 module.exports = {
-
-  /**
+  /** Different ANSI color to decorate different segments
 	* @type {Object.<string>}
 	* @property {string} reset		- Text Color Reset
     * @property {string} black 		- Text Color Block

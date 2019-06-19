@@ -1,6 +1,5 @@
 /**
  * @fileOverview Generic Example
- * @external Example
  * @author Shadly Salahuddin
  * @link mailto:shadlyd15@gmail.com
  * @version 2.0.1
