@@ -12,7 +12,7 @@ ul, ol, li {list-style:none; padding-left:0; margin-left:0;}
     top: 0;
     overflow: auto;
     left: 0;
-    background-color: #161b1d;
+    background-color: #021218;
     padding: 0 20px;
 }
 .lnb .logo {
@@ -29,10 +29,10 @@ ul, ol, li {list-style:none; padding-left:0; margin-left:0;}
 }
 .lnb h3 {
     font-size: 1.5em;
-    color: #fa3282;
+    color: #fbb045;
 }
 .lnb h3 a {
-    color: #fa3282;
+    color: #fbb045;
 }
 .lnb h3 a:hover {
     color: #9a3282;
@@ -44,10 +44,10 @@ ul, ol, li {list-style:none; padding-left:0; margin-left:0;}
     border-bottom: 1px solid #1f292e;
 }
 .lnb .lnb-api h3 a {
-    color: #fa3282;
+    color: #fbb045;
 }
 .lnb .lnb-api h3 a:hover {
-    color: #fa3282;
+    color: #fbb045;
     text-decoration: underline;
 }
 .lnb .lnb-api a,
@@ -154,7 +154,7 @@ ul, ol, li {list-style:none; padding-left:0; margin-left:0;}
 }
 .main section article h3.subsection-title {
     font-size:16px;
-    color: #fa3282;
+    color: #021218;
     padding:35px 0 0 5px;
     border-bottom: 1px solid #dedede;
 }
@@ -343,7 +343,7 @@ footer {
 .readme section header h2 {
     font-size:20px;
     padding-left:10px;
-    border-left:5px solid #fa3282;
+    border-left:5px solid #fbb045;
 }
 .readme section .container-overview {
     color:#333;
