@@ -6,6 +6,8 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
 
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#Intro)
+
 ## Intro
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
@@ -51,8 +53,7 @@ Pretty Debug exposes a debug object. Just attach any stream you want to the modu
 
 For detail information, please see [API Documentation.](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html)
 
-<!-- ## Customization
-As it was mentioned earlier, this library is highly configurable. 
+<!-- 
 ### Show/Hide Section
 
 ### Change Section Color
@@ -187,3 +188,6 @@ To the above example simply put this command
 ```sh
 $ node example.js
 ```
+## Customization
+As it was mentioned earlier, this library is highly configurable.
+For more details, see [API Documentation.](https://shadlyd15.github.io/PrettyDebugJS/module-Default%2520Options.html)
