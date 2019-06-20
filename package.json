@@ -29,8 +29,5 @@
     "colorful",
     "pipe",
     "diagnostic"
-  ],
-  "devDependencies": {
-    "docma": "^3.2.2"
-  }
+  ]
 }
