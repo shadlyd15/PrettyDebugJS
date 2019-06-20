@@ -11,7 +11,7 @@ $ npm install pretty-debug
 
 - **Create debug instance :**
 	```javascript
-		const debug = require('./PrettyDebugJS.js');
+	const debug = require('./PrettyDebugJS.js');
 	```
 - **Set options :**
 	```javascript

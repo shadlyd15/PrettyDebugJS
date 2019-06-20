@@ -6,7 +6,7 @@
  */
 
 /**
- * @module ANSI Color Codes
+ * @module ansiColors
  * @desc Definition of common colors in ansi escape code
  * @exports {ansiColors}
  */

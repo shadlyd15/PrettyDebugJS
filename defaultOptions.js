@@ -8,7 +8,7 @@
 const ansiColors = require('./ansiColors');
 
 /**
- * @module Default Options
+ * @module defaultOptions
  * @desc <strong>Predefined options for pretty-debug library.</strong><br>
  * By changing this options :
  * - Turn on/off debug print.

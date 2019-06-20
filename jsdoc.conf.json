@@ -12,26 +12,28 @@
     "plugins": [
         "plugins/markdown"
     ],
+    "recurseDepth": 3,
     "templates": {
         "referenceTitle": "API Documentation",
         "disableSort": true,
+        "tabNames": {
+            "api": "API",
+            "examples": "Examples"
+        },
         "resources": {
             "Github": "https://github.com/shadlyd15/PrettyDebugJS"
         },
         "examples": {
             "Generic Example": "/PrettyDebugJS/pretty-debug/2.0.0/Examples_example.js.html"
         },
-        "footerText": "My awesome footer text",
-        "tabNames": {
-            "api": "API",
-            "tutorials": "Examples"
-        }
+        "footerText": "My awesome footer text"
     },
     "opts": {
         "destination": "docs",
         "recurse": true,
         "readme": "README.md",
         "lenient": false,
-        "sort": false
+        "sort": false,
+        "tutorials" : "Examples/"
     }
 }

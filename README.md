@@ -1,12 +1,18 @@
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif&display=swap" rel="stylesheet">
 
+<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #F9CD6D; font-size: 70px;font-style: bold">{</span>
+<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 70px;font-style: bold">'</span>
+<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 30px;font-style: bold">Pretty Debug </span>
+<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 40px;font-style: bold">'</span>
+<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #F9CD6D; font-size: 45px;font-style: bold">}</span>
 
-# Pretty Debug JS
 [![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#Intro)
+
 
 ## Intro
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
