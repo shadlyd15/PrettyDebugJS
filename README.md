@@ -1,4 +1,4 @@
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/docs/img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div>
 
 [![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
 
@@ -11,7 +11,7 @@
 ## Intro
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Features
 - Highly configurable
@@ -180,7 +180,7 @@ setInterval(function(){
 }, 666)
 ```
 ## Sample Output
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 
 ## Run Example
