@@ -1,10 +1,4 @@
-<link href="https://fonts.googleapis.com/css?family=Noto+Serif&display=swap" rel="stylesheet">
-
-<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #F9CD6D; font-size: 70px;font-style: bold">{</span>
-<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 70px;font-style: bold">'</span>
-<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 30px;font-style: bold">Pretty Debug </span>
-<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #000000; font-size: 40px;font-style: bold">'</span>
-<span style="font-family: 'Noto Serif', serif; font-weight: 800; color: #F9CD6D; font-size: 45px;font-style: bold">}</span>
+<div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div>
 
 [![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
 
