@@ -1,0 +1,458 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Source: PrettyDebugJS.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: PrettyDebugJS.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>/**
+ * @fileOverview Pretty Debug Javascript
+ * @author Shadly Salahuddin
+ * @link mailto:shadlyd15@gmail.com
+ * @version 2.0.1
+ */
+
+const fs	&#x3D;	require(&#x27;fs&#x27;);
+const util	&#x3D;	require(&#x27;util&#x27;);
+const options &#x3D; require(&#x27;./defaultOptions&#x27;);
+const ansiColors &#x3D; require(&#x27;./ansiColors&#x27;);
+
+function _updateOptions(obj, options &#x3D; {}) {
+    for (var key in options) {
+        if (typeof options[key] &#x3D;&#x3D;&#x3D; &quot;object&quot;) {
+            _updateOptions(obj[key], options[key]);   
+        } else {
+            obj[key] &#x3D; options[key];
+        }
+    }
+}
+
+function _checkUniqueStream(targetArray, targetValue){ 
+    for(let i &#x3D; 0; i &amp;lt; targetArray.length; i++){
+    	if(targetArray[i] &#x3D;&#x3D;&#x3D; targetValue) return false;    	
+    }
+    return true;
+}
+
+function _paintText(text, color, resetColor &#x3D; &#x27;&#x27;){
+	return color + text + resetColor;
+}
+
+function _renderTextSegment(text, color, resetColor &#x3D; &#x27;&#x27;){
+	if(text &#x3D;&#x3D;&#x3D; undefined) return &#x27;&#x27;;
+	return _paintText(&#x27;[&#x27; + text + &#x27;]&#x27;, options.enableColor?color:&#x27;&#x27;, options.enableColor?resetColor:&#x27;&#x27;);
+}
+
+function _getCurrentDateTime(){
+	if(options[&#x27;dateTime&#x27;][&#x27;show&#x27;] !&#x3D;&#x3D; true) return undefined;
+	return new Date().toLocaleTimeString(&#x27;en-US&#x27;, options[&#x27;dateTime&#x27;][&#x27;format&#x27;]);
+}
+
+function _renderMessage(tag, functionName, fileLocation, message, color){
+	return	_renderTextSegment(_getCurrentDateTime(), options[&#x27;dateTime&#x27;][&#x27;color&#x27;], &#x27; &#x27;)
+			+ _renderTextSegment(functionName, options[&#x27;funcName&#x27;][&#x27;color&#x27;], &#x27; &#x27;)
+			+ _renderTextSegment(fileLocation, options[&#x27;fileLocation&#x27;][&#x27;color&#x27;], &#x27; &#x27;)
+			+ _renderTextSegment(tag, color, &#x27; : &#x27;)
+			+ _renderTextSegment(message, color, ansiColors.reset);
+}
+
+function _getFunctionCallLocation(){
+	var err &#x3D; new Error();
+	Error.captureStackTrace(err);
+	let fileLocation;
+	let functionName;
+
+	if(options.fileLocation.show &#x3D;&#x3D;&#x3D; true){
+		const regexFile &#x3D; /\((.*)\)$/;
+		const matchFile &#x3D; regexFile.exec(err.stack.split(/\r\n|\n/, 4)[3]);
+		if((matchFile !&#x3D; null) &amp;amp;&amp;amp; (matchFile.length &gt; 1)){
+			fileLocation &#x3D; matchFile[1].replace(/^.*[\\\/]/, &#x27;&#x27;);
+		}
+	}
+	if(options.funcName.show &#x3D;&#x3D;&#x3D; true &amp;amp;&amp;amp; fileLocation){
+		functionName &#x3D; err.stack
+						.split(&#x27;\n&#x27;, 4)[3]
+						.replace(/^\s+at\s+(.+?)\s.+/g, &#x27;$1&#x27; );
+    } else{
+    	functionName &#x3D; &#x27;Callback&#x27;;
+    }
+	return {
+		functionName : functionName,
+		fileLocation : fileLocation
+	}
+}
+
+function _bytesToMb(kilo){
+	return Math.round(kilo / 1024 / 1024 * 100) / 100;
+}
+
+function _setWaterMark(watermark, currentValue){
+	watermark.now &#x3D; currentValue;
+	if(watermark.peak &amp;lt;&#x3D; currentValue){
+		watermark.peak &#x3D; currentValue;
+		watermark.time 	&#x3D; new Date().toLocaleTimeString(&#x27;en-US&#x27;, options[&#x27;memoryWatermark&#x27;][&#x27;dateTime&#x27;][&#x27;format&#x27;]);
+	}
+}
+
+function _checkAlarmPolicy(policy, currentValue){
+	for (var key in policy) {
+		if (policy[key][&#x27;lowerLimit&#x27;] &gt; currentValue[key]){ 
+			return true;
+		}
+		if (policy[key][&#x27;upperLimit&#x27;] &amp;lt; currentValue[key]){
+			return true;
+		}
+	}
+}
+
+function _generateFunction(tag){
+	return function(){
+		if((options.enable !&#x3D; true) || options[tag][&#x27;level&#x27;] &gt; options[&#x27;debugLevel&#x27;]) return;
+		const currentLocationInfo &#x3D; _getFunctionCallLocation();
+		_printToAllStreams(_renderMessage(	options[tag][&#x27;tag&#x27;],
+											currentLocationInfo[&#x27;functionName&#x27;], 
+											currentLocationInfo[&#x27;fileLocation&#x27;], 
+											util.format.apply(this, arguments),
+											options[tag].color)
+		);
+	};
+}
+
+function _generateTextFromObj(obj, callback){
+	let text &#x3D; &#x27;&#x27;;
+	for(let key in obj){
+		if(obj[key]){
+			text &#x3D; text + callback(key) ;
+		}
+	}
+	return text;
+}
+
+function _printStream(stream, message){
+	if(stream){
+		stream.write(message + &#x27;\n&#x27;);
+	}
+};
+
+function _printToAllStreams(message){
+	debugStreams.forEach(function(stream){
+		_printStream(stream, message);
+	});
+};
+
+
+/**
+ * @module pretty-debug
+ * @desc A highly configurable &amp;amp; lightweight debug library that prints debug messages beautifully. 
+ * It works in Node.js and Web browser environments with very low memory footprint. 
+ */
+
+const debugStreams &#x3D; [process.stdout];
+
+module.exports &#x3D; {
+  /** Different ANSI color to decorate different segments
+	* @type {Object.&amp;lt;string&gt;}
+	* @property {string} reset		- Text Color Reset
+    * @property {string} black 		- Text Color Block
+    * @property {string} red 		- Text Color Red
+    * @property {string} green 		- Text Color Green
+    * @property {string} yellow 	- Text Color Yellow
+    * @property {string} blue 		- Text Color Blue
+    * @property {string} magenta 	- Text Color Magenta
+    * @property {string} cyan 		- Text Color Cyan
+    * @property {string} white 		- Text Color Cyan
+	* @property {string} bgBlack 	- Background Color Black
+	* @property {string} bgRed 		- Background Color Red
+	* @property {string} bgGreen 	- Background Color Green
+	* @property {string} bgYellow 	- Background Color Yellow
+	* @property {string} bgBlue 	- Background Color Blue
+	* @property {string} bgMagenta 	- Background Color Magenta
+	* @property {string} bgCyan 	- Background Color Cyan
+	* @property {string} bgWhite 	- Background Color White
+	*/
+	color : ansiColors,
+
+  /**
+	* Overwrites default options and debug text formats
+	* @param {Object.&amp;lt;userOptions&gt;} userOptions - Options User specific options
+	*/
+	setOptions: function setOptions(userOptions){
+		_updateOptions(options, userOptions);
+	},
+
+  /**
+	* Generates policy for different memory monitors
+	* @param {number} lowerLimit - Lower limit
+	* @param {number} upperLimit - Upper limit
+	* @return {Object.&amp;lt;policy&gt;}
+	*/
+	generatePolicy: function generatePolicy(lower &#x3D; 0, upper &#x3D; 100){
+		return {
+			lowerLimit : &#x60;${lower}&#x60;,
+			upperLimit : &#x60;${upper}&#x60;
+		};
+	},
+
+  /**
+	* Attaches stream to pipe debug output
+	* @param {Object.&amp;lt;stream&gt;} stream - Stream to attach
+	*/
+	attachStream: function attachStream(stream){
+		if(stream &amp;amp;&amp;amp; _checkUniqueStream(debugStreams, stream)){
+			debugStreams.push(stream);
+			this.alert(&#x27;New Debug Stream Attached&#x27;);
+		}
+	},
+
+  /**
+	* Detaches stream from debug output
+	* @param {Object.&amp;lt;stream&gt;} stream - Stream to detach
+	*/
+	detachStream: function detachStream(stream){
+		let filteredStreams &#x3D; debugStreams.filter(function(value){
+		    return ( value !&#x3D; stream );
+		});
+		debugStreams &#x3D; filteredStreams;
+		this.info(&#x27;Debug Stream Detached&#x27;);
+	},
+
+  /**
+	* Prints log messages in level 6
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.log(&quot;Just a simple log message&quot;);
+	* @example
+	* const policy &#x3D; { upperLimit : 70, lowerLimit : 20 };
+	* debug.log(policy);
+	*/
+	log			: _generateFunction(&#x27;log&#x27;),
+
+  /**
+	* Prints info messages in level 5
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.info(&quot;Here is an info message.&quot;);
+	* @example
+	* const birthTimestamp &#x3D; { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+	* debug.info(birthTimestamp);
+	*/
+	info		: _generateFunction(&#x27;info&#x27;),
+
+  /**
+	* Prints alert messages in level 4
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.alert(&quot;An alert message!&quot;);
+	* @example
+	* const birthTimestamp &#x3D; { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+	* debug.alert(birthTimestamp);
+	*/
+	alert		: _generateFunction(&#x27;alert&#x27;),
+  
+  /**
+	* Prints warn messages in level 3
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.warn(&quot;This is your last warning.&quot;);
+	* @example
+	* const resource &#x3D; { RAM : 10, CPU : 60 };
+	* debug.warn(resource);
+	*/
+	warn		: _generateFunction(&#x27;warn&#x27;),
+
+  /**
+	* Prints error messages in level 2
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.error(&quot;Error in recording server&quot;);
+	* @example
+	* const errorMessage &#x3D; { message : &quot;Some Error&quot;, errorCode : 4 };
+	* debug.error(errorMessage);
+	*/
+	error		: _generateFunction(&#x27;error&#x27;),
+
+  /**
+	* Prints critical messages in level 1
+	* @function
+	* @param {...*} var_args Variadic Argument
+	* @example
+	* debug.critical(&quot;API server critical error&quot;);
+	* @example
+	* const criticalMessage &#x3D; { message : &quot;Some Critical Error&quot; };
+	* debug.critical(criticalMessage);
+	*/
+	critical	: _generateFunction(&#x27;critical&#x27;),
+
+  /**
+	* Prints RAM usage by Node.js
+	* @param {Object.&amp;lt;stream&gt;} stream - Stream Object
+	* @param {function} callback - Callback function to invoke when alarm triggers
+	* @example
+	* debug.nodeMemoryMonitor({
+	*		heapTotal: { upperLimit : 100 }
+	* 	}, function(){
+	*		debug.critical(&#x27;Memory Usage Alarm : Total heap usage is above 100 MB&#x27;);
+	*	}
+	* );
+	*/
+	nodeMemoryMonitor: function nodeMemoryMonitor(alarmPolicy &#x3D; {}, callback &#x3D; null){
+		if(options.enable !&#x3D; true) return;
+		const nodeMemInfo &#x3D; process.memoryUsage();
+
+		let message &#x3D; _renderMessage(	&#x27;MEMORY&#x27;,
+										&#x27;Node&#x27;, 
+										undefined, 
+										_generateTextFromObj(options.nodeMemoryMonitor.fields, function(key){
+											return &#x60;| ${key} : ${_bytesToMb(nodeMemInfo[key])} MB |&#x60;;
+										}),
+										options[&#x27;nodeMemoryMonitor&#x27;][&#x27;color&#x27;]);
+
+		_setWaterMark(options.memoryWatermark.fields[&#x27;Node&#x27;], _bytesToMb(nodeMemInfo.heapUsed));
+		_printToAllStreams(message);
+
+		if(_checkAlarmPolicy(alarmPolicy, nodeMemInfo) &amp;amp;&amp;amp; callback) callback();
+	},
+
+  /**
+	* Prints RAM usage by operating system
+	* @param {Object.&amp;lt;alarmPolicy&gt;} alarmPolicy - Policy object to trigger alarm
+	* @param {function} callback - Callback function to invoke when alarm triggers	
+	* @example
+	* debug.sysMemoryMonitor({
+	*		MemTotal: { upperLimit : 700 }
+	* 	}, function(){
+	*		debug.critical(&#x27;Memory Usage Alarm : Total system memory usage is above 700 MB&#x27;);
+	*	}
+	* );
+	*/
+	sysMemoryMonitor: function sysMemoryMonitor(alarmPolicy &#x3D; {}, callback &#x3D; null){
+		if(options.enable !&#x3D; true) return;
+		fs.readFile(&#x27;/proc/meminfo&#x27;, function (err, data){
+			if (err) throw err;
+			var info &#x3D; {};
+			data.toString().split(/\n/g).forEach(function(line){
+			   line &#x3D; line.split(&#x27;:&#x27;);
+			   if (line.length &amp;lt; 2){
+			       return;
+			   }	
+			   info[line[0]] &#x3D; Math.round(parseInt(line[1].trim(), 10) / 1024);
+			});
+
+			let message &#x3D; _renderMessage(	&#x27;MEMORY&#x27;,
+											&#x27;System&#x27;, 
+											undefined,
+											_generateTextFromObj(options.sysMemoryMonitor.fields, function(key){
+												return &#x60;| ${key} : ${info[key]} MB |&#x60;;
+											}),
+											options[&#x27;sysMemoryMonitor&#x27;].color);
+
+			_setWaterMark(options.memoryWatermark.fields[&#x27;Swap&#x27;], info[&#x27;SwapTotal&#x27;] - info[&#x27;SwapFree&#x27;]);
+			_setWaterMark(options.memoryWatermark.fields[&#x27;RAM&#x27;], info[&#x27;MemTotal&#x27;] - info[&#x27;MemAvailable&#x27;]);
+
+			_printToAllStreams(message);
+
+			if(_checkAlarmPolicy(alarmPolicy, info) &amp;amp;&amp;amp; callback) callback();
+		});
+	},
+
+  /**
+	* Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.
+	* @example memoryWatermark();
+	*/
+	memoryWatermark: function memoryWatermark(){
+		if(options.enable !&#x3D; true) return;
+		let message &#x3D; _renderMessage(	&#x27;Watermark&#x27;,
+										undefined, 
+										undefined,
+										_generateTextFromObj(options.memoryWatermark.fields, function(key){
+											return &#x60;| ${key} : ${options.memoryWatermark.fields[key].peak} MB @ ${options.memoryWatermark.fields[key].time} |&#x60;;
+										}),
+										options[&#x27;memoryWatermark&#x27;].color);
+
+		_printToAllStreams(message);
+	},
+
+  /**
+	* Set Schedule to perform healthcheck
+	* @param {function} inputFunc - Healthcheck function
+	* @param {numbers} timeInMinutes - Interval in minutes
+	* @example
+	* debug.scheduleHealthCheck(function(){
+	* 	debug.memoryWatermark();
+	* 	debug.sysMemoryMonitor();
+	* 	debug.nodeMemoryMonitor({
+	* 		heapTotal: { upperLimit : 5 }
+	* 	}, function(){
+	* 		debug.critical(&#x27;Memory Usage Alarm : Total heap usage is above 5 MB&#x27;);
+	* 	});
+	* }, 10);
+	*/
+	scheduleHealthCheck: function scheduleHealthCheck(inputFunc, timeInMinutes){
+		if(options.enable !&#x3D; true) return;
+		setTimeout(function(){
+			if(options[&#x27;enableGC&#x27;] &amp;amp;&amp;amp; global.gc){
+				global.gc();
+			}
+			if(inputFunc){
+				inputFunc();
+				scheduleHealthCheck(inputFunc, timeInMinutes);
+			}
+		}, timeInMinutes * 60 * 1000);
+	}
+};
+
+
+
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

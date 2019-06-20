@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Tutorial: Basics</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <h1>Basics</h1>
+          <article>
+            <p>&lt;!DOCTYPE html&gt;
+              &lt;html&gt;</p>
+            <p>&lt;head&gt;
+              &lt;meta charset=&quot;utf-8&quot;&gt;
+              &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+              &lt;title&gt;Welcome file&lt;/title&gt;
+              &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackedit.io/style.css&quot; /&gt;
+              &lt;/head&gt;</p>
+            <p>&lt;body class=&quot;stackedit&quot;&gt;
+              &lt;div class=&quot;stackedit__html&quot;&gt;&lt;h1 id=&quot;how-to-use&quot;&gt;How to use&lt;/h1&gt;
+              &lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
+              &lt;pre class=&quot; language-sh&quot;&gt;&lt;code class=&quot;prism language-sh&quot;&gt;$ npm install pretty-debug
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;h2 id=&quot;basic-usage&quot;&gt;Basic usage&lt;/h2&gt;
+              &lt;ul&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Create debug instance :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; debug &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'./PrettyDebugJS.js'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Set options :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              enable&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Turning on debug print&lt;/span&gt;
+              enableColor&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling color output&lt;/span&gt;
+              enableGC&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling autometic gerbage collection&lt;/span&gt;
+              debugLevel&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Setting debug level 6 (Upto INFO)&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;<br>
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Attach stream :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;attachStream&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sock&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Attaching new stream to serve debug messages&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Detach stream :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;detachStream&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sock&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Detaching stream&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Set options :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              enable&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Turning on debug print&lt;/span&gt;
+              enableColor&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling color output&lt;/span&gt;
+              enableGC&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling autometic gerbage collection&lt;/span&gt;
+              debugLevel&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Setting debug level 6 (Upto INFO)&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;<br>
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Print in different debug levels :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Show highest RAM usage :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memoryWatermark&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Show memory used by OS :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sysMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Show memory used by Node.js :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+              &lt;p&gt;&lt;strong&gt;Set alarm policy for RAM usage :&lt;/strong&gt;&lt;/p&gt;
+              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              heapTotal&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; upperLimit &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'Memory Usage Alarm : Total heap usage is above 5 MB'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;token comment&quot;&gt;// Do other things like send email!&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;/code&gt;&lt;/pre&gt;
+              &lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;/div&gt;
+              &lt;/body&gt;</p>
+            <p>&lt;/html&gt;</p>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

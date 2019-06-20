@@ -1,0 +1,1037 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Module: pretty-debug</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <div class="symbol-detail-labels"><span class="label label-kind">module</span></div>
+            <h1><small></small><span class="symbol-name">pretty-debug</span></h1>
+            <p class="source-link">Source: <a href="PrettyDebugJS.js.html#source-line-137">PrettyDebugJS.<wbr>js:137</a></p>
+            <div class="symbol-description">
+              <p>A highly configurable &amp; lightweight debug library that prints debug messages beautifully.
+                It works in Node.js and Web browser environments with very low memory footprint.</p>
+            </div>
+            <dl class="dl-compact">
+            </dl>
+          </header>
+          <section id="summary">
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Property</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-pretty-debug.html#.color">color</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                </div>
+                <div class="summary-column">
+                </div>
+              </div>
+            </div>
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Methods</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-pretty-debug.html#.alert">alert(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.attachStream">attachStream(stream)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.critical">critical(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.detachStream">detachStream(stream)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.error">error(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-pretty-debug.html#.generatePolicy">generatePolicy(lowerLimit, upperLimit)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.info">info(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.log">log(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.memoryWatermark">memoryWatermark()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.nodeMemoryMonitor">nodeMemoryMonitor(stream, callback)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="module-pretty-debug.html#.scheduleHealthCheck">scheduleHealthCheck(inputFunc, timeInMinutes)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.setOptions">setOptions(userOptions)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.sysMemoryMonitor">sysMemoryMonitor(alarmPolicy, callback)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-pretty-debug.html#.warn">warn(.<wbr>.<wbr>.<wbr>var_args)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Property</h2>
+            <section>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".color"><span class="symbol-name">color</span><small class="property-type">
+                  &nbsp;Object containing string</small></h3>
+              <p>Different ANSI color to decorate different segments</p>
+              <section>
+                <h4>Properties</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>reset</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Reset</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>black</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Block</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>red</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Red</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>green</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Green</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>yellow</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Yellow</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>blue</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Blue</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>magenta</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Magenta</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>cyan</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Cyan</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>white</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Text Color Cyan</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgBlack</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Black</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgRed</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Red</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgGreen</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Green</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgYellow</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Yellow</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgBlue</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Blue</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgMagenta</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Magenta</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgCyan</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color Cyan</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>bgWhite</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Background Color White</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+            </section>
+            <h2>Methods</h2>
+            <section>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".alert"><span class="symbol-name">alert</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints alert messages in level 4</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.alert(&quot;An alert message!&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const birthTimestamp &#x3D; { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+debug.alert(birthTimestamp);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".attachStream"><span class="symbol-name">attachStream</span><span class="signature"><span class="signature-params">(stream)</span></span></h3>
+              <p>Attaches stream to pipe debug output</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>stream</p>
+                      </td>
+                      <td>
+                        <p>Object containing stream</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Stream to attach</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".critical"><span class="symbol-name">critical</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints critical messages in level 1</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.critical(&quot;API server critical error&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const criticalMessage &#x3D; { message : &quot;Some Critical Error&quot; };
+debug.critical(criticalMessage);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".detachStream"><span class="symbol-name">detachStream</span><span class="signature"><span class="signature-params">(stream)</span></span></h3>
+              <p>Detaches stream from debug output</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>stream</p>
+                      </td>
+                      <td>
+                        <p>Object containing stream</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Stream to detach</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".error"><span class="symbol-name">error</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints error messages in level 2</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.error(&quot;Error in recording server&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const errorMessage &#x3D; { message : &quot;Some Error&quot;, errorCode : 4 };
+debug.error(errorMessage);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".generatePolicy"><span class="symbol-name">generatePolicy</span><span class="signature"><span class="signature-params">(lowerLimit, upperLimit)</span>&nbsp;&rarr; <span class="signature-returns"> Object containing policy</span></span></h3>
+              <p>Generates policy for different memory monitors</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>lowerLimit</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Lower limit</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>upperLimit</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Upper limit</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Object containing policy</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".info"><span class="symbol-name">info</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints info messages in level 5</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.info(&quot;Here is an info message.&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const birthTimestamp &#x3D; { date : &quot;15/12/1993&quot;, time : &quot;12:05 AM&quot; };
+debug.info(birthTimestamp);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".log"><span class="symbol-name">log</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints log messages in level 6</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.log(&quot;Just a simple log message&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const policy &#x3D; { upperLimit : 70, lowerLimit : 20 };
+debug.log(policy);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".memoryWatermark"><span class="symbol-name">memoryWatermark</span><span class="signature"><span class="signature-params">()</span></span></h3>
+              <p>Prints highest RAM usage in application. Scheduled healthcheck is needed to set watermark.</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>memoryWatermark();</code></pre>
+                </div>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".nodeMemoryMonitor"><span class="symbol-name">nodeMemoryMonitor</span><span class="signature"><span class="signature-params">(stream, callback)</span></span></h3>
+              <p>Prints RAM usage by Node.js</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.nodeMemoryMonitor({
+		heapTotal: { upperLimit : 100 }
+	}, function(){
+		debug.critical(&#x27;Memory Usage Alarm : Total heap usage is above 100 MB&#x27;);
+	}
+);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>stream</p>
+                      </td>
+                      <td>
+                        <p>Object containing stream</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Stream Object</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>callback</p>
+                      </td>
+                      <td>
+                        <p>function()</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Callback function to invoke when alarm triggers</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".scheduleHealthCheck"><span class="symbol-name">scheduleHealthCheck</span><span class="signature"><span class="signature-params">(inputFunc, timeInMinutes)</span></span></h3>
+              <p>Set Schedule to perform healthcheck</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+		heapTotal: { upperLimit : 5 }
+	}, function(){
+		debug.critical(&#x27;Memory Usage Alarm : Total heap usage is above 5 MB&#x27;);
+	});
+}, 10);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>inputFunc</p>
+                      </td>
+                      <td>
+                        <p>function()</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Healthcheck function</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>timeInMinutes</p>
+                      </td>
+                      <td>
+                        <p>numbers</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Interval in minutes</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".setOptions"><span class="symbol-name">setOptions</span><span class="signature"><span class="signature-params">(userOptions)</span></span></h3>
+              <p>Overwrites default options and debug text formats</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>userOptions</p>
+                      </td>
+                      <td>
+                        <p>Object containing userOptions</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Options User specific options</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".sysMemoryMonitor"><span class="symbol-name">sysMemoryMonitor</span><span class="signature"><span class="signature-params">(alarmPolicy, callback)</span></span></h3>
+              <p>Prints RAM usage by operating system</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.sysMemoryMonitor({
+		MemTotal: { upperLimit : 700 }
+	}, function(){
+		debug.critical(&#x27;Memory Usage Alarm : Total system memory usage is above 700 MB&#x27;);
+	}
+);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>alarmPolicy</p>
+                      </td>
+                      <td>
+                        <p>Object containing alarmPolicy</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Policy object to trigger alarm</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>callback</p>
+                      </td>
+                      <td>
+                        <p>function()</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Callback function to invoke when alarm triggers</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".warn"><span class="symbol-name">warn</span><span class="signature"><span class="signature-params">(...var_args)</span></span></h3>
+              <p>Prints warn messages in level 3</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>debug.warn(&quot;This is your last warning.&quot;);</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>const resource &#x3D; { RAM : 10, CPU : 60 };
+debug.warn(resource);</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>var_args</p>
+                      </td>
+                      <td>
+                        <p>any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Variadic Argument</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+              </dl>
+            </section>
+          </section>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

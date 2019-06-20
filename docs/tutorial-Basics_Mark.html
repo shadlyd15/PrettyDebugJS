@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Tutorial: Basics_Mark</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <h1>Basics_Mark</h1>
+          <article>
+            <h1>How to use</h1>
+            <h2>Install</h2>
+            <p>```sh
+              $ npm install pretty-debug
+              ```</p>
+            <h2>Basic usage</h2>
+            <ul>
+              <li>
+                <p><strong>Create debug instance :</strong>
+                  ```javascript
+                  const debug = require('./PrettyDebugJS.js');
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Set options :</strong>
+                  ```javascript
+                  debug.setOptions({
+                  enable: true, // Turning on debug print
+                  enableColor: true, // Enabling color output
+                  enableGC: true, // Enabling autometic gerbage collection
+                  debugLevel: 6, // Setting debug level 6 (Upto INFO)
+                  }<br>
+                  });
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Attach stream :</strong>
+                  ```javascript
+                  debug.attachStream(sock); // Attaching new stream to serve debug messages
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Detach stream :</strong>
+                  ```javascript
+                  debug.detachStream(sock); // Detaching stream
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Set options :</strong>
+                  ```javascript
+                  debug.setOptions({
+                  enable: true, // Turning on debug print
+                  enableColor: true, // Enabling color output
+                  enableGC: true, // Enabling autometic gerbage collection
+                  debugLevel: 6, // Setting debug level 6 (Upto INFO)
+                  }<br>
+                  });
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Print in different debug levels :</strong>
+                  ```javascript
+                  debug.log('The quick brown fox jumps over the lazy dog');
+                  debug.info('The quick brown fox jumps over the lazy dog');
+                  debug.alert('The quick brown fox jumps over the lazy dog');
+                  debug.warn('The quick brown fox jumps over the lazy dog');
+                  debug.error('The quick brown fox jumps over the lazy dog');
+                  debug.critical('The quick brown fox jumps over the lazy dog');
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Show highest RAM usage :</strong>
+                  ```javascript
+                  debug.memoryWatermark();
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Show memory used by OS :</strong>
+                  ```javascript
+                  debug.sysMemoryMonitor();
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Show memory used by Node.js :</strong>
+                  ```javascript
+                  debug.nodeMemoryMonitor(();
+                  ```</p>
+              </li>
+              <li>
+                <p><strong>Set alarm policy for RAM usage :</strong>
+                  ```javascript
+                  debug.nodeMemoryMonitor({
+                  heapTotal: { upperLimit : 5 }
+                  }, function(){
+                  debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+                  // Do other things like send email!
+                  });
+                  ```</p>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

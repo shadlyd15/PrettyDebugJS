@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Home</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>
+              pretty-debug 2.0.0
+            </h1>
+          </header>
+          <article>
+            <h1>Pretty Debug JavaScript</h1>
+            <p>A <strong>highly configurable &amp; lightweight debug library</strong> that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.</p>
+            <div><img src="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt="Sample Output" /></div>
+            <h2>Features</h2>
+            <ul>
+              <li>Highly configurable</li>
+              <li>Very low memory footprint</li>
+              <li>Beautifully colored and formatted</li>
+              <li>Attach multiple streams on runtime and pipe output</li>
+              <li>Node process and System process health check</li>
+              <li>Alarm on crossing memory thresholds</li>
+              <li>Monitor system memory high watermark</li>
+              <li>No third party library dependencies</li>
+            </ul>
+            <h2>Install</h2>
+            <pre class="prettyprint source lang-sh"><code>npm install pretty-debug
+</code></pre>
+            <h2>Usage</h2>
+            <p>Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.</p>
+            <h2>API Documention</h2>
+            <pre class="prettyprint source lang-javascript"><code>	const debug = require('./PrettyDebugJS.js');
+</code></pre>
+            <h2>Customization</h2>
+            <p>As it was mentioned earlier, this library is highly configurable.</p>
+            <h3>Show/Hide Section</h3>
+            <h3>Change Section Color</h3>
+            <p>Let's say we want to change the color of <strong>Timestamp</strong> to Green and hide the File Name section.</p>
+            <h2>Example</h2>
+            <p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
+            <pre class="prettyprint source lang-javascript"><code>const net 	= require('net');
+const debug = require('./PrettyDebugJS.js');
+
+var PORT = 6969;
+var HOST = '0.0.0.0';
+
+debug.setOptions({
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
+	}
+});
+
+debug.info('Hello Pretty World');
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+			heapTotal: { upperLimit : 5 }
+		}, function(){
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
+		});
+}, .02);
+
+net.createServer(function(sock){
+	debug.attachStream(sock);
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	}); 
+}).listen(PORT, HOST);
+
+function generateRandomLog(){
+	debug.log('The quick brown fox jumps over the lazy dog');
+	debug.info('The quick brown fox jumps over the lazy dog');
+	debug.alert('The quick brown fox jumps over the lazy dog');
+	debug.warn('The quick brown fox jumps over the lazy dog');
+	debug.error('The quick brown fox jumps over the lazy dog');
+	debug.critical('The quick brown fox jumps over the lazy dog');
+}
+
+setInterval(function(){
+	generateRandomLog();
+}, 666)
+</code></pre>
+            <h2>Sample Output</h2>
+            <div><img src="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt="Sample Output" /></div>
+            <h2>Run Example</h2>
+            <p>To the above example simply put this command</p>
+            <pre class="prettyprint source lang-sh"><code>node example.js
+</code></pre>
+          </article>
+          <div class="symbol-index">
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="ANSI Color Codes">ANSI Color Codes</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-ANSI%2520Color%2520Codes.html" class="!symbol-index-name">ANSI Color Codes</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-ANSI%252520Color%252520Codes.html#~ansiColors" class="!symbol-index-name">ANSI Color Codes~<wbr>ansiColors</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="Default Options">Default Options</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%2520Options.html" class="!symbol-index-name">Default Options</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.alert" class="!symbol-index-name">Default Options.<wbr>alert</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.critical" class="!symbol-index-name">Default Options.<wbr>critical</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.dateTime" class="!symbol-index-name">Default Options.<wbr>dateTime</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.debugLevel" class="!symbol-index-name">Default Options.<wbr>debugLevel</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.enable" class="!symbol-index-name">Default Options.<wbr>enable</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.enableColor" class="!symbol-index-name">Default Options.<wbr>enableColor</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.enableGC" class="!symbol-index-name">Default Options.<wbr>enableGC</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.error" class="!symbol-index-name">Default Options.<wbr>error</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.fileLocation" class="!symbol-index-name">Default Options.<wbr>fileLocation</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.funcName" class="!symbol-index-name">Default Options.<wbr>funcName</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.info" class="!symbol-index-name">Default Options.<wbr>info</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.log" class="!symbol-index-name">Default Options.<wbr>log</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.memoryWatermark" class="!symbol-index-name">Default Options.<wbr>memoryWatermark</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.nodeMemoryMonitor" class="!symbol-index-name">Default Options.<wbr>nodeMemoryMonitor</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.sysMemoryMonitor" class="!symbol-index-name">Default Options.<wbr>sysMemoryMonitor</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-Default%252520Options.html#.warn" class="!symbol-index-name">Default Options.<wbr>warn</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="pretty-debug">pretty-debug</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html" class="!symbol-index-name">pretty-debug</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.alert" class="!symbol-index-name">pretty-debug.<wbr>alert(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.attachStream" class="!symbol-index-name">pretty-debug.<wbr>attachStream(stream)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.color" class="!symbol-index-name">pretty-debug.<wbr>color</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.critical" class="!symbol-index-name">pretty-debug.<wbr>critical(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.detachStream" class="!symbol-index-name">pretty-debug.<wbr>detachStream(stream)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.error" class="!symbol-index-name">pretty-debug.<wbr>error(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.generatePolicy" class="!symbol-index-name">pretty-debug.<wbr>generatePolicy(lowerLimit, upperLimit)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.info" class="!symbol-index-name">pretty-debug.<wbr>info(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.log" class="!symbol-index-name">pretty-debug.<wbr>log(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.memoryWatermark" class="!symbol-index-name">pretty-debug.<wbr>memoryWatermark()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.nodeMemoryMonitor" class="!symbol-index-name">pretty-debug.<wbr>nodeMemoryMonitor(stream, callback)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.scheduleHealthCheck" class="!symbol-index-name">pretty-debug.<wbr>scheduleHealthCheck(inputFunc, timeInMinutes)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.setOptions" class="!symbol-index-name">pretty-debug.<wbr>setOptions(userOptions)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.sysMemoryMonitor" class="!symbol-index-name">pretty-debug.<wbr>sysMemoryMonitor(alarmPolicy, callback)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-pretty-debug.html#.warn" class="!symbol-index-name">pretty-debug.<wbr>warn(.<wbr>.<wbr>.<wbr>var_args)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

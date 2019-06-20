@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.0-dev">
+  <meta charset="utf-8">
+  <title>pretty-debug 2.0.0 &raquo; Source: defaultOptions.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: defaultOptions.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>/**
+ * @fileOverview Default Options
+ * @author Shadly Salahuddin
+ * @link mailto:shadlyd15@gmail.com
+ * @version 2.0.1
+ */
+
+const ansiColors &#x3D; require(&#x27;./ansiColors&#x27;);
+
+/**
+ * @module Default Options
+ * @desc &amp;lt;strong&gt;Predefined options for pretty-debug library.&amp;lt;/strong&gt;&amp;lt;br&gt;
+ * By changing this options :
+ * - Turn on/off debug print.
+ * - Turn on/off color debug print.
+ * - Turn on/off Automatic grabage collection.
+ * - User can show or hide any segment.
+ * - User can change the default colors of different segments.
+ * @exports {defaultOptions}
+ */
+module.exports &#x3D; {
+	/** 
+	* Enable pretty-debug (Default : true)
+	* @type {boolean}
+	*/
+	enable: true,
+
+	/** 
+	* Enable pretty-debug color output (Default : true)
+	* @type {boolean}
+	*/
+	enableColor: true,
+
+	/** 
+	* Enable pretty-debug automatic grbage collection. (Default : false)( NB: If turned true --expose-gc flag is needed )
+	* @type {boolean}
+	*/
+	enableGC: false,
+
+	/** 
+	* Highest debug level to output (Default : 6)
+	* @type {number}
+	*/
+	debugLevel: 6,
+
+	/** 
+	* Date &amp;amp; time display options
+	* @type {dateTime}
+	*/
+	dateTime:{
+		show: true,
+		color: ansiColors.yellow,
+		format: {
+		    year: &quot;numeric&quot;, month: &quot;short&quot;, day: &quot;numeric&quot;, 
+		    hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot;, second: &quot;2-digit&quot;,
+		    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+		}
+	},
+
+	/** 
+	* File location display options
+	* @type {fileLocation}
+	*/
+	fileLocation:{
+		show: true,
+		color: ansiColors.magenta		
+	},
+
+	/** 
+	* Function name display options
+	* @type {funcName}
+	*/
+	funcName:{
+		show: true,
+		color: ansiColors.cyan
+	},
+
+	/** 
+	* Print function options : log
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;6 Log Level
+	* @property {string} tag&#x3D;&quot;LOG&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.green Print color at this log level
+	*/
+	log:{
+		level: 6,
+		tag: &quot;LOG&quot;,
+		color: ansiColors.green
+	},
+
+	/** 
+	* Print function options : info
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;5 Log Level
+	* @property {string} tag&#x3D;&quot;INFO&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.green Print color at this log level
+	*/
+	info:{
+		level: 5,
+		tag: &quot;INFO&quot;,
+		color: ansiColors.green
+	},
+
+	/** 
+	* Print function options : alert
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;4 Log Level
+	* @property {string} tag&#x3D;&quot;ALERT&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.yellow Print color at this log level
+	*/
+	alert:{
+		level: 4,
+		tag: &quot;ALERT&quot;,
+		color: ansiColors.yellow
+	},
+
+	/** 
+	* Print function options : warn
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;5 Log Level
+	* @property {string} tag&#x3D;&quot;WARN&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.yellow Print color at this log level
+	*/
+	warn:{
+		level: 3,
+		tag: &quot;WARN&quot;,
+		color: ansiColors.yellow
+	},
+
+	/** 
+	* Print function options : error
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;5 Log Level
+	* @property {string} tag&#x3D;&quot;ERROR&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.red Print color at this log level
+	*/
+	error:{
+		level: 2,
+		tag: &quot;ERROR&quot;,
+		color: ansiColors.red
+	},
+
+	/** 
+	* Print function options : critical
+	* @type {debugPrintOptions}
+	* @property {number} level&#x3D;5 Log Level
+	* @property {string} tag&#x3D;&quot;CRITICAL&quot; Tag to print
+	* @property {string} color&#x3D;ansiColor.red Print color at this log level
+	*/
+	critical:{
+		level: 1,
+		tag: &quot;CRITICAL&quot;,
+		color: ansiColors.reset + ansiColors.bgRed
+	},
+
+	/**
+	 * Node memory monitor options
+	 * @type {memoryMonitorOptions}
+	 * @property {string} tag&#x3D;&quot;NODE&quot; Tag to print
+	 * @property {string} type&#x3D;&quot;MONITOR&quot; Type of monitor
+	 * @property {string} color&#x3D;ansiColor.blue Print color in this segment
+	 * @property {Object} fields Available fields
+	 * @property {boolean} fields.rss&#x3D;true Show/hide rss
+	 * @property {boolean} fields.heapTotal&#x3D;true Show/hide heapTotal
+	 * @property {boolean} fields.heapUsed&#x3D;true Show/hide heapUsed
+	 * @property {boolean} fields.external&#x3D;true Show/hide external
+	 */
+	nodeMemoryMonitor:{
+		tag: &quot;NODE&quot;,
+		type: &quot;MONITOR&quot;,
+		color: ansiColors.blue,
+		fields:{
+			rss: true,
+			heapTotal: true, 
+			heapUsed: true,
+			external: true
+		}
+	},
+
+	/**
+	 * System memory monitor options
+	 * @type {memoryMonitorOptions}
+	 * @property {string} tag&#x3D;&quot;SYSTEM&quot; Tag to print
+	 * @property {string} type&#x3D;&quot;MONITOR&quot; Type of monitor
+	 * @property {string} color&#x3D;ansiColor.blue Print color in this segment
+	 * @property {Object} fields Available fields
+	 * @property {boolean} fields.MemTotal&#x3D;true Show/hide MemTotal
+	 * @property {boolean} fields.MemAvailable&#x3D;true Show/hide MemAvailable
+	 * @property {boolean} fields.SwapTotal&#x3D;true Show/hide SwapTotal
+	 * @property {boolean} fields.SwapFree&#x3D;true Show/hide SwapFree
+	 */
+	sysMemoryMonitor:{
+		tag: &quot;SYSTEM&quot;,
+		type: &quot;MONITOR&quot;,
+		color: ansiColors.blue,
+		fields:{
+			MemTotal: true,
+			MemAvailable: true,
+			SwapTotal: true,
+			SwapFree: true
+		}
+	},
+
+	/**
+	 * System memory watermark options
+	 * @type {memoryWatermark}
+	 * @property {string} tag&#x3D;&quot;WATERMARK&quot; Tag to print
+	 * @property {string} text&#x3D;&quot;RAM Watermark&quot; Type of monitor
+	 * @property {string} color&#x3D;ansiColor.yellow Print color in this segment
+	 * @property {Object} fields Available fields
+	 * @property {boolean} fields.RAM Value of highest RAM ussage
+	 * @property {boolean} fields.Swap Value of highest Swap ussage
+	 * @property {boolean} fields.Node Value of highest Node.js ussage
+	 * @property {dateTime} dateTime Date &amp;amp; time segment options
+	 */
+	memoryWatermark:{
+		tag: &quot;WATERMARK&quot;,
+		color: ansiColors.yellow,
+		text: &quot;RAM Watermark&quot;,
+		fields:{
+			RAM 	: {time : &#x27;&#x27;, peak : 0},
+			Swap 	: {time : &#x27;&#x27;, peak : 0},
+			Node 	: {time : &#x27;&#x27;, peak : 0},
+		},
+		dateTime:{
+			show: true,
+			format: {
+			    year: &quot;2-digit&quot;, month: &quot;numeric&quot;, day: &quot;numeric&quot;, 
+			    hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot;,
+			    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+			}
+		}
+	},
+	saveLog: false
+};
+
+
+/**
+* Default date &amp;amp; time format
+* @typedef {Object} format
+* @property {string} year&#x3D;&quot;numeric&quot; Current year
+* @property {string} month&#x3D;&quot;short&quot; Current month
+* @property {string} day&#x3D;&quot;numeric&quot; Current day
+* @property {string} hour&#x3D;&quot;2-digit&quot; Current hour
+* @property {string} minute&#x3D;&quot;2-digit&quot; Current minute
+* @property {string} second&#x3D;&quot;2-digit&quot; Current second
+* @property {string} timeZone Time Zone
+*/
+
+/**
+* Default options for dateTime segment
+* @typedef {Object} dateTime
+* @property {boolean} show&#x3D;true Show/hide time &amp;amp; date
+* @property {number} color&#x3D;ansiColors.yellow Date &amp;amp; time color
+* @property {format} format - Default date &amp;amp; time format
+*/
+
+/**
+* File location segment properties
+* @typedef {Object} fileLocation
+* @property {boolean} show&#x3D;true Show/hide file name
+* @property {number} color&#x3D;ansiColors.magenta Date &amp;amp; time color
+*/
+
+/**
+* Function name segment properties
+* @typedef {Object} funcName
+* @property {boolean} show&#x3D;true Show/hide function name
+* @property {number} color&#x3D;ansiColors.cyan Date &amp;amp; time color
+*/
+
+/**
+* Generic debug print function option
+* @typedef {Object} debugPrintOptions
+* @property {number} level Log Level
+* @property {string} tag  Tag to print
+* @property {string} color Print color at this log level
+*/
+
+/**
+ * Generic memory monitor options
+ * @typedef {Object} memoryMonitorOptions
+ * @property {string} tag Tag to print
+ * @property {string} type Type of monitor
+ * @property {string} color Print color in this segment
+ * @property {Object} fields Available fields
+ */
+
+/**
+ * System memory watermark options
+ * @typedef {Object} memoryWatermark
+ * @property {string} tag&#x3D;&quot;WATERMARK&quot; Tag to print
+ * @property {string} text&#x3D;&quot;RAM Watermark&quot; Type of monitor
+ * @property {string} color&#x3D;ansiColor.yellow Print color in this segment
+ * @property {Object} fields Available fields
+ * @property {boolean} fields.RAM Value of highest RAM ussage
+ * @property {boolean} fields.Swap Value of highest Swap ussage
+ * @property {boolean} fields.Node Value of highest Node.js ussage
+ * @property {dateTime} dateTime Date &amp;amp; time segment options
+ */</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>
