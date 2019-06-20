@@ -1,11 +1,12 @@
 
 
-# Pretty Debug JavaScript
+# Pretty Debug JS
 [![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
 
+## Intro
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
