@@ -1,5 +1,5 @@
 
-# Pretty Debug JS
+# Pretty Debug JavaScript
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
@@ -25,24 +25,24 @@ Pretty Debug exposes a debug object. Just attach any stream you want to the modu
 
 ## API
 
-* [pretty-debug](module-pretty-debug.html#module_pretty-debug)
-    * [.color](module-pretty-debug.html#.info) : <code>Object.&lt;string&gt;</code>
-    * [.setOptions(userOptions)](module_pretty-debug#.setOptions) - Overwrites default options and debug text formats
-    * [.generatePolicy(lowerLimit, upperLimit)](module-pretty-debug.html#module_pretty-debug#.generatePolicy) ⇒ <code>Object.&lt;policy&gt;</code>
-    * [.attachStream(stream)](module-pretty-debug.html#module_pretty-debug#.attachStream)
-    * [.detachStream(stream)](module-pretty-debug.html#module_pretty-debug#.detachStream)
-    * [.log(...var_args)](module-pretty-debug.html#module_pretty-debug#.log)
-    * [.info(...var_args)](module-pretty-debug.html#module_pretty-debug#.info)
-    * [.alert(...var_args)](module-pretty-debug.html#module_pretty-debug#.alert)
-    * [.warn(...var_args)](module-pretty-debug.html#module_pretty-debug#.warn)
-    * [.error(...var_args)](module-pretty-debug.html#module_pretty-debug#.error)
-    * [.critical(...var_args)](module-pretty-debug.html#module_pretty-debug#.critical)
-    * [.nodeMemoryMonitor(stream, callback)](module-pretty-debug.html#module_pretty-debug#.nodeMemoryMonitor)
-    * [.sysMemoryMonitor(alarmPolicy, callback)](module-pretty-debug.html#module_pretty-debug#.sysMemoryMonitor)
-    * [.memoryWatermark()](module-pretty-debug.html#module_pretty-debug#.memoryWatermark)
-    * [.scheduleHealthCheck(inputFunc, timeInMinutes)](module-pretty-debug.html#module_pretty-debug#.scheduleHealthCheck)
+* [pretty-debug](module-pretty-debug.html)
+    * [.color](module-pretty-debug.html#.color) : <code>Object.&lt;string&gt;</code>
+    * [.setOptions(userOptions)](module-pretty-debug.html#.setOptions)
+    * [.generatePolicy(lowerLimit, upperLimit)](module-pretty-debug.html#.generatePolicy) ⇒ <code>Object.&lt;policy&gt;</code>
+    * [.attachStream(stream)](module-pretty-debug.html#.attachStream)
+    * [.detachStream(stream)](module-pretty-debug.html#.detachStream)
+    * [.log(...var_args)](module-pretty-debug.html#.log)
+    * [.info(...var_args)](module-pretty-debug.html#.info)
+    * [.alert(...var_args)](module-pretty-debug.html#.alert)
+    * [.warn(...var_args)](module-pretty-debug.html#.warn)
+    * [.error(...var_args)](module-pretty-debug.html#.error)
+    * [.critical(...var_args)](module-pretty-debug.html#.critical)
+    * [.nodeMemoryMonitor(stream, callback)](module-pretty-debug.html#.nodeMemoryMonitor)
+    * [.sysMemoryMonitor(alarmPolicy, callback)](module-pretty-debug.html#.sysMemoryMonitor)
+    * [.memoryWatermark()](module-pretty-debug.html#.memoryWatermark)
+    * [.scheduleHealthCheck(inputFunc, timeInMinutes)](module-pretty-debug.html#.scheduleHealthCheck)
 
-**For detail information, please see [API Documentation.](module-pretty-debug.html#module_pretty-debug)**
+For detail information, please see [API Documentation.](module-pretty-debug.html)
 
 <!-- ## Customization
 As it was mentioned earlier, this library is highly configurable. 
@@ -58,7 +58,6 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 	```javascript
 	const debug = require('./PrettyDebugJS.js');
 	```
-<a name="module_pretty-debug#.setOptions"></a>
 - **Set options :**
 	```javascript
 	debug.setOptions({ 
