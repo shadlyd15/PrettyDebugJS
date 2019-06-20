@@ -1,141 +1,147 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="generator" content="JSDoc 4.0.0-dev">
-  <meta charset="utf-8">
-  <title>pretty-debug 2.0.0 &raquo; Tutorial: Basics</title>
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
-  <link href="css/baseline.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Tutorial: Basics | pretty-debug</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
 </head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">pretty-debug</a></h1>
+        
+            <span class="version">v2.0.0</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-API.html">API</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="API_sub"></div></li><li><a href="tutorial-Basics.html">Basics</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_sub"></div></li><li><a href="tutorial-Basics_Mark.html">Basics_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_Mark_sub"></div></li><li><a href="tutorial-multiple-stream.html">multiple-stream</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_sub"></div></li><li><a href="tutorial-multiple-stream_Mark.html">multiple-stream_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_Mark_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-ANSI%2520Color%2520Codes.html">ANSI Color Codes</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:ANSI Color Codes_sub"><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-ANSI%252520Color%252520Codes.html#~ansiColors">ansiColors</a></li></ul></div></li><li><a href="module-Default%2520Options.html">Default Options</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Default Options_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Default%252520Options.html#.alert">alert</a></li><li><a href="module-Default%252520Options.html#.critical">critical</a></li><li><a href="module-Default%252520Options.html#.dateTime">dateTime</a></li><li><a href="module-Default%252520Options.html#.debugLevel">debugLevel</a></li><li><a href="module-Default%252520Options.html#.enable">enable</a></li><li><a href="module-Default%252520Options.html#.enableColor">enableColor</a></li><li><a href="module-Default%252520Options.html#.enableGC">enableGC</a></li><li><a href="module-Default%252520Options.html#.error">error</a></li><li><a href="module-Default%252520Options.html#.fileLocation">fileLocation</a></li><li><a href="module-Default%252520Options.html#.funcName">funcName</a></li><li><a href="module-Default%252520Options.html#.info">info</a></li><li><a href="module-Default%252520Options.html#.log">log</a></li><li><a href="module-Default%252520Options.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-Default%252520Options.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.warn">warn</a></li></ul></div></li><li><a href="module-pretty-debug.html">pretty-debug</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:pretty-debug_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-pretty-debug.html#.color">color</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-pretty-debug.html#.alert">alert</a></li><li><a href="module-pretty-debug.html#.attachStream">attachStream</a></li><li><a href="module-pretty-debug.html#.critical">critical</a></li><li><a href="module-pretty-debug.html#.detachStream">detachStream</a></li><li><a href="module-pretty-debug.html#.error">error</a></li><li><a href="module-pretty-debug.html#.generatePolicy">generatePolicy</a></li><li><a href="module-pretty-debug.html#.info">info</a></li><li><a href="module-pretty-debug.html#.log">log</a></li><li><a href="module-pretty-debug.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-pretty-debug.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.scheduleHealthCheck">scheduleHealthCheck</a></li><li><a href="module-pretty-debug.html#.setOptions">setOptions</a></li><li><a href="module-pretty-debug.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.warn">warn</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3><a href="global.html">Global</a></h3></div>
+</nav>
+<div id="resizer"></div>
 
-<body onload="prettyPrint()">
-  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
-    <div id="jsdoc-navbar-container">
-      <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
-      </div>
-    </div>
-  </nav>
-  <div id="jsdoc-body-container">
-    <div id="jsdoc-content">
-      <div id="jsdoc-content-container">
-        <div id="jsdoc-main" role="main">
-          <h1>Basics</h1>
-          <article>
-            <p>&lt;!DOCTYPE html&gt;
-              &lt;html&gt;</p>
-            <p>&lt;head&gt;
-              &lt;meta charset=&quot;utf-8&quot;&gt;
-              &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-              &lt;title&gt;Welcome file&lt;/title&gt;
-              &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackedit.io/style.css&quot; /&gt;
-              &lt;/head&gt;</p>
-            <p>&lt;body class=&quot;stackedit&quot;&gt;
-              &lt;div class=&quot;stackedit__html&quot;&gt;&lt;h1 id=&quot;how-to-use&quot;&gt;How to use&lt;/h1&gt;
-              &lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
-              &lt;pre class=&quot; language-sh&quot;&gt;&lt;code class=&quot;prism language-sh&quot;&gt;$ npm install pretty-debug
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;h2 id=&quot;basic-usage&quot;&gt;Basic usage&lt;/h2&gt;
-              &lt;ul&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Create debug instance :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; debug &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'./PrettyDebugJS.js'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Set options :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-              enable&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Turning on debug print&lt;/span&gt;
-              enableColor&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling color output&lt;/span&gt;
-              enableGC&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling autometic gerbage collection&lt;/span&gt;
-              debugLevel&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Setting debug level 6 (Upto INFO)&lt;/span&gt;
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;<br>
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Attach stream :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;attachStream&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sock&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Attaching new stream to serve debug messages&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Detach stream :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;detachStream&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sock&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Detaching stream&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Set options :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setOptions&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-              enable&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Turning on debug print&lt;/span&gt;
-              enableColor&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling color output&lt;/span&gt;
-              enableGC&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Enabling autometic gerbage collection&lt;/span&gt;
-              debugLevel&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Setting debug level 6 (Upto INFO)&lt;/span&gt;
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;<br>
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Print in different debug levels :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'The quick brown fox jumps over the lazy dog'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Show highest RAM usage :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memoryWatermark&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Show memory used by OS :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sysMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Show memory used by Node.js :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;li&gt;
-              &lt;p&gt;&lt;strong&gt;Set alarm policy for RAM usage :&lt;/strong&gt;&lt;/p&gt;
-              &lt;pre class=&quot; language-javascript&quot;&gt;&lt;code class=&quot;prism language-javascript&quot;&gt;debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;nodeMemoryMonitor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-              heapTotal&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; upperLimit &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-              debug&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;critical&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'Memory Usage Alarm : Total heap usage is above 5 MB'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;span class=&quot;token comment&quot;&gt;// Do other things like send email!&lt;/span&gt;
-              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-              &lt;/code&gt;&lt;/pre&gt;
-              &lt;/li&gt;
-              &lt;/ul&gt;
-              &lt;/div&gt;
-              &lt;/body&gt;</p>
-            <p>&lt;/html&gt;</p>
-          </article>
-        </div>
-      </div>
-      <nav id="jsdoc-toc-nav" role="navigation"></nav>
-    </div>
-  </div>
-  <footer id="jsdoc-footer" class="jsdoc-footer">
-    <div id="jsdoc-footer-container">
-      <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
-      </p>
-    </div>
-  </footer>
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/jquery.cookie.js"></script>
-  <script src="scripts/tree.jquery.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <script src="scripts/jsdoc-toc.js"></script>
-  <script src="scripts/linenumber.js"></script>
-  <script src="scripts/scrollanchor.js"></script>
+<div class="main" id="main">
+    
+
+<section>
+    <header>
+        
+
+        <h2>Basics</h2>
+    </header>
+
+    
+        
+
+        <ul id="example-nav" class="nav nav-tabs hidden">
+            <li role="presentation" id="example-result-btn" class="active" onclick="showResult()">
+                <a href="#">Result</a>
+            </li>
+            <li role="presentation" id="example-js-btn" class="hidden" onclick="showJs()">
+                <a href="#">JS</a>
+            </li>
+            <li role="presentation" id="example-html-btn" class="hidden" onclick="showHtml()">
+                <a href="#">HTML</a>
+            </li>
+        </ul>
+        <article>
+            
+            <iframe id="example-result" width="100%" height="800" frameborder="0" src=tutorials/Basics.html></iframe>
+            <div id="example-js" class="hidden"><pre class="prettyprint source"></pre></div>
+            <div id="example-html" class="hidden"><pre class="prettyprint source"></pre></div>
+        </article>
+    
+</section>
+
+
+    <script>
+        var exampleResult = document.getElementById('example-result');
+        var exampleJs = document.getElementById('example-js');
+        var exampleHtml = document.getElementById('example-html');
+        var exampleResultBtn = document.getElementById('example-result-btn');
+        var exampleJsBtn = document.getElementById('example-js-btn');
+        var exampleHtmlBtn = document.getElementById('example-html-btn');
+
+        function setActive(el) {
+            el.className += ' active';
+        }
+
+        function setInactive(el) {
+            el.className = el.className.replace(/\s*active\s*/g, '');
+        }
+
+        function show(el) {
+            el.className = el.className.replace(/\s*hidden\s*/g, '');
+        }
+
+        function hide(el) {
+            el.className += ' hidden';
+        }
+
+        function showJs() {
+            hide(exampleHtml);
+            hide(exampleResult);
+            setInactive(exampleHtmlBtn);
+            setInactive(exampleResultBtn);
+
+            show(exampleJs);
+            setActive(exampleJsBtn);
+        }
+
+        function showHtml() {
+            hide(exampleJs);
+            hide(exampleResult);
+            setInactive(exampleJsBtn);
+            setInactive(exampleResultBtn);
+
+            show(exampleHtml);
+            setActive(exampleHtmlBtn);
+        }
+
+        function showResult() {
+            hide(exampleJs);
+            hide(exampleHtml);
+            setInactive(exampleJsBtn);
+            setInactive(exampleHtmlBtn);
+
+            show(exampleResult);
+            setActive(exampleResultBtn);
+        }
+    </script>
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">My awesome footer text</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        showLnbExamples();
+    </script>
+
 </body>
-
 </html>

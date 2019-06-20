@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="how-to-use">How to use</h1>
+<h2 id="install">Install</h2>
+<pre class=" language-sh"><code class="prism  language-sh">$ npm install pretty-debug
+</code></pre>
+<h2 id="basic-usage">Basic usage</h2>
+<ul>
+<li>
+<p><strong>Create debug instance :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">	<span class="token keyword">const</span> debug <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./PrettyDebugJS.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Set options :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">setOptions</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+	enable<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>		<span class="token comment">// Turning on debug print</span>
+	enableColor<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>	<span class="token comment">// Enabling color output</span>
+	enableGC<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>		<span class="token comment">// Enabling autometic gerbage collection</span>
+	debugLevel<span class="token punctuation">:</span> <span class="token number">6</span><span class="token punctuation">,</span> 		<span class="token comment">// Setting debug level 6 (Upto INFO)</span>
+	<span class="token punctuation">}</span>  
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Attach stream :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">attachStream</span><span class="token punctuation">(</span>sock<span class="token punctuation">)</span><span class="token punctuation">;</span> 	<span class="token comment">// Attaching new stream to serve debug messages</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Detach stream :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">detachStream</span><span class="token punctuation">(</span>sock<span class="token punctuation">)</span><span class="token punctuation">;</span> 	<span class="token comment">// Detaching stream</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Set options :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">setOptions</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+	enable<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>		<span class="token comment">// Turning on debug print</span>
+	enableColor<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>	<span class="token comment">// Enabling color output</span>
+	enableGC<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>		<span class="token comment">// Enabling autometic gerbage collection</span>
+	debugLevel<span class="token punctuation">:</span> <span class="token number">6</span><span class="token punctuation">,</span> 		<span class="token comment">// Setting debug level 6 (Upto INFO)</span>
+	<span class="token punctuation">}</span>  
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Print in different debug levels :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+debug<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+debug<span class="token punctuation">.</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+debug<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+debug<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+debug<span class="token punctuation">.</span><span class="token function">critical</span><span class="token punctuation">(</span><span class="token string">'The quick brown fox jumps over the lazy dog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Show highest RAM usage :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">memoryWatermark</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Show memory used by OS :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">sysMemoryMonitor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Show memory used by Node.js :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">nodeMemoryMonitor</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Set alarm policy for RAM usage :</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript">debug<span class="token punctuation">.</span><span class="token function">nodeMemoryMonitor</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	heapTotal<span class="token punctuation">:</span> <span class="token punctuation">{</span> upperLimit <span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	debug<span class="token punctuation">.</span><span class="token function">critical</span><span class="token punctuation">(</span><span class="token string">'Memory Usage Alarm : Total heap usage is above 5 MB'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">// Do other things like send email!</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+</div>
+</body>
+
+</html>

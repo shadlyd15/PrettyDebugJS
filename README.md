@@ -27,7 +27,7 @@ Pretty Debug exposes a debug object. Just attach any stream you want to the modu
 
 * [pretty-debug](module-pretty-debug.html#module_pretty-debug)
     * [.color](module-pretty-debug.html#module_pretty-debug.color) : <code>Object.&lt;string&gt;</code>
-    * [.setOptions(userOptions)](module-pretty-debug.html#module_pretty-debug.setOptions)
+    * [.setOptions(userOptions)](#module_pretty-debug.setOptions) - Overwrites default options and debug text formats
     * [.generatePolicy(lowerLimit, upperLimit)](module-pretty-debug.html#module_pretty-debug.generatePolicy) ⇒ <code>Object.&lt;policy&gt;</code>
     * [.attachStream(stream)](module-pretty-debug.html#module_pretty-debug.attachStream)
     * [.detachStream(stream)](module-pretty-debug.html#module_pretty-debug.detachStream)
@@ -58,6 +58,7 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 	```javascript
 	const debug = require('./PrettyDebugJS.js');
 	```
+<a name="module_pretty-debug.setOptions"></a>
 - **Set options :**
 	```javascript
 	debug.setOptions({ 

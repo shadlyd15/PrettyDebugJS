@@ -1,667 +1,1674 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="generator" content="JSDoc 4.0.0-dev">
-  <meta charset="utf-8">
-  <title>pretty-debug 2.0.0 &raquo; Globals</title>
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
-  <link href="css/baseline.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Global | pretty-debug</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
 </head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">pretty-debug</a></h1>
+        
+            <span class="version">v2.0.0</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-API.html">API</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="API_sub"></div></li><li><a href="tutorial-Basics.html">Basics</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_sub"></div></li><li><a href="tutorial-Basics_Mark.html">Basics_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_Mark_sub"></div></li><li><a href="tutorial-multiple-stream.html">multiple-stream</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_sub"></div></li><li><a href="tutorial-multiple-stream_Mark.html">multiple-stream_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_Mark_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-ANSI%2520Color%2520Codes.html">ANSI Color Codes</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:ANSI Color Codes_sub"><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-ANSI%252520Color%252520Codes.html#~ansiColors">ansiColors</a></li></ul></div></li><li><a href="module-Default%2520Options.html">Default Options</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Default Options_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Default%252520Options.html#.alert">alert</a></li><li><a href="module-Default%252520Options.html#.critical">critical</a></li><li><a href="module-Default%252520Options.html#.dateTime">dateTime</a></li><li><a href="module-Default%252520Options.html#.debugLevel">debugLevel</a></li><li><a href="module-Default%252520Options.html#.enable">enable</a></li><li><a href="module-Default%252520Options.html#.enableColor">enableColor</a></li><li><a href="module-Default%252520Options.html#.enableGC">enableGC</a></li><li><a href="module-Default%252520Options.html#.error">error</a></li><li><a href="module-Default%252520Options.html#.fileLocation">fileLocation</a></li><li><a href="module-Default%252520Options.html#.funcName">funcName</a></li><li><a href="module-Default%252520Options.html#.info">info</a></li><li><a href="module-Default%252520Options.html#.log">log</a></li><li><a href="module-Default%252520Options.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-Default%252520Options.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.warn">warn</a></li></ul></div></li><li><a href="module-pretty-debug.html">pretty-debug</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:pretty-debug_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-pretty-debug.html#.color">color</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-pretty-debug.html#.alert">alert</a></li><li><a href="module-pretty-debug.html#.attachStream">attachStream</a></li><li><a href="module-pretty-debug.html#.critical">critical</a></li><li><a href="module-pretty-debug.html#.detachStream">detachStream</a></li><li><a href="module-pretty-debug.html#.error">error</a></li><li><a href="module-pretty-debug.html#.generatePolicy">generatePolicy</a></li><li><a href="module-pretty-debug.html#.info">info</a></li><li><a href="module-pretty-debug.html#.log">log</a></li><li><a href="module-pretty-debug.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-pretty-debug.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.scheduleHealthCheck">scheduleHealthCheck</a></li><li><a href="module-pretty-debug.html#.setOptions">setOptions</a></li><li><a href="module-pretty-debug.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.warn">warn</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3><a href="global.html">Global</a></h3></div>
+</nav>
+<div id="resizer"></div>
 
-<body onload="prettyPrint()">
-  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
-    <div id="jsdoc-navbar-container">
-      <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
-      </div>
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Global</h2>
+    
+</header>
+
+<article>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        <dl>
+                
+
+<dt>
+<h4 class="name" id="dateTime">
+    dateTime
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line250">line 250</a></code>
     </div>
-  </nav>
-  <div id="jsdoc-body-container">
-    <div id="jsdoc-content">
-      <div id="jsdoc-content-container">
-        <div id="jsdoc-main" role="main">
-          <h1>Globals</h1>
-          <section id="summary">
-            <div class="summary-callout">
-              <h2 class="summary-callout-heading">Abstract types</h2>
-              <div class="summary-content">
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="global.html#dateTime">dateTime</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="global.html#debugPrintOptions">debugPrintOptions</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="global.html#fileLocation">fileLocation</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="global.html#format">format</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="global.html#funcName">funcName</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="global.html#memoryMonitorOptions">memoryMonitorOptions</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="global.html#memoryWatermark">memoryWatermark</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <h2>Abstract types</h2>
-            <section>
-              <h3 id="dateTime"><span class="symbol-name">dateTime</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Default options for dateTime segment</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>show</p>
-                      </td>
-                      <td>
-                        <p>boolean</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Show/hide time &amp; date</p>
-                        <p>Defaults to <code>true</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>number</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Date &amp; time color</p>
-                        <p>Defaults to <code>ansiColors.yellow</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>format</p>
-                      </td>
-                      <td>
-                        <p><a href="global.html#format">format</a></p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Default date &amp; time format</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="debugPrintOptions"><span class="symbol-name">debugPrintOptions</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Generic debug print function option</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>level</p>
-                      </td>
-                      <td>
-                        <p>number</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Log Level</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>tag</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Tag to print</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Print color at this log level</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="fileLocation"><span class="symbol-name">fileLocation</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>File location segment properties</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>show</p>
-                      </td>
-                      <td>
-                        <p>boolean</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Show/hide file name</p>
-                        <p>Defaults to <code>true</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>number</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Date &amp; time color</p>
-                        <p>Defaults to <code>ansiColors.magenta</code>.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="format"><span class="symbol-name">format</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Default date &amp; time format</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>year</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current year</p>
-                        <p>Defaults to <code>"numeric"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>month</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current month</p>
-                        <p>Defaults to <code>"short"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>day</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current day</p>
-                        <p>Defaults to <code>"numeric"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>hour</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current hour</p>
-                        <p>Defaults to <code>"2-digit"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>minute</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current minute</p>
-                        <p>Defaults to <code>"2-digit"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>second</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Current second</p>
-                        <p>Defaults to <code>"2-digit"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>timeZone</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Time Zone</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="funcName"><span class="symbol-name">funcName</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Function name segment properties</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>show</p>
-                      </td>
-                      <td>
-                        <p>boolean</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Show/hide function name</p>
-                        <p>Defaults to <code>true</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>number</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Date &amp; time color</p>
-                        <p>Defaults to <code>ansiColors.cyan</code>.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="memoryMonitorOptions"><span class="symbol-name">memoryMonitorOptions</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Generic memory monitor options</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>tag</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Tag to print</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>type</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Type of monitor</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Print color in this segment</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>fields</p>
-                      </td>
-                      <td>
-                        <p>Object</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Available fields</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <h3 id="memoryWatermark"><span class="symbol-name">memoryWatermark</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>System memory watermark options</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>tag</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Tag to print</p>
-                        <p>Defaults to <code>"WATERMARK"</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>text</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Watermark&quot; Type of monitor</p>
-                        <p>Defaults to <code>"RAM</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>color</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Print color in this segment</p>
-                        <p>Defaults to <code>ansiColor.yellow</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>fields</p>
-                      </td>
-                      <td>
-                        <p>Object</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Available fields</p>
-                        <p>Values in <code>fields</code> have the following properties:</p>
-                        <table class="jsdoc-details-table">
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th>Type</th>
-                              <th>Optional</th>
-                              <th>Description</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <p>RAM</p>
-                              </td>
-                              <td>
-                                <p>boolean</p>
-                              </td>
-                              <td>
-                                <p>&nbsp;</p>
-                              </td>
-                              <td>
-                                <p>Value of highest RAM ussage</p>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <p>Swap</p>
-                              </td>
-                              <td>
-                                <p>boolean</p>
-                              </td>
-                              <td>
-                                <p>&nbsp;</p>
-                              </td>
-                              <td>
-                                <p>Value of highest Swap ussage</p>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <p>Node</p>
-                              </td>
-                              <td>
-                                <p>boolean</p>
-                              </td>
-                              <td>
-                                <p>&nbsp;</p>
-                              </td>
-                              <td>
-                                <p>Value of highest Node.js ussage</p>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>dateTime</p>
-                      </td>
-                      <td>
-                        <p><a href="global.html#dateTime">dateTime</a></p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Date &amp; time segment options</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-            </section>
-          </section>
-        </div>
-      </div>
-      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Default options for dateTime segment</p>
     </div>
-  </div>
-  <footer id="jsdoc-footer" class="jsdoc-footer">
-    <div id="jsdoc-footer-container">
-      <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
-      </p>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>show</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Show/hide time &amp; date</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    ansiColors.yellow
+                
+                </td>
+            
+
+            <td class="description last"><p>Date &amp; time color</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#format">format</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Default date &amp; time format</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="debugPrintOptions">
+    debugPrintOptions
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line272">line 272</a></code>
     </div>
-  </footer>
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/jquery.cookie.js"></script>
-  <script src="scripts/tree.jquery.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <script src="scripts/jsdoc-toc.js"></script>
-  <script src="scripts/linenumber.js"></script>
-  <script src="scripts/scrollanchor.js"></script>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Generic debug print function option</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Log Level</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Tag to print</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Print color at this log level</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="fileLocation">
+    fileLocation
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line258">line 258</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>File location segment properties</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>show</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Show/hide file name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    ansiColors.magenta
+                
+                </td>
+            
+
+            <td class="description last"><p>Date &amp; time color</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="format">
+    format
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line238">line 238</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Default date &amp; time format</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "numeric"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current year</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "short"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current month</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>day</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "numeric"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current day</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hour</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "2-digit"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current hour</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minute</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "2-digit"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current minute</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "2-digit"
+                
+                </td>
+            
+
+            <td class="description last"><p>Current second</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeZone</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Time Zone</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="funcName">
+    funcName
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line265">line 265</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Function name segment properties</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>show</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Show/hide function name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    ansiColors.cyan
+                
+                </td>
+            
+
+            <td class="description last"><p>Date &amp; time color</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="memoryMonitorOptions">
+    memoryMonitorOptions
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line280">line 280</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Generic memory monitor options</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Tag to print</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Type of monitor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Print color in this segment</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Available fields</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="memoryWatermark">
+    memoryWatermark
+    
+    <div class="container-source members">
+        <code><a href="defaultOptions.js.html">defaultOptions.js</a></code>,
+        <code><a href="defaultOptions.js.html#line289">line 289</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>System memory watermark options</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "WATERMARK"
+                
+                </td>
+            
+
+            <td class="description last"><p>Tag to print</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    "RAM
+                
+                </td>
+            
+
+            <td class="description last"><p>Watermark&quot; Type of monitor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    ansiColor.yellow
+                
+                </td>
+            
+
+            <td class="description last"><p>Print color in this segment</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Available fields</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>RAM</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Value of highest RAM ussage</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Swap</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Value of highest Swap ussage</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Value of highest Node.js ussage</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dateTime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#dateTime">dateTime</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Date &amp; time segment options</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            </dl>
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">My awesome footer text</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
 </body>
-
 </html>

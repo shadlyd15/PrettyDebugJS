@@ -1,356 +1,797 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="generator" content="JSDoc 4.0.0-dev">
-  <meta charset="utf-8">
-  <title>pretty-debug 2.0.0 &raquo; Module: ANSI Color Codes</title>
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
-  <link href="css/baseline.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Module: ANSI Color Codes | pretty-debug</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
 </head>
-
-<body onload="prettyPrint()">
-  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
-    <div id="jsdoc-navbar-container">
-      <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pretty-debug 2.<wbr>0.<wbr>0</a>
-      </div>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
     </div>
-  </nav>
-  <div id="jsdoc-body-container">
-    <div id="jsdoc-content">
-      <div id="jsdoc-content-container">
-        <div id="jsdoc-main" role="main">
-          <header class="page-header">
-            <div class="symbol-detail-labels"><span class="label label-kind">module</span></div>
-            <h1><small></small><span class="symbol-name">ANSI Color Codes</span></h1>
-            <p class="source-link">Source: <a href="ansiColors.js.html#source-line-8">ansiColors.<wbr>js:8</a></p>
-            <div class="symbol-description">
-              <p>Definition of common colors in ansi escape code</p>
-            </div>
-            <dl class="dl-compact">
-            </dl>
-          </header>
-          <section id="summary">
-            <div class="summary-callout">
-              <h2 class="summary-callout-heading">Abstract type</h2>
-              <div class="summary-content">
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="module-ANSI%252520Color%252520Codes.html#~ansiColors">ansiColors</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                </div>
-                <div class="summary-column">
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <h2>Abstract type</h2>
-            <section>
-              <div class="symbol-detail-labels"><span class="label label-inner">inner</span></div>
-              <h3 id="~ansiColors"><span class="symbol-name">ansiColors</span><small class="property-type">
-                  &nbsp;Object</small></h3>
-              <p>Default options for Pretty Debug library</p>
-              <section>
-                <h4>Properties</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>reset</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : reset</p>
-                        <p>Defaults to <code>'\x1B[00m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>black</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : black</p>
-                        <p>Defaults to <code>'\x1B[30m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>red</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : red</p>
-                        <p>Defaults to <code>'\x1B[31m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>red</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : red</p>
-                        <p>Defaults to <code>'\x1B[32m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>yellow</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : yellow</p>
-                        <p>Defaults to <code>'\x1B[33m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>blue</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : blue</p>
-                        <p>Defaults to <code>'\x1B[34m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>magenta</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : magenta</p>
-                        <p>Defaults to <code>'\x1B[35m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>cyan</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : cyan</p>
-                        <p>Defaults to <code>'\x1B[36m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>white</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : white</p>
-                        <p>Defaults to <code>'\x1B[37m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgBlack</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgBlack</p>
-                        <p>Defaults to <code>'\x1B[40m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgRed</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgRed</p>
-                        <p>Defaults to <code>'\x1B[41m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgGreen</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgGreen</p>
-                        <p>Defaults to <code>'\x1B[42m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgYellow</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgYellow</p>
-                        <p>Defaults to <code>'\x1B[43m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgBlue</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgBlue</p>
-                        <p>Defaults to <code>'\x1B[44m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgMagenta</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgMagenta</p>
-                        <p>Defaults to <code>'\x1B[45m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgCyan</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgCyan</p>
-                        <p>Defaults to <code>'\x1B[46m'</code>.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>bgWhite</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>ANSI color code : bgWhite</p>
-                        <p>Defaults to <code>'\x1B[47m'</code>.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-            </section>
-          </section>
+    <div class="title">
+        <h1><a href="index.html" class="link">pretty-debug</a></h1>
+        
+            <span class="version">v2.0.0</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-API.html">API</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="API_sub"></div></li><li><a href="tutorial-Basics.html">Basics</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_sub"></div></li><li><a href="tutorial-Basics_Mark.html">Basics_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Basics_Mark_sub"></div></li><li><a href="tutorial-multiple-stream.html">multiple-stream</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_sub"></div></li><li><a href="tutorial-multiple-stream_Mark.html">multiple-stream_Mark</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="multiple-stream_Mark_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-ANSI%2520Color%2520Codes.html">ANSI Color Codes</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:ANSI Color Codes_sub"><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-ANSI%252520Color%252520Codes.html#~ansiColors">ansiColors</a></li></ul></div></li><li><a href="module-Default%2520Options.html">Default Options</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Default Options_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Default%252520Options.html#.alert">alert</a></li><li><a href="module-Default%252520Options.html#.critical">critical</a></li><li><a href="module-Default%252520Options.html#.dateTime">dateTime</a></li><li><a href="module-Default%252520Options.html#.debugLevel">debugLevel</a></li><li><a href="module-Default%252520Options.html#.enable">enable</a></li><li><a href="module-Default%252520Options.html#.enableColor">enableColor</a></li><li><a href="module-Default%252520Options.html#.enableGC">enableGC</a></li><li><a href="module-Default%252520Options.html#.error">error</a></li><li><a href="module-Default%252520Options.html#.fileLocation">fileLocation</a></li><li><a href="module-Default%252520Options.html#.funcName">funcName</a></li><li><a href="module-Default%252520Options.html#.info">info</a></li><li><a href="module-Default%252520Options.html#.log">log</a></li><li><a href="module-Default%252520Options.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-Default%252520Options.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-Default%252520Options.html#.warn">warn</a></li></ul></div></li><li><a href="module-pretty-debug.html">pretty-debug</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:pretty-debug_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-pretty-debug.html#.color">color</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-pretty-debug.html#.alert">alert</a></li><li><a href="module-pretty-debug.html#.attachStream">attachStream</a></li><li><a href="module-pretty-debug.html#.critical">critical</a></li><li><a href="module-pretty-debug.html#.detachStream">detachStream</a></li><li><a href="module-pretty-debug.html#.error">error</a></li><li><a href="module-pretty-debug.html#.generatePolicy">generatePolicy</a></li><li><a href="module-pretty-debug.html#.info">info</a></li><li><a href="module-pretty-debug.html#.log">log</a></li><li><a href="module-pretty-debug.html#.memoryWatermark">memoryWatermark</a></li><li><a href="module-pretty-debug.html#.nodeMemoryMonitor">nodeMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.scheduleHealthCheck">scheduleHealthCheck</a></li><li><a href="module-pretty-debug.html#.setOptions">setOptions</a></li><li><a href="module-pretty-debug.html#.sysMemoryMonitor">sysMemoryMonitor</a></li><li><a href="module-pretty-debug.html#.warn">warn</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3><a href="global.html">Global</a></h3></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>ANSI Color Codes</h2>
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description"><p>Definition of common colors in ansi escape code</p></div>
+            
+
+            
+                
+
+<dt>
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+        
         </div>
-      </div>
-      <nav id="jsdoc-toc-nav" role="navigation"></nav>
-    </div>
-  </div>
-  <footer id="jsdoc-footer" class="jsdoc-footer">
-    <div id="jsdoc-footer-container">
-      <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.0-dev on June 20, 2019.
-      </p>
-    </div>
-  </footer>
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/jquery.cookie.js"></script>
-  <script src="scripts/tree.jquery.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <script src="scripts/jsdoc-toc.js"></script>
-  <script src="scripts/linenumber.js"></script>
-  <script src="scripts/scrollanchor.js"></script>
-</body>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        <dl>
+                
+
+<dt>
+<h4 class="name" id="~ansiColors">
+    ansiColors
+    
+    <div class="container-source members">
+        <code><a href="ansiColors.js.html">ansiColors.js</a></code>,
+        <code><a href="ansiColors.js.html#line14">line 14</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Default options for Pretty Debug library</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[00m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : reset</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>black</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[30m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : black</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>red</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[31m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : red</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>red</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[32m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : red</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>yellow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[33m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : yellow</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[34m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : blue</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>magenta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[35m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : magenta</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cyan</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[36m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : cyan</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>white</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[37m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : white</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgBlack</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[40m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgBlack</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgRed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[41m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgRed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgGreen</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[42m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgGreen</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgYellow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[43m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgYellow</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgBlue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[44m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgBlue</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgMagenta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[45m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgMagenta</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgCyan</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[46m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgCyan</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bgWhite</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    '\x1B[47m'
+                
+                </td>
+            
+
+            <td class="description last"><p>ANSI color code : bgWhite</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            </dl>
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">My awesome footer text</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'module:ANSI Color Codes_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
 </html>
