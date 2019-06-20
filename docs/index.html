@@ -58,6 +58,9 @@
 
     <section>
         <article class="readme"><h1>Pretty Debug JavaScript</h1>
+<p><a href="https://nodei.co/npm/pretty-debug/"><img src="https://nodei.co/npm/pretty-debug.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="npm package"></a></p>
+<p><a href="https://forthebadge.com"><img src="https://forthebadge.com/images/badges/made-with-javascript.svg" alt="forthebadge"></a>
+<a href="https://forthebadge.com"><img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" alt="forthebadge"></a></p>
 <p>A <strong>highly configurable &amp; lightweight debug library</strong> that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint.</p>
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 <h2>Features</h2>
@@ -74,8 +77,10 @@
 <h2>Install</h2>
 <pre class="prettyprint source lang-sh"><code>$ npm install pretty-debug
 </code></pre>
-<h2>Usage</h2>
-<p>Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.</p>
+<!-- 
+## Usage
+
+Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output. -->
 <h2>API</h2>
 <ul>
 <li><a href="https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html">pretty-debug</a>
@@ -183,7 +188,7 @@ debug.critical('The quick brown fox jumps over the lazy dog');
 </ul>
 <h2>Example</h2>
 <p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
-<pre class="prettyprint source lang-javascript"><code>const net 	= require('net');
+<pre class="prettyprint source lang-javascript"><code>const net = require('net');
 const debug = require('./PrettyDebugJS.js');
 
 var PORT = 6969;

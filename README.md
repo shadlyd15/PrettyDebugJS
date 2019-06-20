@@ -1,5 +1,11 @@
 
+
 # Pretty Debug JavaScript
+[![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
+
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
@@ -18,10 +24,10 @@ A **highly configurable & lightweight debug library** that prints debug messages
 ```sh
 $ npm install pretty-debug
 ```
-
+<!-- 
 ## Usage
 
-Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.
+Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output. -->
 
 ## API
 
@@ -123,7 +129,7 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example. 
 
 ```javascript
-const net 	= require('net');
+const net = require('net');
 const debug = require('./PrettyDebugJS.js');
 
 var PORT = 6969;
