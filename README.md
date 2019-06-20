@@ -25,24 +25,24 @@ Pretty Debug exposes a debug object. Just attach any stream you want to the modu
 
 ## API
 
-* [pretty-debug](module-pretty-debug.html)
-    * [.color](module-pretty-debug.html#.color) : <code>Object.&lt;string&gt;</code>
-    * [.setOptions(userOptions)](module-pretty-debug.html#.setOptions)
-    * [.generatePolicy(lowerLimit, upperLimit)](module-pretty-debug.html#.generatePolicy) ⇒ <code>Object.&lt;policy&gt;</code>
-    * [.attachStream(stream)](module-pretty-debug.html#.attachStream)
-    * [.detachStream(stream)](module-pretty-debug.html#.detachStream)
-    * [.log(...var_args)](module-pretty-debug.html#.log)
-    * [.info(...var_args)](module-pretty-debug.html#.info)
-    * [.alert(...var_args)](module-pretty-debug.html#.alert)
-    * [.warn(...var_args)](module-pretty-debug.html#.warn)
-    * [.error(...var_args)](module-pretty-debug.html#.error)
-    * [.critical(...var_args)](module-pretty-debug.html#.critical)
-    * [.nodeMemoryMonitor(stream, callback)](module-pretty-debug.html#.nodeMemoryMonitor)
-    * [.sysMemoryMonitor(alarmPolicy, callback)](module-pretty-debug.html#.sysMemoryMonitor)
-    * [.memoryWatermark()](module-pretty-debug.html#.memoryWatermark)
-    * [.scheduleHealthCheck(inputFunc, timeInMinutes)](module-pretty-debug.html#.scheduleHealthCheck)
+* [pretty-debug](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html)
+    * [.color](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.color) : <code>Object.&lt;string&gt;</code>
+    * [.setOptions(userOptions)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.setOptions)
+    * [.generatePolicy(lowerLimit, upperLimit)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.generatePolicy) ⇒ <code>Object.&lt;policy&gt;</code>
+    * [.attachStream(stream)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.attachStream)
+    * [.detachStream(stream)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.detachStream)
+    * [.log(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.log)
+    * [.info(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.info)
+    * [.alert(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.alert)
+    * [.warn(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.warn)
+    * [.error(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.error)
+    * [.critical(...var_args)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.critical)
+    * [.nodeMemoryMonitor(stream, callback)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.nodeMemoryMonitor)
+    * [.sysMemoryMonitor(alarmPolicy, callback)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.sysMemoryMonitor)
+    * [.memoryWatermark()](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.memoryWatermark)
+    * [.scheduleHealthCheck(inputFunc, timeInMinutes)](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.scheduleHealthCheck)
 
-For detail information, please see [API Documentation.](module-pretty-debug.html)
+For detail information, please see [API Documentation.](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html)
 
 <!-- ## Customization
 As it was mentioned earlier, this library is highly configurable. 
