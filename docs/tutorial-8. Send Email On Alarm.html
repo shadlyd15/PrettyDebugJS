@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: 5. Set Options | pretty-debug</title>
+    <title>Tutorial: 8. Send Email On Alarm | pretty-debug</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -56,55 +56,84 @@
     <header>
         
 
-        <h2>5. Set Options</h2>
+        <h2>8. Send Email On Alarm</h2>
     </header>
 
     
         <article class="readme">
-            <h1>Set Options</h1>
-<p>In this example, print formatting is dempnstrated.</p>
+            <h1>Send Email On Alarm</h1>
+<p>In this example, Sending email on alarm is demonstrated.</p>
 <ul>
-<li>Suppress messages higher than level 2.</li>
-<li>Change month format to &quot;2-digit&quot;</li>
-<li>Print file names in blue.</li>
+<li>Trigger alarm if heap used by Node.js exceeds 5 MB</li>
+<li>Send email when alarm triggers</li>
 </ul>
-<pre class="prettyprint source lang-javascript"><code>const net = require('net');
+<pre class="prettyprint source lang-javascript"><code>
+const net = require('net');
 const debug = require('.././PrettyDebugJS.js');
 
-debug.setOptions({
-	debugLevel: 2,
-	funcName:{
-		show: false
-	},
-	dateTime:{
-		format: {
-			month: &quot;short&quot;
-		}
-	},
-	fileName:{
-		color : debug.color.blue
-	}
-});
+const nodemailer = require('nodemailer');
 
-debug.info('Example : Set Options');
+// async..await is not allowed in global scope, must use a wrapper
+async function sendEmail(to, subject, message){
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
 
-function test(){
-	debug.log('The is level 1 : LOG');
-	debug.info('The is level 2 : INFO');
-	debug.alert('The is level 3 : ALERT');
-	debug.warn('The is level 4 : WARN');
-	debug.error('The is level 5 : ERROR');
-	debug.critical('The is level 6 : CRITICAL');
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: &quot;smtp.zoho.com&quot;,
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: '&lt;YOUR_EMAIL>',
+      pass: '&lt;YOUR_PASSWORD>'
+    }
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '&quot;&lt;YOUR_NAME>&quot; &lt;YOUR_EMAIL>', // sender address
+    to: to, // list of receivers
+    subject: subject, // Subject line
+    text: 'Notification', // plain text body
+    html: message // html body
+  });
+
+  debug.alert(&quot;Message sent: %s&quot;, info.messageId);
+  debug.alert(&quot;Preview URL: %s&quot;, nodemailer.getTestMessageUrl(info));
 }
 
-test();
+debug.info('Example : Send Email On Alarm');
+// debug.info('Send Emmail : ' + sendMail());
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+		heapTotal: { upperLimit : 5 }
+	}, function(){
+		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+		sendEmail('RECEIVER_EMAIL@EXAMPLE.com', 'High Memory Usage Alert', 'Memory Usage Alarm : Total heap usage is above 5 MB').catch(debug.error)
+	});
+}, 1);
+
 </code></pre>
 <h2>Run Example</h2>
-<p>To run the above example simply run the command below</p>
+<p>To run the above example &quot;nodemailer&quot; package is needed</p>
+<ul>
+<li>
+<p>Install &quot;nodemailer&quot; :</p>
+<pre class="prettyprint source lang-sh"><code>$ npm install nodemailer
+</code></pre>
+</li>
+<li>
+<p>Run setOptions.js  :</p>
 <pre class="prettyprint source lang-sh"><code>$ node Examples/setOptions.js
 </code></pre>
+</li>
+</ul>
 <h2>Output</h2>
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/setOptions.png" style='width:100%;' border="0" alt ="Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/sendEmail.png" style='width:100%;' border="0" alt ="Output"/></div>
 <p><a href="#readme"><img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="-----------------------------------------------------"></a></p>
         </article>
     
