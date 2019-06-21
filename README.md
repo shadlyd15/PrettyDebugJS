@@ -182,15 +182,24 @@ setInterval(function(){
 	generateRandomLog();
 }, 666)
 ```
-## Sample Output
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
-
 
 ## Run Example
 To run the example above, simply put this command and press Enter!
 ```sh
 $ node Examples/example.js
 ```
+
+## Sample Output
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+
+
 ## Customization
 As it was mentioned earlier, this library is highly configurable.
-For more details, see [API Documentation.](https://shadlyd15.github.io/PrettyDebugJS/module-Default%2520Options.html)
+For more details, see [Default Options.](https://shadlyd15.github.io/PrettyDebugJS/module-defaultOptions.html)
+
+
+## Contributing
+If you are interested in requesting a feature, fixing issues and contributing directly to the code base, please do not hesitate.
+
+## License
+Licensed under the [MIT](LICENSE) License.
