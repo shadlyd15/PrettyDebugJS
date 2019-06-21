@@ -2,7 +2,7 @@
  * @fileOverview Pretty Debug Javascript
  * @author Shadly Salahuddin
  * @link mailto:shadlyd15@gmail.com
- * @version 2.0.1
+ * @version 2.0.2
  */
 
 const fs	=	require('fs');
@@ -148,14 +148,14 @@ module.exports = {
   /** Different ANSI color to decorate different segments
 	* @type {Object.<string>}
 	* @property {string} reset		- Text Color Reset
-    * @property {string} black 		- Text Color Block
-    * @property {string} red 		- Text Color Red
-    * @property {string} green 		- Text Color Green
-    * @property {string} yellow 	- Text Color Yellow
-    * @property {string} blue 		- Text Color Blue
-    * @property {string} magenta 	- Text Color Magenta
-    * @property {string} cyan 		- Text Color Cyan
-    * @property {string} white 		- Text Color Cyan
+	* @property {string} black 		- Text Color Block
+	* @property {string} red 		- Text Color Red
+	* @property {string} green 		- Text Color Green
+	* @property {string} yellow 	- Text Color Yellow
+	* @property {string} blue 		- Text Color Blue
+	* @property {string} magenta 	- Text Color Magenta
+	* @property {string} cyan 		- Text Color Cyan
+	* @property {string} white 		- Text Color Cyan
 	* @property {string} bgBlack 	- Background Color Black
 	* @property {string} bgRed 		- Background Color Red
 	* @property {string} bgGreen 	- Background Color Green
