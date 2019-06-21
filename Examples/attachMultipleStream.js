@@ -1,6 +1,5 @@
 /**
- * @external
- * @fileOverview Generic Example
+ * @fileOverview Attach Multiple Stream Example
  * @author Shadly Salahuddin
  * @link mailto:shadlyd15@gmail.com
  * @version 2.0.1
@@ -21,18 +20,7 @@ debug.setOptions({
 	}
 });
 
-debug.info('Hello Pretty World');
-
-debug.scheduleHealthCheck(function(){
-	debug.memoryWatermark();
-	debug.sysMemoryMonitor();
-	debug.nodeMemoryMonitor({
-		heapTotal: { upperLimit : 5 }
-	}, function(){
-		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
-		// Do other things like sending email!
-	});
-}, 0.5);
+debug.info('Example : Attach Multiple Stream');
 
 net.createServer(function(sock){
 	debug.attachStream(sock);
