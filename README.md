@@ -69,7 +69,7 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 
 - **Create debug instance :**
 	```javascript
-	const debug = require('./PrettyDebugJS.js');
+	const debug = require('pretty-debug');
 	```
 - **Set options :**
 	```javascript
