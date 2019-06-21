@@ -30,7 +30,7 @@ A **highly configurable & lightweight debug library** that prints debug messages
 
 ## Screenshot
 
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Install
 ```sh
@@ -186,7 +186,7 @@ $ node Examples/example.js
 ```
 
 ## Sample Output
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/gh-pages/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Tutorials
 All the tutorials and examples can be found in the link below :
