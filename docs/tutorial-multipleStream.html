@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: Basics | pretty-debug</title>
+    <title>Tutorial: multipleStream | pretty-debug</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -56,90 +56,68 @@
     <header>
         
 
-        <h2>Basics</h2>
+        <h2>multipleStream</h2>
     </header>
 
     
         <article class="readme">
-            <h1>How to use</h1>
-<h2>Install</h2>
-<pre class="prettyprint source lang-sh"><code>$ npm install pretty-debug
-</code></pre>
-<h2>Basic usage</h2>
-<ul>
-<li>
-<p><strong>Create debug instance :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>const debug = require('./PrettyDebugJS.js');
-</code></pre>
-</li>
-<li>
-<p><strong>Set options :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.setOptions({ 
-	enable: true,		// Turning on debug print
-	enableColor: true,	// Enabling color output
-	enableGC: true,		// Enabling autometic gerbage collection
-	debugLevel: 6, 		// Setting debug level 6 (Upto INFO)
-	}  
+            <h1>Example</h1>
+<h2>multiple-stream.js</h2>
+<p>In this example a debug instance is created. To demonstrate multiple stream, a TCP server is created. Then the TCP socket is attached as a stream instance to the debug module. So when a client connects to that TCP server, debug output will also be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
+<pre class="prettyprint source lang-javascript"><code>const net 	= require('net');
+const debug = require('./PrettyDebugJS.js');
+
+var PORT = 6969;
+var HOST = '0.0.0.0';
+
+debug.setOptions({
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
+	}
 });
+
+debug.info('Hello Pretty World');
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+			heapTotal: { upperLimit : 5 }
+		}, function(){
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
+		});
+}, .02);
+
+net.createServer(function(sock){
+	debug.attachStream(sock);
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	}); 
+}).listen(PORT, HOST);
+
+function generateRandomLog(){
+	debug.log('The quick brown fox jumps over the lazy dog');
+	debug.info('The quick brown fox jumps over the lazy dog');
+	debug.alert('The quick brown fox jumps over the lazy dog');
+	debug.warn('The quick brown fox jumps over the lazy dog');
+	debug.error('The quick brown fox jumps over the lazy dog');
+	debug.critical('The quick brown fox jumps over the lazy dog');
+}
+
+setInterval(function(){
+	generateRandomLog();
+}, 666)
 </code></pre>
-</li>
-<li>
-<p><strong>Attach stream :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.attachStream(sock); 	// Attaching new stream to serve debug messages
+<h2>Sample Output</h2>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<h2>Run Example</h2>
+<p>To the above example simply put this command</p>
+<pre class="prettyprint source lang-sh"><code>$ node basic.js
 </code></pre>
-</li>
-<li>
-<p><strong>Detach stream :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.detachStream(sock); 	// Detaching stream
-</code></pre>
-</li>
-<li>
-<p><strong>Set options :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.setOptions({ 
-	enable: true,		// Turning on debug print
-	enableColor: true,	// Enabling color output
-	enableGC: true,		// Enabling autometic gerbage collection
-	debugLevel: 6, 		// Setting debug level 6 (Upto INFO)
-	}  
-});
-</code></pre>
-</li>
-<li>
-<p><strong>Print in different debug levels :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.log('The quick brown fox jumps over the lazy dog');
-debug.info('The quick brown fox jumps over the lazy dog');
-debug.alert('The quick brown fox jumps over the lazy dog');
-debug.warn('The quick brown fox jumps over the lazy dog');
-debug.error('The quick brown fox jumps over the lazy dog');
-debug.critical('The quick brown fox jumps over the lazy dog');
-</code></pre>
-</li>
-<li>
-<p><strong>Show highest RAM usage :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.memoryWatermark();
-</code></pre>
-</li>
-<li>
-<p><strong>Show memory used by OS :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.sysMemoryMonitor();
-</code></pre>
-</li>
-<li>
-<p><strong>Show memory used by Node.js :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.nodeMemoryMonitor(();
-</code></pre>
-</li>
-<li>
-<p><strong>Set alarm policy for RAM usage :</strong></p>
-<pre class="prettyprint source lang-javascript"><code>debug.nodeMemoryMonitor({
-	heapTotal: { upperLimit : 5 }
-}, function(){
-	debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
-	// Do other things like send email!
-});
-</code></pre>
-</li>
-</ul>
         </article>
     
 </section>

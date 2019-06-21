@@ -62,13 +62,15 @@ function _getFunctionCallLocation(){
 			fileLocation = matchFile[1].replace(/^.*[\\\/]/, '');
 		}
 	}
-	if(options.funcName.show === true && fileLocation){
-		functionName = err.stack
-						.split('\n', 4)[3]
-						.replace(/^\s+at\s+(.+?)\s.+/g, '$1' );
-    } else{
-    	functionName = 'Callback';
-    }
+	if(options.funcName.show === true){
+		if(fileLocation){
+			functionName = err.stack
+							.split('\n', 4)[3]
+							.replace(/^\s+at\s+(.+?)\s.+/g, '$1' );
+	    } else{
+	    	functionName = 'Callback';
+	    }
+	}
 	return {
 		functionName : functionName,
 		fileLocation : fileLocation
@@ -140,7 +142,7 @@ function _printToAllStreams(message){
  * It works in Node.js and Web browser environments with very low memory footprint. 
  */
 
-const debugStreams = [process.stdout];
+let debugStreams = [process.stdout];
 
 module.exports = {
   /** Different ANSI color to decorate different segments

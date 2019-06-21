@@ -11,17 +11,20 @@
 ## Intro
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
-
 ## Features
 - Highly configurable
 - Very low memory footprint
 - Beautifully colored and formatted
-- Attach multiple streams on runtime and pipe output
+- Attach multiple streams and pipe the debug outputs
 - Node process and System process health check
+- Schedule memory monitor
 - Alarm on crossing memory thresholds
-- Monitor system memory high watermark
+- System memory high watermark
 - No third party library dependencies
+
+## Screenshot
+
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
 ## Install
 ```sh
@@ -184,9 +187,9 @@ setInterval(function(){
 
 
 ## Run Example
-To the above example simply put this command
+To run the example above, simply put this command and press Enter!
 ```sh
-$ node example.js
+$ node Examples/example.js
 ```
 ## Customization
 As it was mentioned earlier, this library is highly configurable.

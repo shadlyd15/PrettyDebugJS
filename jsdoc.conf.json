@@ -25,8 +25,7 @@
         },
         "examples": {
             "Generic Example": "/PrettyDebugJS/pretty-debug/2.0.0/Examples_example.js.html"
-        },
-        "footerText": "My awesome footer text"
+        }
     },
     "opts": {
         "destination": "docs",
@@ -34,6 +33,6 @@
         "readme": "README.md",
         "lenient": false,
         "sort": false,
-        "tutorials" : "Examples/"
+        "tutorials" : "Tutorials/"
     }
 }
