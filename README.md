@@ -1,3 +1,5 @@
+
+
 <!-- <div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div> -->
 
 [![logo](https://shadlyd15.github.io/PrettyDebugJS/img/pretty-logo.svg)](#)
@@ -39,7 +41,7 @@ $ npm install pretty-debug
 
 Pretty Debug exposes a debug object. Just attach any stream you want to the module to pipe debug messages. process.stdout is the default steam which prints output to console. Any other streams like TCP socket or request to an HTTP server can be attached on runtime to pipe the debug output.
 
-## API
+## API Documentation
 
 * [pretty-debug](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html)
     * [.color](https://shadlyd15.github.io/PrettyDebugJS/module-pretty-debug.html#.color) : <code>Object.&lt;string&gt;</code>
@@ -76,10 +78,10 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 - **Set options :**
 	```javascript
 	debug.setOptions({ 
-		enable: true,		// Turning on debug print
-		enableColor: true,	// Enabling color output
-		enableGC: true,		// Enabling autometic gerbage collection
-		debugLevel: 6, 		// Setting debug level 6 (Upto INFO)
+			enable: true,		// Turning on debug print
+			enableColor: true,	// Enabling color output
+			enableGC: true,		// Enabling autometic gerbage collection
+			debugLevel: 6, 		// Setting debug level 6 (Upto INFO)
 		}  
 	});
 	```
@@ -92,16 +94,6 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 	```javascript
 	debug.detachStream(sock); 	// Detaching stream
 	```
-- **Set options :**
-	```javascript
-	debug.setOptions({ 
-		enable: true,		// Turning on debug print
-		enableColor: true,	// Enabling color output
-		enableGC: true,		// Enabling autometic gerbage collection
-		debugLevel: 6, 		// Setting debug level 6 (Upto INFO)
-		}  
-	});
-	```
 - **Print in different debug levels :**
 	```javascript
 	debug.log('The quick brown fox jumps over the lazy dog');
@@ -113,20 +105,20 @@ Let's say we want to change the color of **Timestamp** to Green and hide the Fil
 	```
 - **Show highest RAM usage :**
 	```javascript
-	debug.memoryWatermark();
+	debug.memoryWatermark();	// Shows highest RAM usage in MB.
 	```
 - **Show memory used by OS :**
 	```javascript
-	debug.sysMemoryMonitor();
+	debug.sysMemoryMonitor();	// Shows memory information of operating system
 	```
 - **Show memory used by Node.js :**
 	```javascript
-	debug.nodeMemoryMonitor(();
+	debug.nodeMemoryMonitor(();	// Shows memory information of Node.js system
 	```
 - **Set alarm policy for RAM usage :**
 	```javascript
 	debug.nodeMemoryMonitor({
-		heapTotal: { upperLimit : 5 }
+		heapTotal: { upperLimit : 5 } // Trigger alarm when heap usage is greater than 5 MB
 	}, function(){
 		debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
 		// Do other things like send email!
@@ -139,7 +131,7 @@ In this example a debug instance is created. For multiple stream demonstration, 
 
 ```javascript
 const net = require('net');
-const debug = require('./PrettyDebugJS.js');
+const debug = require('pretty-debug');
 
 var PORT = 6969;
 var HOST = '0.0.0.0';
@@ -196,10 +188,21 @@ $ node Examples/example.js
 ## Sample Output
 <div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
 
+## Tutorials
+All the tutorials and examples can be found in the link below :
+-   [How To Use](https://shadlyd15.github.io/PrettyDebugJS/tutorial-0.%20How%20To%20Use.html)
+-   [Basics](https://shadlyd15.github.io/PrettyDebugJS/tutorial-1.%20Basics.html)
+-   [Memory Monitor](https://shadlyd15.github.io/PrettyDebugJS/tutorial-2.%20Memory%20Monitor.html)
+-   [Shedule Healthcheck](https://shadlyd15.github.io/PrettyDebugJS/tutorial-3.%20Shedule%20Healthcheck.html)
+-   [Set Alarm](https://shadlyd15.github.io/PrettyDebugJS/tutorial-4.%20Set%20Alarm.html)
+-   [Set Options](https://shadlyd15.github.io/PrettyDebugJS/tutorial-5.%20Set%20Options.html)
+-   [Attach Multiple Stream](https://shadlyd15.github.io/PrettyDebugJS/tutorial-6.%20Attach%20Multiple%20Stream.html)
+-   [Send Email On Alarm](https://shadlyd15.github.io/PrettyDebugJS/tutorial-8.%20Send%20Email%20On%20Alarm.html)
+-   [Summary](https://shadlyd15.github.io/PrettyDebugJS/tutorial-7.%20Summary.html)
 
 ## Customization
 As it was mentioned earlier, this library is highly configurable.
-For more details, see [Default Options.](https://shadlyd15.github.io/PrettyDebugJS/module-defaultOptions.html)
+For more details, please see [Default Options.](https://shadlyd15.github.io/PrettyDebugJS/module-defaultOptions.html)
 
 
 ## Contributing

@@ -7,7 +7,7 @@
  */
 
 const net = require('net');
-const debug = require('.././PrettyDebugJS.js');
+const debug = require('pretty-debug');
 
 const nodemailer = require('nodemailer');
 
