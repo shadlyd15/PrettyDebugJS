@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: 1. Basics | pretty-debug</title>
+    <title>Tutorial: 7. Summary | pretty-debug</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -56,30 +56,68 @@
     <header>
         
 
-        <h2>1. Basics</h2>
+        <h2>7. Summary</h2>
     </header>
 
     
         <article class="readme">
-            <h1>Basics</h1>
-<p>In this example, only the basic features are demonstrated.</p>
+            <h1>Summary</h1>
+<h2>Example</h2>
+<p>In this example a debug instance is created. For multiple stream demonstration, a TCP server is created. TCP socket is attached to the debug module. So when a client connects to that TCP server, color debug output will be shown on the client console. Health check scheduler is also demonstrated in this example.</p>
 <pre class="prettyprint source lang-javascript"><code>const net = require('net');
-const debug = require('.././PrettyDebugJS.js');
+const debug = require('./PrettyDebugJS.js');
 
-debug.log('The is level 1 : LOG');
-debug.info('The is level 2 : INFO');
-debug.alert('The is level 3 : ALERT');
-debug.warn('The is level 4 : WARN');
-debug.error('The is level 5 : ERROR');
-debug.critical('The is level 6 : CRITICAL');
+var PORT = 6969;
+var HOST = '0.0.0.0';
 
+debug.setOptions({
+	nodeMemoryMonitor:{
+		fields: {
+			rss: false,
+			external: false
+		}
+	}
+});
+
+debug.info('Hello Pretty World');
+
+debug.scheduleHealthCheck(function(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor({
+			heapTotal: { upperLimit : 5 }
+		}, function(){
+			debug.critical('Memory Usage Alarm : Total heap usage is above 5 MB');
+			// Do other things like send email!
+		});
+}, .02);
+
+net.createServer(function(sock){
+	debug.attachStream(sock);
+	sock.on('end', function() {
+		debug.detachStream(sock);
+	}); 
+}).listen(PORT, HOST);
+
+function generateRandomLog(){
+	debug.log('The quick brown fox jumps over the lazy dog');
+	debug.info('The quick brown fox jumps over the lazy dog');
+	debug.alert('The quick brown fox jumps over the lazy dog');
+	debug.warn('The quick brown fox jumps over the lazy dog');
+	debug.error('The quick brown fox jumps over the lazy dog');
+	debug.critical('The quick brown fox jumps over the lazy dog');
+}
+
+setInterval(function(){
+	generateRandomLog();
+}, 678)
 </code></pre>
 <h2>Run Example</h2>
 <p>To run the above example simply run the command below</p>
-<pre class="prettyprint source lang-sh"><code>$ node Examples/basic.js
+<pre class="prettyprint source lang-sh"><code>$ node Examples/example.js
 </code></pre>
 <h2>Output</h2>
-<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/basic.png" style='width:100%;' border="0" alt ="Output"/></div>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/img/screenshot.png" style='width:100%;' border="0" alt ="Output"/></div>
 <p><a href="#readme"><img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" alt="-----------------------------------------------------"></a></p>
         </article>
     
