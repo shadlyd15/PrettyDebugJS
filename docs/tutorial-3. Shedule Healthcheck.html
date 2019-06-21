@@ -1,10 +1,8 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: ansiColors.js | pretty-debug</title>
+    <title>Tutorial: 3. Shedule Healthcheck | pretty-debug</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -54,70 +52,43 @@
 <div class="main" id="main">
     
 
+<section>
+    <header>
+        
 
+        <h2>3. Shedule Healthcheck</h2>
+    </header>
 
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @fileOverview ANSI color codes
- * @author Shadly Salahuddin
- * @link mailto:shadlyd15@gmail.com
- * @version 2.0.1
- */
+        <article class="readme">
+            <h1>Schedule Healthcheck</h1>
+<p>In this example, healthcheck scheduling is demonstrated.</p>
+<ul>
+<li>Turned off printing rss and external memory usage by Node.js</li>
+<li>Run healthcheck routine with a minute interval.</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>const net = require('net');
+const debug = require('.././PrettyDebugJS.js');
 
-/**
- * @module ansiColors
- * @desc Definition of common colors in ansi escape code
- * @exports {ansiColors}
- */
+debug.info('Example : Set Schedule');
 
-/**
- * Default options for Pretty Debug library
- * @typedef {Object} ansiColors
- * @property {string} reset='\x1B[00m' ANSI color code : reset
- * @property {string} black='\x1B[30m' ANSI color code : black
- * @property {string} red='\x1B[31m' ANSI color code : red
- * @property {string} red='\x1B[32m' ANSI color code : red
- * @property {string} yellow='\x1B[33m' ANSI color code : yellow
- * @property {string} blue='\x1B[34m' ANSI color code : blue
- * @property {string} magenta='\x1B[35m' ANSI color code : magenta
- * @property {string} cyan='\x1B[36m' ANSI color code : cyan
- * @property {string} white='\x1B[37m' ANSI color code : white
- * @property {string} bgBlack='\x1B[40m' ANSI color code : bgBlack
- * @property {string} bgRed='\x1B[41m' ANSI color code : bgRed
- * @property {string} bgGreen='\x1B[42m' ANSI color code : bgGreen
- * @property {string} bgYellow='\x1B[43m' ANSI color code : bgYellow
- * @property {string} bgBlue='\x1B[44m' ANSI color code : bgBlue
- * @property {string} bgMagenta='\x1B[45m' ANSI color code : bgMagenta
- * @property {string} bgCyan='\x1B[46m' ANSI color code : bgCyan
- * @property {string} bgWhite='\x1B[47m' ANSI color code : bgWhite
- */
+function healthcheck(){
+	debug.memoryWatermark();
+	debug.sysMemoryMonitor();
+	debug.nodeMemoryMonitor();
+}
 
-module.exports = {
-    reset		: 	'\x1B[00m',
-
-    black     	: 	'\x1B[30m',
-    red       	: 	'\x1B[31m',
-    green     	: 	'\x1B[32m',
-    yellow    	: 	'\x1B[33m',
-    blue      	: 	'\x1B[34m',
-    magenta   	: 	'\x1B[35m',
-    cyan      	: 	'\x1B[36m',
-    white     	: 	'\x1B[37m',
-
-	bgBlack		:	'\x1B[40m',
-	bgRed		:	'\x1B[41m',
-	bgGreen		:	'\x1B[42m',
-	bgYellow	:	'\x1B[43m',
-	bgBlue		:	'\x1B[44m',
-	bgMagenta	:	'\x1B[45m',
-	bgCyan		:	'\x1B[46m',
-	bgWhite		:	'\x1B[47m'
-};</code></pre>
+debug.scheduleHealthCheck(healthcheck, 1);
+</code></pre>
+<h2>Sample Output</h2>
+<div><img src ="https://raw.githubusercontent.com/shadlyd15/PrettyDebugJS/master/images/screenshot.png" style='width:100%;' border="0" alt ="Sample Output"/></div>
+<h2>Run Example</h2>
+<p>To run the above example simply run the command below</p>
+<pre class="prettyprint source lang-sh"><code>$ node Examples/setScheduleHealthCheck.js
+</code></pre>
         </article>
-    </section>
-
+    
+</section>
 
 
 
@@ -129,13 +100,7 @@ module.exports = {
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = '_sub'.replace(/"/g, '_');
-        var selectedApi = document.getElementById(id); // do not use jquery selector
-        var $selectedApi = $(selectedApi);
-
-        $selectedApi.removeClass('hidden');
-        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        showLnbApi();
+        showLnbExamples();
     </script>
 
 </body>
