@@ -180,7 +180,7 @@ function generateRandomLog(){
 
 setInterval(function(){
 	generateRandomLog();
-}, 666)
+}, 678)
 ```
 
 ## Run Example
