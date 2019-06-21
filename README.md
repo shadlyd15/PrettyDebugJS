@@ -1,6 +1,6 @@
 <!-- <div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div> -->
 
-[![logo](img/pretty-logo.svg)](#)
+[![logo](https://shadlyd15.github.io/PrettyDebugJS/img/pretty-logo.svg)](#)
 
 [![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/pretty-debug)
 
