@@ -1,9 +1,11 @@
-<div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div>
+<!-- <div><img src ="img/pretty-logo.svg" style='width:25%;' border="0" alt ="Sample Output"/></div> -->
 
-[![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pretty-debug/)
+[![logo](img/pretty-logo.svg)](#)
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
+[![npm package](https://nodei.co/npm/pretty-debug.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/pretty-debug)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](#)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](#)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#Intro)
 
