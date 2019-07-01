@@ -16,17 +16,18 @@
 A **highly configurable & lightweight debug library** that prints debug messages beautifully. It works in Node.js and Web browser environments with very low memory footprint. 
 
 ## Features
-- Beautifully colored and formatted
-- Pretty prints current file name, function and and line number
-- Pretty prints date, time with formatting
+- Beautifully colored and formatted output texts
+- Pretty prints current file name, function and line number
+- Pretty prints date, time with timezone and formatting
 - Attach multiple streams and pipe the debug outputs
-- Node process and System process health check
-- Schedule memory monitor
-- Alarm on crossing memory thresholds
+- Compatible with Node.js stream objects
+- Node process and System process memory monitor
+- Schedule health check
+- Alarm on crossing memory usage thresholds
 - System memory high watermark
 - Highly configurable
 - Very low memory footprint
-- No third party library dependencies
+- No third party library dependency
 
 ## Screenshot
 
